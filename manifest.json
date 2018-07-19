@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Hello World Extension",
+  "name": "CatsWork_start",
   "version": "1.0",
   "permissions": [
     "https://mail.google.com/",
