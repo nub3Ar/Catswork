@@ -2,18 +2,19 @@
   "manifest_version": 2,
   "name": "CatsWork_1.0",
   "version": "1.0",
-  "options_page": "options.html",
+  "options_page": "src/html/options.html",
   "permissions": [
+    "activeTab", "declarativeContent", "storage",
     "https://mail.google.com/",
     "https://inbox.google.com/"
   ],
   "content_scripts" : [
     {
       "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
-      "js": ["inboxsdk.js", "myapp.js"]
+      "js": ["src/js/inboxsdk.js", "src/js/myapp.js"]
     }
   ],
   "page_action":{
-    "default_popup": "index.html"
+    "default_popup": "src/html/popup.html"
   }
 }
