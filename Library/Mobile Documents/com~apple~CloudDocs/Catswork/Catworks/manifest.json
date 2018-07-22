@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "CatsWork_start",
+  "version": "1.0",
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "tabs",
+    "<all_urls>",
+    "identity",
+    "https://*.googleapis.com/*"
+  ],
+  "content_scripts" : [
+    {
+      "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
+      "js": ["inboxsdk.js", "myapp.js"]
+    }
+  ],
+  "browser_action":{
+    "default_title":"Catswork",
+    "default_popup":"popup.html"
+  }
+
+}
