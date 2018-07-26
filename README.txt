@@ -44,3 +44,6 @@ Catswork
 --README.md
 
 
+
+
+7/26/18, Barry: Added modal to creating profile. Trying to fix eventlistener in option page

@@ -1,5 +1,3 @@
-
-
 function save_options(){
     var sheetsLink = document.getElementById('sheetsLink').value;
     chrome.storage.sync.set({

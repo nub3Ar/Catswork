@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="../js/options.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        // Init Modal
+        $('.modal').modal();
+
+    });
+</script>
 
 <html>
 
@@ -12,7 +22,7 @@
 </head>
 
 
-<body background = "../Image/background.jpg">
+<body background="../Image/background.jpg">
     <div class="container">
         <!--navigation bar-->
         <nav>
@@ -20,13 +30,6 @@
                 <a class="brand-logo center">Catswork</a>
 
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li>
-                        <form>
-                            Google Sheets link: <br>
-                            <input type="text" name="sheetsLink">
-                        </form>
-                        <button id="save">Save</button>
-                    </li>
                     <li>
                         <a href="https://mail.google.com" target="_blank">Gmail</a>
                     </li>
@@ -37,16 +40,26 @@
             </div>
         </nav>
 
+        <br>
+        <a href="#modal1" class="btn waves-effect purple">Add Profile</a>
 
-
-
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Add Profile</h4>
+                <form>
+                    <div class="input-field">
+                        <input type="text" id="sheets">
+                        <label class="active purple-text" for="name">Google Sheet Link</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
+                        <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-<script src="/js/options.js"
 </body>
-
-
-
-
 
 
 </html>
