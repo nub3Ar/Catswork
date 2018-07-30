@@ -1,3 +1,9 @@
+jQuery(document).ready(function () {
+    // Init Modal
+    $('.modal').modal();
+
+}); 
+
 function save_options(){
     var sheetsLink = document.getElementById('sheetsLink').value;
     chrome.storage.sync.set({
@@ -13,4 +19,4 @@ function save_options(){
     });
 }
 
-document.getElementById('save').addEventListener('click',save_options)
+

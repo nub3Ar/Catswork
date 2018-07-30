@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script type="text/javascript" src="../js/libraries/jquery-3.3.1.min.js"></script>
+<script src="../js/libraries/materialize.min.js"></script>
 <script type="text/javascript" src="../js/options.js"></script>
 
 
-<script>
-    $(document).ready(function () {
-        // Init Modal
-        $('.modal').modal();
-
-    });
-</script>
 
 <html>
 
@@ -41,24 +34,100 @@
         </nav>
 
         <br>
-        <a href="#modal1" class="btn waves-effect purple">Add Profile</a>
 
         <div id="modal1" class="modal">
             <div class="modal-content">
                 <h4>Add Profile</h4>
                 <form>
                     <div class="input-field">
+                        <input type="text" id="prefered_name">
+                        <label class="active purple-text" for="name">Prefered Name</label>
+                    </div>
+                    <div class="input-field">
                         <input type="text" id="sheets">
-                        <label class="active purple-text" for="name">Google Sheet Link</label>
+                        <label class="active purple-text"  for="sheet">Google Sheet Link</label>
                     </div>
                     <div class="modal-footer">
-                        <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
                         <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+                        <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>Default Setting</h4>
+                <h6>Default setting includes: So is it not with me as with that Muse Stirr'd by a painted beauty to his verse,
+                    Who heaven itself for ornament doth use And every fair with his fair doth rehearse Making a couplement
+                    of proud compare, 5 With sun and moon, with earth and sea's rich gems, With April's first-born flowers,
+                    and all things rare That heaven's air in this huge rondure hems. O' let me, true in love, but truly write,
+                    And then believe me, my love is as fair 10 As any mother's child, though not so bright As those gold
+                    candles fix'd in heaven's air: Let them say more than like of hearsay well; I will not praise that purpose
+                    not to sell.
+                </h6>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+                <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
+            </div>
+        </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h4>Custom Setting</h4>
+                <h6>Information you would like to track:</h6>
+                <form action="#">
+                    <p>
+                        <input type="checkbox" id="Name" />
+                        <label for="Name" class="">Name</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" id="Email" />
+                        <label for="Email">Email</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" id="Subject" />
+                        <label for="Subject">Subject</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" id="Date" />
+                        <label for="Date">Date</label>
+                    </p>
+                </form>
+                <br>
+                <h6>Method of information tracking</h6>
+                <form action="#">
+                        <p>
+                            <input type="checkbox" id="On_page" />
+                            <label for="On_page" class="">On-page manual tracking</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="S_Auto" />
+                            <label for="S_Auto">Automatic with label</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="F_Auto" />
+                            <label for="F_Auto">Automatic for email</label>
+                        </p>
+                    </form>
+                <br>
+                <div class="modal-footer">
+                    <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+                    <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>Custom Settings</h2>
+        <a href="#modal1" class="btn waves-effect purple">Account Information</a>
+        <br>
+        <br>
+        <a href="#modal2" class="btn waves-effect purple">Default</a>
+        <br>
+        <br>
+        <a href="#modal3" class="btn waves-effect purple">Custom Setting</a>
+
+
 </body>
 
 
