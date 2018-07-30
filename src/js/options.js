@@ -1,7 +1,8 @@
 jQuery(document).ready(function () {
     // Init Modal
     $('.modal').modal();
-
+    $('.tooltipped').tooltip();
+    
 }); 
 
 function save_options(){
