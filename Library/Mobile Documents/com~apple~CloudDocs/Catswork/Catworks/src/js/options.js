@@ -1,9 +1,4 @@
-jQuery(document).ready(function () {
-    // Init Modal
-    $('.modal').modal();
-    $('.tooltipped').tooltip();
-    
-}); 
+
 
 function save_options(){
     var sheetsLink = document.getElementById('sheetsLink').value;
@@ -20,4 +15,4 @@ function save_options(){
     });
 }
 
-
+document.getElementById('save').addEventListener('click',save_options)

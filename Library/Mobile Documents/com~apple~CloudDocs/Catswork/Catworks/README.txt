@@ -51,6 +51,3 @@ Added client id in manifest.json. Unable to add a working key.
 Authentication of chrome identity api is working.
 
 
-
-
-7/26/18, Barry: Added modal to creating profile. Trying to fix eventlistener in option page
