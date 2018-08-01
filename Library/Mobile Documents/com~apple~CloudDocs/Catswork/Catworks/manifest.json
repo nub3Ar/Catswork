@@ -1,8 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "CatsWork_start",
+  "name": "CatsWork_1.0",
   "version": "1.0",
+  "options_page": "src/html/options.html",
   "permissions": [
+    "activeTab", "declarativeContent", "storage",
     "https://mail.google.com/",
     "https://inbox.google.com/",
     "tabs",
@@ -13,12 +15,20 @@
   "content_scripts" : [
     {
       "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
-      "js": ["inboxsdk.js", "myapp.js"]
+      "js": ["src/js/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js"]
     }
   ],
   "browser_action":{
     "default_title":"Catswork",
-    "default_popup":"popup.html"
-  }
+    "default_popup":"src/html/popup.html"
+  },
 
+  "background": { "scripts": ["src/js/background.js"], "persistent":false },
+
+  "oauth2": {
+    "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  }
 }
