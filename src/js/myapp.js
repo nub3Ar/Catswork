@@ -37,16 +37,16 @@ InboxSDK.load(2, 'sdk_Catworks_b73c68555a').then(function(sdk){
       // message sent successfully
       console.log("Message sent successfully.");
       // print info
-      console.log(info_dict.contact);
+      console.log(sent_info_dict.contact);
       console.log('Email Destination Name:')
-      console.log(info_dict.contact[0].name);
+      console.log(sent_info_dict.contact[0].name);
       console.log('Email Destination:')
-      console.log(info_dict.contact[0].emailAddress);
+      console.log(sent_info_dict.contact[0].emailAddress);
       console.log('Email Subject:')
-      console.log(info_dict.subject);
+      console.log(sent_info_dict.subject);
       console.log('Email Body:')
-      console.log(info_dict.htmlcontent);
-      console.log(info_dict.textcontent);
+      console.log(sent_info_dict.htmlcontent);
+      console.log(sent_info_dict.textcontent);
     });
   });
 
