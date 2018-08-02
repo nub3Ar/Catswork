@@ -101,7 +101,7 @@ var executionAPIExample = (function() {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		}
 	}
-	
+
 	/**
 	 * Calling the Execution API script.
 	 */

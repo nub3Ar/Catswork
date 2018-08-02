@@ -24,6 +24,14 @@
   "browser_action":{
     "default_title":"Catswork",
     "default_popup":"src/html/popup.html"
-  }
+  },
 
+  "background": { "scripts": ["src/js/background.js"], "persistent":false },
+
+  "oauth2": {
+    "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  }
 }
