@@ -50,7 +50,8 @@ Added sample_support.js and background.js files to the js folder.
 Added client id in manifest.json. Unable to add a working key.
 Authentication of chrome identity api is working.
 
-
+8/2/18
+Connected popup.js file and myapp.js file. Now the extracted info from emails are stored in global variables and can be accesssed in popup.js
 
 
 7/26/18, Barry: Added modal to creating profile. Trying to fix eventlistener in option page
