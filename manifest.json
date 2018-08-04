@@ -12,21 +12,23 @@
     "identity",
     "https://*.googleapis.com/*"
   ],
-  "content_scripts" : [
-    {
-      "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
-      "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js", 
-        "src/js/libraries/jquery-3.3.1.min.js", "src/js/libraries/materialize.min.js"]
-    }
-  ],
-  
+  "content_scripts": [{
+    "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
+    "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
+      "src/js/libraries/jquery-3.3.1.min.js", "src/js/libraries/materialize.min.js"
+    ]
+  }],
 
-  "browser_action":{
-    "default_title":"Catswork",
-    "default_popup":"src/html/popup.html"
+
+  "browser_action": {
+    "default_title": "Catswork",
+    "default_popup": "src/html/popup.html"
   },
 
-  "background": { "scripts": ["src/js/background.js"], "persistent":false },
+  "background": {
+    "scripts": ["src/js/background.js"],
+    "persistent": false
+  },
 
   "oauth2": {
     "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
