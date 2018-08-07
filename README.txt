@@ -55,3 +55,5 @@ Connected popup.js file and myapp.js file. Now the extracted info from emails ar
 
 
 7/26/18, Barry: Added modal to creating profile. Trying to fix eventlistener in option page
+
+8/7/18, Barry: added local storage in option page. Not completed and not linked to front-end yet
