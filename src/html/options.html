@@ -48,95 +48,111 @@
             <a href="#modal1" class="btn waves-effect purple">Account Information</a>
             <a href="#modal2" class="btn waves-effect tooltipped purple" data-position="bottom" data-tooltip="Default Settings" data-delay="0">Default</a>
             <a href="#modal3" class="btn waves-effect purple">Custom Setting</a>
+            <a href="#modal4" class="btn waves-effect purple">Erase Setting</a>
         </center>
     </main>
 
-        <!--modals -->
-        <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4>Add Profile</h4>
-                    <form>
-                        <div class="input-field">
-                            <input type="text" id="prefered_name">
-                            <label class="active purple-text" for="name">Prefered Name</label>
-                        </div>
-                        <div class="input-field">
-                            <input type="text" id="sheets">
-                            <label class="active purple-text" for="sheet">Google Sheet Link</label>
-                        </div>
-        
-                        <div class="information">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
-                            <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
-                        </div>
-                    </form>
+    <!--modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Add Profile</h4>
+            <form>
+                <div class="input-field">
+                    <input type="text" id="prefered_name">
+                    <label class="active purple-text" for="name">Prefered Name</label>
                 </div>
-            </div>
-        
-            <div id="modal2" class="modal">
-                <div class="modal-content">
-                    <h4>Default Setting</h4>
-                    <h6>Default setting includes: So is it not with me as with that Muse Stirr'd by a painted beauty to his verse, Who
-                        heaven itself for ornament doth use And every fair with his fair doth rehearse Making a couplement of proud
-                        compare, 5 With sun and moon, with earth and sea's rich gems, With April's first-born flowers, and all things
-                        rare That heaven's air in this huge rondure hems. O' let me, true in love, but truly write, And then believe
-                        me, my love is as fair 10 As any mother's child, though not so bright As those gold candles fix'd in heaven's
-                        air: Let them say more than like of hearsay well; I will not praise that purpose not to sell.
-                    </h6>
+                <div class="input-field">
+                    <input type="text" id="sheets">
+                    <label class="active purple-text" for="sheet">Google Sheet Link</label>
+                </div>
+
+                <div class="information">
                 </div>
                 <div class="modal-footer">
                     <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
                     <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <h4>Default Setting</h4>
+            <h6>Default setting includes: So is it not with me as with that Muse Stirr'd by a painted beauty to his verse, Who
+                heaven itself for ornament doth use And every fair with his fair doth rehearse Making a couplement of proud
+                compare, 5 With sun and moon, with earth and sea's rich gems, With April's first-born flowers, and all things
+                rare That heaven's air in this huge rondure hems. O' let me, true in love, but truly write, And then believe
+                me, my love is as fair 10 As any mother's child, though not so bright As those gold candles fix'd in heaven's
+                air: Let them say more than like of hearsay well; I will not praise that purpose not to sell.
+            </h6>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+            <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <h4>Custom Setting</h4>
+            <h6>Information you would like to track:</h6>
+            <form action="#">
+                <p>
+                    <input type="checkbox" id="Name" />
+                    <label for="Name" class="">Name</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Email" />
+                    <label for="Email">Email</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Subject" />
+                    <label for="Subject">Subject</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="Date" />
+                    <label for="Date">Date</label>
+                </p>
+            </form>
+            <br>
+            <h6>Method of information tracking</h6>
+            <form action="#">
+                <p>
+                    <input type="checkbox" id="On_page" />
+                    <label for="On_page" class="">On-page manual tracking</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="S_Auto" />
+                    <label for="S_Auto">Automatic with label</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="F_Auto" />
+                    <label for="F_Auto">Automatic for email</label>
+                </p>
+            </form>
+            <br>
+            <div class="modal-footer">
+                <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
+                <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
             </div>
-        
-            <div id="modal3" class="modal">
-                <div class="modal-content">
-                    <h4>Custom Setting</h4>
-                    <h6>Information you would like to track:</h6>
-                    <form action="#">
-                        <p>
-                            <input type="checkbox" id="Name" />
-                            <label for="Name" class="">Name</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="Email" />
-                            <label for="Email">Email</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="Subject" />
-                            <label for="Subject">Subject</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="Date" />
-                            <label for="Date">Date</label>
-                        </p>
-                    </form>
-                    <br>
-                    <h6>Method of information tracking</h6>
-                    <form action="#">
-                        <p>
-                            <input type="checkbox" id="On_page" />
-                            <label for="On_page" class="">On-page manual tracking</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="S_Auto" />
-                            <label for="S_Auto">Automatic with label</label>
-                        </p>
-                        <p>
-                            <input type="checkbox" id="F_Auto" />
-                            <label for="F_Auto">Automatic for email</label>
-                        </p>
-                    </form>
-                    <br>
-                    <div class="modal-footer">
-                        <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
-                        <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <h4>Erase all data</h4>
+            <h6>Are you sure you want to erase all settings and personal information?
+            </h6>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect btn purple" id="confirm_erase">Confirm</button>
+            <button class="modal-action modal-close waves-effect btn purple">Confirm</button>
+        </div>
+    </div>
+
+
+
 
 </body>
 
