@@ -55,7 +55,7 @@ function Compose_view_info() {
     });
   }
 
-  function conversation_info() {
+  function Conversation_info() {
     sdk.Conversations.registerMessageViewHandler(function (messageView) {
       messageView.addAttachmentIcon({
         tooltip: "Load Email Data",
@@ -73,3 +73,7 @@ function Compose_view_info() {
     });
 
   }
+
+Compose_view_info()
+Send_info()
+conversation_info()

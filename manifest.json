@@ -19,7 +19,7 @@
     ]
   }],
 
-
+  
   "browser_action": {
     "default_title": "Catswork",
     "default_popup": "src/html/popup.html"
