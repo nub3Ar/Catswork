@@ -11,7 +11,7 @@ function Compose_view_info() {
 
         composeView.addButton({
           title: "Get my email content!",
-          iconUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQxFoh469eOsZQkuPOLpZn3R6yyIExkZCxOxf4ywfeY3v330EwP3Q",
+          iconUrl: chrome.extension.getURL("../Image/icon.jpg"),
           onClick: function (event) {
             sent_info_dict.contact = event.composeView.getToRecipients();
             sent_info_dict.subject = event.composeView.getSubject()
@@ -76,4 +76,4 @@ function Compose_view_info() {
 
 Compose_view_info()
 Send_info()
-conversation_info()
+Conversation_info()

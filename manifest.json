@@ -12,6 +12,7 @@
     "identity",
     "https://*.googleapis.com/*"
   ],
+  "web_accessible_resources": ["src/Image/icon.jpg"],
   "content_scripts": [{
     "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
     "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
@@ -29,7 +30,7 @@
     "scripts": ["src/js/background.js"],
     "persistent": false
   },
-
+  
   "oauth2": {
     "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
     "scopes": [
