@@ -61,3 +61,6 @@ Connected popup.js file and myapp.js file. Now the extracted info from emails ar
 8/11/18, Barry:
 -Change data security options in manifest to enable inline script for local storage
 -File interaction between front-end and localstorage is done for gsheet and name
+
+8/14/18, Barry£º
+-Change storage option from localstorage to chrome storage for variable sharing among the files
