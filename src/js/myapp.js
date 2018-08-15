@@ -16,6 +16,9 @@ receive_info_dict.receivetime = ''
 //Global variable for storing the current selected text
 var selected_text = ''
 
+console.log(localStorage.prefered_name)
+
+
 // newdiv = document.createElement('div');   //create a div
 // newdiv.id = 'newid';                      //add an id
 // body.appendChild(newdiv);                 //append to the doc.body
@@ -241,6 +244,20 @@ InboxSDK.load(2, 'sdk_Catworks_b73c68555a').then(function (sdk) {
           console.log(receive_info_dict.receivetime)
         },
         orderHint: 0,
-      });
-  });
+        
+        })
+  })
+
+  sdk.Conversations.registerThreadViewHandler(function (threadView){
+      var side_bar_HTML = document.createElement("div")
+      side_bar_HTML.innerHTML = 'Side_Bar'
+      threadView.addSidebarContentPanel({
+        el: side_bar_HTML,
+        title: 'Data Panel',
+        iconUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQxFoh469eOsZQkuPOLpZn3R6yyIExkZCxOxf4ywfeY3v330EwP3Q",
+        appName: 'Data Panel app',
+        appIconUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQxFoh469eOsZQkuPOLpZn3R6yyIExkZCxOxf4ywfeY3v330EwP3Q",
+        id : 'data_panel'
+      })
+  })
 })

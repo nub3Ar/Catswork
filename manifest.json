@@ -12,6 +12,7 @@
     "identity",
     "https://*.googleapis.com/*"
   ],
+  "web_accessible_resources": ["src/Image/icon.jpg"],
   "content_scripts": [{
     "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
     "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
@@ -19,7 +20,7 @@
     ]
   }],
 
-
+  
   "browser_action": {
     "default_title": "Catswork",
     "default_popup": "src/html/popup.html"
@@ -29,11 +30,13 @@
     "scripts": ["src/js/background.js"],
     "persistent": false
   },
-
+  
   "oauth2": {
     "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
     "scopes": [
       "https://www.googleapis.com/auth/spreadsheets"
-    ]
-  }
+    ] 
+  },
+
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgyIR07T1CxGx2Lj5IoRupp/s93NfGb5wPV26r3+zi/ZdLGtVDgMrZyz/S1gdYj3/4EbkKA9PFatDZZWsrDtbz4AOCm+1IgkZ4zEO1m2kIAlhg9iealvqFnZBeBdBsVpGABW5NxNfKtdZ+67pqBydVkICMD9RmP7pJrlAkcTazsWy2W/a9/2fExWvxSBl5JIqRPRRMqlnTujTCVmbEciQ6vt5tyJEZweYgJW5XF9r7Jzst84L0jxBLVTwKoJ4fpB9IkQiTPmG/BrZt31rafWzm/lL/8271oZ93Bjzl0ODdAqd7rYeVwzHJ8zHUYDuFrZ4w2Gzjn3s5a93tXTHTblw2wIDAQAB"
 }

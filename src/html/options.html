@@ -49,6 +49,7 @@
             <a href="#modal2" class="btn waves-effect tooltipped purple" data-position="bottom" data-tooltip="Default Settings" data-delay="0">Default</a>
             <a href="#modal3" class="btn waves-effect purple">Custom Setting</a>
             <a href="#modal4" class="btn waves-effect purple">Erase Setting</a>
+            <a class = "btn waves-effect purple" >Load information</a>
         </center>
     </main>
 
@@ -62,15 +63,15 @@
                     <label class="active purple-text" for="name">Prefered Name</label>
                 </div>
                 <div class="input-field">
-                    <input type="text" id="sheets">
+                    <input type="text" id="gsheets_link">
                     <label class="active purple-text" for="sheet">Google Sheet Link</label>
                 </div>
 
                 <div class="information">
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect btn purple" id="modal_footer1">Cancel</button>
-                    <button class="modal-action modal-close waves-effect btn purple" id="save">Confirm</button>
+                    <button class = "modal-action modal-close waves-effect btn purple">Cancel</button>
+                    <button type = "button" class="modal-action modal-close waves-effect btn purple" id="basic_info_save">Confirm</button>
                 </div>
             </form>
         </div>
@@ -146,8 +147,9 @@
             </h6>
         </div>
         <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect btn purple">Cancel</button>
             <button class="modal-action modal-close waves-effect btn purple" id="confirm_erase">Confirm</button>
-            <button class="modal-action modal-close waves-effect btn purple">Confirm</button>
+
         </div>
     </div>
 

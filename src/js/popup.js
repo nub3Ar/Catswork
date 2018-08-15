@@ -11,9 +11,7 @@
 * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
 */
 
-var sender = receive_info_dict.sender
-console.log('success')
-console.log(sender)
+
 
 var executionAPIExample = (function() {
 
