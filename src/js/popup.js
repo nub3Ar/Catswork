@@ -11,8 +11,6 @@
 * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
 */
 
-
-
 var executionAPIExample = (function() {
 
 	var SCRIPT_ID='1mjZg2epHVn6i0ftTBj9a2nmkpMunoY4nNTvCoQXAMk-r0oEBLmLFnZCx'; // Apps Script script id
@@ -61,6 +59,7 @@ var executionAPIExample = (function() {
 	 *   @value {function} callback - Async function to receive getAuthToken result.
 	 */
 	function getAuthToken(options) {
+		sampleSupport.log('accessing identity API...')
 		chrome.identity.getAuthToken({ 'interactive': options.interactive }, options.callback);
 	}
 
@@ -68,7 +67,9 @@ var executionAPIExample = (function() {
 	 * Get users access_token in background with now UI prompts.
 	 */
 	function getAuthTokenSilent() {
+		sampleSupport.log('Getting silently...');
 		getAuthToken({
+			
 			'interactive': false,
 			'callback': getAuthTokenCallback,
 		});
@@ -78,6 +79,7 @@ var executionAPIExample = (function() {
 	 * Get users access_token or show authorize UI if access has not been granted.
 	 */
 	function getAuthTokenInteractive() {
+		sampleSupport.log('Getting interactively...');
 		getAuthToken({
 			'interactive': true,
 			'callback': getAuthTokenCallback,
@@ -99,7 +101,7 @@ var executionAPIExample = (function() {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		}
 	}
-
+	
 	/**
 	 * Calling the Execution API script.
 	 */
@@ -123,7 +125,7 @@ var executionAPIExample = (function() {
 				'token': token,
 				'request': {'function': 'setData',
 							'parameters': {'data':JSON.parse(exec_data.value)}}
-			});
+			}); 
 	}
 
 	/**
