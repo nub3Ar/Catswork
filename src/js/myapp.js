@@ -16,7 +16,6 @@ receive_info_dict.receivetime = ''
 //Global variable for storing the current selected text
 var selected_text = ''
 
-console.log(localStorage.prefered_name)
 
 
 // newdiv = document.createElement('div');   //create a div
@@ -32,6 +31,10 @@ console.log(localStorage.prefered_name)
 // console.log(document.getElementById("test").innerHTML)
 
 // All functions using InboxSDK api
+chrome.storage.local.get("gsheets_link", result => {
+  console.log(result)
+});
+
 InboxSDK.load(2, 'sdk_Catworks_b73c68555a').then(function (sdk) {
   // ComposeView Modifier
   sdk.Compose.registerComposeViewHandler(function (composeView) {

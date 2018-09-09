@@ -16,7 +16,7 @@
   "content_scripts": [{
     "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
     "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
-      "src/js/libraries/jquery-3.3.1.min.js", "src/js/libraries/materialize.min.js"
+      "src/js/libraries/jquery-2.2.1.min.js", "src/js/libraries/materialize.min.js"
     ]
   }],
 

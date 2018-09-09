@@ -1,23 +1,76 @@
 <html>
-  <head>
-    <title>Catswork Authentication</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script src="../js/popup.js"></script>
-    <script src="../js/sample_support.js"></script>
-  </head>
-  <body>
-    <div class="flows">
-      <h2>Catswork Authentication</h2>
-      <div class="flow">
-        <button id="signin">Authenticate</button>
-		<button id="getxhr" disabled>Send Data</button>
-        <button id="revoke" disabled>Log Out</button>
-        <div id="exec_info"></div>
-      </div>
+
+<head>
+  <title>Catswork Authentication</title>
+  <link rel="stylesheet" src="../css/style.css">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <script type="text/javascript" src="../js/libraries/jquery-2.2.1.min.js"></script>
+  <script src="../js/libraries/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/popup.js"></script>
+
+</head>
+
+<body>
+  <div class="card-panel" style="min-width:300px;">
+    <h5>Catswork Networking Tracker</h5>
+    <div class="row">
+      <form class="col s12">
+        <div class="input-field col s12">
+          <input id="date" type="text" class="datepicker">
+          <label for="date">Date</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="name" type="text" class="validate">
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="firm" type="text" class="validate">
+          <label for="">Firm</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="city" type="text" class="validate">
+          <label for="city">City</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="position" type="text" class="validate">
+          <label for="position">Position</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="phone" type="tel" class="validate">
+          <label for="phone">Phone</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="notes" class="materialize-textarea"></textarea>
+          <label for="notes">Notes</label>
+        </div>
+      </form>
     </div>
-   <div class="log">
-      <textarea id="__sample_support_logarea" disabled></textarea>
-	   <div id="exec_info"><p><strong>Data to send via Execution API</strong> (data to be sent on Call Execution API) <textarea id="exec_data">Insert Data to be added here</textarea><span id="exec_result"></span></p></div>
-   </div>
-  </body>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Submit
+      <i class="material-icons right">send</i>
+    </button>
+    <br>
+    <br>
+    <a class="waves-effect waves-light btn">
+      <i class="material-icons right">assignment</i>
+      Create SpreadSheet</a>
+    <br>
+    <br>
+    <a class="waves-effect waves-light btn" href="https://www.northwestern.edu/careers" target="_blank">
+      <i class="material-icons right">business_center</i>
+      NCA Resources</a>
+    <br>
+    <br>
+    <a class="waves-effect waves-light btn">
+      <i class="material-icons right">feedback</i>
+      Feedback</a>
+  </div>
+</body>
+
 </html>
