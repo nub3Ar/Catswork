@@ -84,3 +84,10 @@ div.ui-datepicker {
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
   background-color:rgb(246, 73, 77);
 }
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: rgb(246, 73, 77) !important;
+}
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: rgb(246, 73, 77) !important;
+}
