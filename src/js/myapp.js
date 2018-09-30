@@ -38,18 +38,24 @@ var executionAPIExample = (function() {
 		switch (state) {
 		  case STATE_START:
 			enableButton(signin_button);
-			disableButton(xhr_button);
+			disableButton(submit_button);
+			disableButton(create_button);
+			disableButton(feedback_button);
 			disableButton(revoke_button);
 			break;
 		  case STATE_ACQUIRING_AUTHTOKEN:
 			sampleSupport.log('Acquiring token...');
 			disableButton(signin_button);
-			disableButton(xhr_button);
+			disableButton(submit_button);
+			disableButton(create_button);
+			disableButton(feedback_button);
 			disableButton(revoke_button);
 			break;
 		  case STATE_AUTHTOKEN_ACQUIRED:
 			disableButton(signin_button);
-			enableButton(xhr_button);
+			enableButton(submit_button);
+			enableButton(create_button);
+			enableButton(feedback_button);
 			enableButton(revoke_button);
 			break;
 		}
