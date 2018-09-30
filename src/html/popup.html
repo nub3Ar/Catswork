@@ -1,36 +1,38 @@
-
 <html>
-  <head>
-    <title>Catswork Tracker</title>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script type="text/javascript" src="../js/libraries/jquery-2.2.1.min.js"></script>
-    <script src="../js/libraries/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/popup.js"></script>
-    <script type="text/javascript" src="../js/myapp.js"></script>
-    <script src="../js/sample_support.js"></script>
-    
-  </head>
-  
-  <body style="background-color:rgba(0, 0, 0, 0.05); padding: 5%; min-width:300px;">
-    <center>
-      <h4>CatsWork</h4>
-      <h5>Networking Tracker</h5>
-  
-      <div class="flows">
-        <h2>Execution API Integration</h2>
-        <div class="flow">
-        <button class="btn-large waves-effect waves-light" type="signin" id="signin" name="action">
+
+<head>
+  <title>Catswork Tracker</title>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="text/javascript" src="../js/libraries/jquery-2.2.1.min.js"></script>
+  <script src="../js/libraries/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/popup.js"></script>
+  <script type="text/javascript" src="../js/myapp.js"></script>
+  <script src="../js/sample_support.js"></script>
+
+</head>
+
+<body style="background-color:rgba(0, 0, 0, 0.05); padding: 5%; min-width:300px;">
+  <center>
+    <div class="row">
+      <div class="col s6"> <img src="../image/logo.png" width="100%"></div>
+      <div class="col s6">
+        <h4>CatsWork</h4>
+        <h6>Networking Tracker</h6>
+      </div>
+    </div>
+    <br>
+    <div class="flows">
+      <div class="flow">
+        <button class="btn waves-effect waves-light" type="signin" id="signin" name="action">
           Authenticate
         </button>
-
-        <button class="btn-large waves-effect waves-light" type="getxhr" id="getxhr" name="action" disabled>
-          Call Execution API
-        </button>
-
-        <button class="btn-large waves-effect waves-light" type="revoke" id="revoke" name="action" disabled>
+        <button class="btn waves-effect waves-light" type="revoke" id="revoke" name="action" disabled>
           Log Out
+        </button>
+        <button class="btn waves-effect waves-light" type="getxhr" id="getxhr" name="action" disabled>
+          Call Execution API
         </button>
         <div id="exec_info"></div>
       </div>
@@ -38,73 +40,77 @@
 
     <div class="log">
       <textarea id="__sample_support_logarea" disabled></textarea>
-     <div id="exec_info"><p><strong>Data to send via Execution API</strong> (data to be sent on Call Execution API) <textarea id="exec_data">[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]</textarea><span id="exec_result"></span></p></div>
-   </div>
-      <div class="row">
-        <form class="col s12">
-          <div class="input-field col s12">
-            <input id="date" type="text" class="datepicker">
-            <label for="date">Date</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="name" type="text" class="validate">
-            <label for="name">Name</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="firm" type="text" class="validate">
-            <label for="firm">Firm</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="position" type="text" class="validate">
-            <label for="position">Position</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="city" type="text" class="validate">
-            <label for="city">City</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="phone" type="tel" class="validate">
-            <label for="phone">Phone</label>
-          </div>
-          <div class="input-field col s12">
-            <textarea id="notes" class="materialize-textarea"></textarea>
-            <label for="notes">Notes</label>
-          </div>
-          <div class="switch">
-            <p style = "text-align: center">Follow up immediately</p>
-            <label style="color:black">
-              No
-              <input type="checkbox" id = 'follow-up' value='yes'>
-              <span class="lever"></span>
-              Yes
-            </label>
-          </div>
-        </form>
+      <div id="exec_info">
+        <p><strong>Data to send via Execution API</strong> (data to be sent on Call Execution API) <textarea id="exec_data">[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]</textarea><span
+            id="exec_result"></span></p>
       </div>
-  
-  
-      <button class="btn-large waves-effect waves-light" type="submit" id="submit" name="action" disabled>
-        Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </center>
-    <br>
-    <br>
-    <button class="waves-effect waves-light btn-flat" id = "createsheet">
-      <i class="material-icons right">assignment</i>
-      Create SpreadSheet</button>
-    <br>
-    <a class="waves-effect waves-light btn-flat" href="https://www.northwestern.edu/careers" target="_blank">
-      <i class="material-icons right">business_center</i>
-      NCA Resources</a>
-    <br>
-    <button class="waves-effect waves-light btn-flat" id = "feedback">
-      <i class="material-icons right">feedback</i>
-      Feedback</button>
-    <br>
-  </body>
+    </div>
+    <div class="row">
+      <form class="col s12">
+        <div class="input-field col s12">
+          <input id="date" type="text" class="datepicker">
+          <label for="date">Date</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="name" type="text" class="validate">
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="firm" type="text" class="validate">
+          <label for="firm">Firm</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="position" type="text" class="validate">
+          <label for="position">Position</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="city" type="text" class="validate">
+          <label for="city">City</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="phone" type="tel" class="validate">
+          <label for="phone">Phone</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="notes" class="materialize-textarea"></textarea>
+          <label for="notes">Notes</label>
+        </div>
+        <div class="switch">
+          <p style="text-align: center">Follow up immediately</p>
+          <label style="color:black">
+            No
+            <input type="checkbox" id='follow-up' value='yes'>
+            <span class="lever"></span>
+            Yes
+          </label>
+        </div>
+      </form>
+    </div>
+
+
+    <button class="btn-large waves-effect waves-light" type="submit" id="submit" name="action" disabled>
+      Submit
+      <i class="material-icons right">send</i>
+    </button>
+  </center>
+  <br>
+  <br>
+  <button class="waves-effect waves-light btn-flat" id="createsheet">
+    <i class="material-icons right">assignment</i>
+    Create SpreadSheet</button>
+  <br>
+  <a class="waves-effect waves-light btn-flat" href="https://www.northwestern.edu/careers" target="_blank">
+    <i class="material-icons right">business_center</i>
+    NCA Resources</a>
+  <br>
+  <button class="waves-effect waves-light btn-flat" id="feedback">
+    <i class="material-icons right">feedback</i>
+    Feedback</button>
+  <br>
+</body>
+
 </html>
