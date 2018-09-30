@@ -1,10 +1,10 @@
 # Catswork
-All time updates should be in GMT 
+All time updates should be 24-hour military time in GMT 
 
 
 
 07/14/18 8:30
-This is the basic files you need to get started.
+This is the basic files you need to get started. I (Barry) will add front-end features from time-to-time. 
 
 
 7/22/18 9:35
@@ -62,5 +62,5 @@ Connected popup.js file and myapp.js file. Now the extracted info from emails ar
 -Change data security options in manifest to enable inline script for local storage
 -File interaction between front-end and localstorage is done for gsheet and name
 
-8/14/18, BarryÂ£Âº
+8/14/18, Barry£º
 -Change storage option from localstorage to chrome storage for variable sharing among the files

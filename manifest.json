@@ -16,7 +16,7 @@
   "content_scripts": [{
     "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
     "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
-      "src/js/libraries/jquery-2.2.1.min.js", "src/js/libraries/materialize.min.js"
+      "src/js/libraries/jquery-3.3.1.min.js", "src/js/libraries/materialize.min.js"
     ]
   }],
 
@@ -32,9 +32,11 @@
   },
   
   "oauth2": {
-    "client_id": "683425020415-vdv2sptk0e8v77t4ep3md6l2ediphkoh.apps.googleusercontent.com",
+    "client_id": "174622660166-1vl9lfqkdttfj848ghe1c37s6a84ah1d.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/spreadsheets"
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/drive.file"
     ] 
   },
 
