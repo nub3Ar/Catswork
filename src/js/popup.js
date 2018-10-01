@@ -1,9 +1,7 @@
-'use strict';
 
-var inputArray = {};
 
 //----------------------------------------------------------------------------------------------------------
-//Barry's UI/UX
+//Barry's UI/UX, strictly use for front-end features
 
 //Front-End JQuery
 jQuery(document).ready(function () {
@@ -32,7 +30,7 @@ jQuery(document).ready(function () {
 	//prefilling the date
 	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
 	$("#date").val(today);
-
+	
 
 
 });

@@ -10,8 +10,10 @@
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
  */
-inputArray = {}
+var inputArray = {}
 var inputDictionary = {}
+var exec_data = '[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]';
+
 
 var executionAPIExample = (function () {
 
@@ -49,7 +51,7 @@ var executionAPIExample = (function () {
 				disableButton(signin_button);
 				disableButton(submit_button);
 				disableButton(create_button);
-				disableButton(xhr_button);
+				enableButton(xhr_button);
 				disableButton(feedback_button);
 				disableButton(revoke_button);
 				break;
@@ -57,7 +59,7 @@ var executionAPIExample = (function () {
 				disableButton(signin_button);
 				enableButton(submit_button);
 				enableButton(create_button);
-				disableButton(xhr_button);
+				enableButton(xhr_button);
 				enableButton(feedback_button);
 				enableButton(revoke_button);
 				break;
@@ -71,7 +73,6 @@ var executionAPIExample = (function () {
 	 *   @value {function} callback - Async function to receive getAuthToken result.
 	 */
 	function getAuthToken(options) {
-		sampleSupport.log('accessing identity API...')
 		chrome.identity.getAuthToken({
 			'interactive': options.interactive
 		}, options.callback);
@@ -81,7 +82,6 @@ var executionAPIExample = (function () {
 	 * Get users access_token in background with now UI prompts.
 	 */
 	function getAuthTokenSilent() {
-		sampleSupport.log('Getting silently...');
 		getAuthToken({
 
 			'interactive': false,
@@ -93,7 +93,6 @@ var executionAPIExample = (function () {
 	 * Get users access_token or show authorize UI if access has not been granted.
 	 */
 	function getAuthTokenInteractive() {
-		sampleSupport.log('Getting interactively...');
 		getAuthToken({
 			'interactive': true,
 			'callback': getAuthTokenCallback,
@@ -108,10 +107,8 @@ var executionAPIExample = (function () {
 	function getAuthTokenCallback(token) {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
-			sampleSupport.log('No token aquired');
 			changeState(STATE_START);
 		} else {
-			sampleSupport.log('Token acquired');
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		}
 	}
@@ -141,7 +138,7 @@ var executionAPIExample = (function () {
 			'request': {
 				'function': 'setData',
 				'parameters': {
-					'data': JSON.parse(exec_data.value)
+					'data': JSON.parse(exec_data)
 				}
 			}
 		});
@@ -226,13 +223,11 @@ var executionAPIExample = (function () {
 				// JSON response assumed. Other APIs may have different responses.
 				options.callback(JSON.parse(xhr.responseText));
 			} else if (xhr.readyState === 4 && xhr.status !== 200) {
-				sampleSupport.log('post ' + xhr.readyState + xhr.status + xhr.responseText);
 			}
 		};
 		xhr.open('POST', options.url, true);
 		// Set standard Google APIs authentication header.
 		xhr.setRequestHeader('Authorization', 'Bearer ' + options.token);
-		sampleSupport.log(options.request);
 		xhr.send(JSON.stringify(options.request));
 	}
 
@@ -248,11 +243,11 @@ var executionAPIExample = (function () {
 	//2. store all nputs into an array
 	function submitCallback() {
 		localStorage.clear()
-		inputs = document.getElementsByTagName('input');
-		for (index = 0; index < inputs.length; ++index) {
+		var inputs = document.getElementsByTagName('input');
+		for (let index = 0; index < inputs.length; ++index) {
 			if (inputs[index].getAttribute('id')) {
 				console.log("here");
-				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
+				if ( inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
 					inputDictionary[inputs[index].getAttribute('id')] = "yes";
 				} else {
 					inputDictionary[inputs[index].getAttribute('id')] = inputs[index].value;
@@ -312,8 +307,8 @@ var executionAPIExample = (function () {
 			revoke_button.addEventListener('click', revokeToken);
 
 			exec_info_div = document.querySelector('#exec_info');
-			exec_data = document.querySelector('#exec_data');
-			exec_result = document.querySelector('#exec_result')
+			exec_data = '[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]';
+			exec_result = document.querySelector('#exec_result');
 
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit);
