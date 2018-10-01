@@ -12,7 +12,7 @@
     "identity",
     "https://*.googleapis.com/*"
   ],
-  "web_accessible_resources": ["src/Image/icon.jpg"],
+  "web_accessible_resources": ["src/image/icon.jpg, src/image/logo.png"],
   "content_scripts": [{
     "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
     "js": ["src/js/libraries/inboxsdk.js", "src/js/myapp.js", "src/js/popup.js",
