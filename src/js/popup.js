@@ -33,22 +33,6 @@ jQuery(document).ready(function () {
 	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
 	$("#date").val(today);
 
-	//submission button:
-	//1. clears the previous inputs because the data will be saved
-	//2. store all nputs into an array
-	$("#submit").click(function () {
-		localStorage.clear();
-		$(":input").each(function (input) {
-			console.log($(this).attr("id"), $(this).val());
-			if ($(this).attr('id')) {
-				if ($(this).attr('type') == 'checkbox' && $(this).prop('checked')) {
-					console.log("here")
-					inputArray[$(this).attr("id")] = "yes";
-				} else {
-					inputArray[$(this).attr("id")] = $(this).val();
-				}
-			}
-		});
-	});
+
 
 });

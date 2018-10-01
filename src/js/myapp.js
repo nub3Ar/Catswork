@@ -1,25 +1,25 @@
-
 'use strict';
 
 /*
-* Based on: 
-* Identity example in Chrome Apps Samples 
-* https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/identity 
-* https://github.com/GoogleChrome/chrome-app-samples/blob/master/LICENSE
-*
-* GDE Sample: Chrome extension Google APIs by Abraham's 
-* https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
-* https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
-*/
-inputArray['url'] = 'https://docs.google.com/spreadsheets/d/1QLrSgxgD2VKEqNc-VMObsPJ9i6t7lc-DXFGeqPVc4HI/edit#gid=0'
+ * Based on: 
+ * Identity example in Chrome Apps Samples 
+ * https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/identity 
+ * https://github.com/GoogleChrome/chrome-app-samples/blob/master/LICENSE
+ *
+ * GDE Sample: Chrome extension Google APIs by Abraham's 
+ * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
+ * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
+ */
+inputArray = {}
+var inputDictionary = {}
 
-var executionAPIExample = (function() {
+var executionAPIExample = (function () {
 
 	//var SCRIPT_ID='1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT'; // Apps Script script id
-	var SCRIPT_ID='1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
-	var STATE_START=1;
-	var STATE_ACQUIRING_AUTHTOKEN=2;
-	var STATE_AUTHTOKEN_ACQUIRED=3;
+	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
+	var STATE_START = 1;
+	var STATE_ACQUIRING_AUTHTOKEN = 2;
+	var STATE_AUTHTOKEN_ACQUIRED = 3;
 
 	var state = STATE_START;
 
@@ -36,28 +36,31 @@ var executionAPIExample = (function() {
 	function changeState(newState) {
 		state = newState;
 		switch (state) {
-		  case STATE_START:
-			enableButton(signin_button);
-			disableButton(submit_button);
-			disableButton(create_button);
-			disableButton(feedback_button);
-			disableButton(revoke_button);
-			break;
-		  case STATE_ACQUIRING_AUTHTOKEN:
-			sampleSupport.log('Acquiring token...');
-			disableButton(signin_button);
-			disableButton(submit_button);
-			disableButton(create_button);
-			disableButton(feedback_button);
-			disableButton(revoke_button);
-			break;
-		  case STATE_AUTHTOKEN_ACQUIRED:
-			disableButton(signin_button);
-			enableButton(submit_button);
-			enableButton(create_button);
-			enableButton(feedback_button);
-			enableButton(revoke_button);
-			break;
+			case STATE_START:
+				enableButton(signin_button);
+				disableButton(submit_button);
+				disableButton(xhr_button);
+				disableButton(create_button);
+				disableButton(feedback_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_ACQUIRING_AUTHTOKEN:
+				sampleSupport.log('Acquiring token...');
+				disableButton(signin_button);
+				disableButton(submit_button);
+				disableButton(create_button);
+				disableButton(xhr_button);
+				disableButton(feedback_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_AUTHTOKEN_ACQUIRED:
+				disableButton(signin_button);
+				enableButton(submit_button);
+				enableButton(create_button);
+				disableButton(xhr_button);
+				enableButton(feedback_button);
+				enableButton(revoke_button);
+				break;
 		}
 	}
 	/**
@@ -69,7 +72,9 @@ var executionAPIExample = (function() {
 	 */
 	function getAuthToken(options) {
 		sampleSupport.log('accessing identity API...')
-		chrome.identity.getAuthToken({ 'interactive': options.interactive }, options.callback);
+		chrome.identity.getAuthToken({
+			'interactive': options.interactive
+		}, options.callback);
 	}
 
 	/**
@@ -78,12 +83,12 @@ var executionAPIExample = (function() {
 	function getAuthTokenSilent() {
 		sampleSupport.log('Getting silently...');
 		getAuthToken({
-			
+
 			'interactive': false,
 			'callback': getAuthTokenCallback,
 		});
 	}
-	
+
 	/**
 	 * Get users access_token or show authorize UI if access has not been granted.
 	 */
@@ -94,7 +99,7 @@ var executionAPIExample = (function() {
 			'callback': getAuthTokenCallback,
 		});
 	}
-	
+
 	/**
 	 * Handle response from authorization server.
 	 *
@@ -103,14 +108,14 @@ var executionAPIExample = (function() {
 	function getAuthTokenCallback(token) {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
-			sampleSupport.log('No token aquired'); 
+			sampleSupport.log('No token aquired');
 			changeState(STATE_START);
 		} else {
 			sampleSupport.log('Token acquired');
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		}
 	}
-	
+
 	/**
 	 * Calling the Execution API script.
 	 */
@@ -122,19 +127,24 @@ var executionAPIExample = (function() {
 			'callback': sendDataToExecutionAPICallback,
 		});
 	}
-	
+
 	/**
 	 * Calling the Execution API script callback.
 	 * @param {string} token - Google access_token to authenticate request with.
 	 */
 	function sendDataToExecutionAPICallback(token) {
 		sampleSupport.log('Sending data to Execution API script');
-		post({	'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-				'callback': executionAPIResponse,
-				'token': token,
-				'request': {'function': 'setData',
-							'parameters': {'data':JSON.parse(exec_data.value)}}
-			}); 
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': executionAPIResponse,
+			'token': token,
+			'request': {
+				'function': 'setData',
+				'parameters': {
+					'data': JSON.parse(exec_data.value)
+				}
+			}
+		});
 	}
 
 	// function sendDataToExecutionAPICallback(token) {
@@ -151,30 +161,30 @@ var executionAPIExample = (function() {
 	 * Handling response from the Execution API script.
 	 * @param {Object} response - response object from API call
 	 */
-	function executionAPIResponse(response){
+	function executionAPIResponse(response) {
 		sampleSupport.log(response);
 		enableButton(xhr_button);
 		xhr_button.classList.remove('loading');
 		var info;
-		if (response.response.result.status == 'ok'){
-			info = 'Data has been entered into <a href="'+response.response.result.doc+'" target="_blank"><strong>this sheet</strong></a>';
+		if (response.response.result.status == 'ok') {
+			info = 'Data has been entered into <a href="' + response.response.result.doc + '" target="_blank"><strong>this sheet</strong></a>';
 		} else {
 			info = 'Error...';
 		}
 		exec_result.innerHTML = info;
 	}
-	
+
 	/**
 	 * Revoking the access token.
 	 */
 	function revokeToken() {
-		exec_result.innerHTML='';
+		exec_result.innerHTML = '';
 		getAuthToken({
 			'interactive': false,
 			'callback': revokeAuthTokenCallback,
 		});
 	}
-	
+
 	/**
 	 * Revoking the access token callback
 	 */
@@ -182,22 +192,24 @@ var executionAPIExample = (function() {
 		if (!chrome.runtime.lastError) {
 
 			// Remove the local cached token
-			chrome.identity.removeCachedAuthToken({ token: current_token }, function() {});
-			
+			chrome.identity.removeCachedAuthToken({
+				token: current_token
+			}, function () {});
+
 			// Make a request to revoke token in the server
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
-				   current_token);
+				current_token);
 			xhr.send();
 
 			// Update the user interface accordingly
 			changeState(STATE_START);
-			sampleSupport.log('Token revoked and removed from cache. '+
-							'Check chrome://identity-internals to confirm.');
+			sampleSupport.log('Token revoked and removed from cache. ' +
+				'Check chrome://identity-internals to confirm.');
 		}
-	
+
 	}
-	
+
 	/**
 	 * Make an authenticated HTTP POST request.
 	 *
@@ -209,11 +221,11 @@ var executionAPIExample = (function() {
 	 */
 	function post(options) {
 		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {			
+		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				// JSON response assumed. Other APIs may have different responses.
 				options.callback(JSON.parse(xhr.responseText));
-			} else if(xhr.readyState === 4 && xhr.status !== 200) {
+			} else if (xhr.readyState === 4 && xhr.status !== 200) {
 				sampleSupport.log('post ' + xhr.readyState + xhr.status + xhr.responseText);
 			}
 		};
@@ -224,17 +236,30 @@ var executionAPIExample = (function() {
 		xhr.send(JSON.stringify(options.request));
 	}
 
-  function submit() {
-    getAuthToken({
+	function submit() {
+		getAuthToken({
 			'interactive': true,
 			'callback': submitCallback,
 		});
-  }
+	}
 
-  function submitCallback(){
-    localStorage.clear()
-    //to-do: connect with appscript
-  }
+	//submission button:
+	//1. clears the previous inputs because the data will be saved
+	//2. store all nputs into an array
+	function submitCallback() {
+		localStorage.clear()
+		inputs = document.getElementsByTagName('input');
+		for (index = 0; index < inputs.length; ++index) {
+			if (inputs[index].getAttribute('id')) {
+				console.log("here");
+				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
+					inputDictionary[inputs[index].getAttribute('id')] = "yes";
+				} else {
+					inputDictionary[inputs[index].getAttribute('id')] = inputs[index].value;
+				}
+			}
+		}
+	}
 
 
 
@@ -244,12 +269,16 @@ var executionAPIExample = (function() {
 			'callback': createSheetCallback,
 		});
 	}
-	function createSheetCallback(token){
-		post({	'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-				'callback': executionAPIResponse,
-				'token': token,
-				'request': {'function': 'createGoogleSheetWithHeading',}
-			}); 
+
+	function createSheetCallback(token) {
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': executionAPIResponse,
+			'token': token,
+			'request': {
+				'function': 'createGoogleSheetWithHeading',
+			}
+		});
 	}
 
 	function feedback() {
@@ -259,13 +288,16 @@ var executionAPIExample = (function() {
 		});
 	}
 
-	function feedbackCallback(token){
-		post({	'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-				'callback': executionAPIResponse,
-				'token': token,
-				'request': {'function': 'feedbackEmail',
-							'parameters': {}}
-			}); 
+	function feedbackCallback(token) {
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': executionAPIResponse,
+			'token': token,
+			'request': {
+				'function': 'feedbackEmail',
+				'parameters': {}
+			}
+		});
 	}
 
 	return {
@@ -277,14 +309,14 @@ var executionAPIExample = (function() {
 			xhr_button.addEventListener('click', sendDataToExecutionAPI.bind(xhr_button, true));
 
 			revoke_button = document.querySelector('#revoke');
-      revoke_button.addEventListener('click', revokeToken);
+			revoke_button.addEventListener('click', revokeToken);
 
 			exec_info_div = document.querySelector('#exec_info');
 			exec_data = document.querySelector('#exec_data');
-      exec_result = document.querySelector('#exec_result')
-      
-      submit_button = document.querySelector('#submit')
-      submit_button.addEventListener('click', submit);
+			exec_result = document.querySelector('#exec_result')
+
+			submit_button = document.querySelector('#submit')
+			submit_button.addEventListener('click', submit);
 
 			create_button = document.querySelector('#createsheet');
 			create_button.addEventListener('click', createSheet);
@@ -301,12 +333,3 @@ var executionAPIExample = (function() {
 })();
 
 window.onload = executionAPIExample.onload;
-
-
-
-
-
-
-
-
-
