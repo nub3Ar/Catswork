@@ -10,14 +10,11 @@
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
  */
-var inputArray = {}
-var inputDictionary = {}
-var exec_data = '[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]';
-
+var inputArray = []
+var sheet_link;
 
 var executionAPIExample = (function () {
 
-	//var SCRIPT_ID='1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT'; // Apps Script script id
 	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
 	var STATE_START = 1;
 	var STATE_ACQUIRING_AUTHTOKEN = 2;
@@ -25,7 +22,7 @@ var executionAPIExample = (function () {
 
 	var state = STATE_START;
 
-	var signin_button, xhr_button, revoke_button, exec_info_div, exec_data, exec_result, create_button, feedback_button, submit_button;
+	var signin_button, revoke_button, create_button, submit_button;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -41,26 +38,19 @@ var executionAPIExample = (function () {
 			case STATE_START:
 				enableButton(signin_button);
 				disableButton(submit_button);
-				disableButton(xhr_button);
 				disableButton(create_button);
-				disableButton(feedback_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
-				sampleSupport.log('Acquiring token...');
 				disableButton(signin_button);
 				disableButton(submit_button);
 				disableButton(create_button);
-				enableButton(xhr_button);
-				disableButton(feedback_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
-				enableButton(submit_button);
+				disableButton(submit_button);
 				enableButton(create_button);
-				enableButton(xhr_button);
-				enableButton(feedback_button);
 				enableButton(revoke_button);
 				break;
 		}
@@ -108,74 +98,53 @@ var executionAPIExample = (function () {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
 			changeState(STATE_START);
+			if(localStorage.getItem('url')){
+				enableButton(submit_button)
+				disableButton(create_button)
+			}
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
+		    if(localStorage.getItem('url')){
+				enableButton(submit_button)
+				disableButton(create_button)
+			}
 		}
 	}
 
-	/**
-	 * Calling the Execution API script.
-	 */
-	function sendDataToExecutionAPI() {
-		disableButton(xhr_button);
-		xhr_button.className = 'loading';
-		getAuthToken({
-			'interactive': false,
-			'callback': sendDataToExecutionAPICallback,
-		});
-	}
-
-	/**
-	 * Calling the Execution API script callback.
-	 * @param {string} token - Google access_token to authenticate request with.
-	 */
-	function sendDataToExecutionAPICallback(token) {
-		sampleSupport.log('Sending data to Execution API script');
-		post({
-			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-			'callback': executionAPIResponse,
-			'token': token,
-			'request': {
-				'function': 'setData',
-				'parameters': {
-					'data': JSON.parse(exec_data)
-				}
-			}
-		});
-	}
-
-	// function sendDataToExecutionAPICallback(token) {
-	// 	sampleSupport.log('Sending data to Execution API script');
-	// 	post({	'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-	// 			'callback': executionAPIResponse,
-	// 			'token': token,
-	// 			'request': {'function': 'submitForm',			
-	// 						'parameters': {'data': inputArray}}
-	// 		}); 
+	// /**
+	//  * Calling the Execution API script.
+	//  */
+	// function sendDataToExecutionAPI() {
+	// 	disableButton(xhr_button);
+	// 	xhr_button.className = 'loading';
+	// 	getAuthToken({
+	// 		'interactive': false,
+	// 		'callback': sendDataToExecutionAPICallback,
+	// 	});
 	// }
 
-	/**
-	 * Handling response from the Execution API script.
-	 * @param {Object} response - response object from API call
-	 */
-	function executionAPIResponse(response) {
-		sampleSupport.log(response);
-		enableButton(xhr_button);
-		xhr_button.classList.remove('loading');
-		var info;
-		if (response.response.result.status == 'ok') {
-			info = 'Data has been entered into <a href="' + response.response.result.doc + '" target="_blank"><strong>this sheet</strong></a>';
-		} else {
-			info = 'Error...';
-		}
-		exec_result.innerHTML = info;
-	}
+	// /**
+	//  * Calling the Execution API script callback.
+	//  * @param {string} token - Google access_token to authenticate request with.
+	//  */
+	// function sendDataToExecutionAPICallback(token) {
+	// 	post({
+	// 		'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+	// 		'callback': executionAPIResponse,
+	// 		'token': token,
+	// 		'request': {
+	// 			'function': 'setData',
+	// 			'parameters': {
+	// 				'data': JSON.parse(exec_data)
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	/**
 	 * Revoking the access token.
 	 */
 	function revokeToken() {
-		exec_result.innerHTML = '';
 		getAuthToken({
 			'interactive': false,
 			'callback': revokeAuthTokenCallback,
@@ -201,8 +170,6 @@ var executionAPIExample = (function () {
 
 			// Update the user interface accordingly
 			changeState(STATE_START);
-			sampleSupport.log('Token revoked and removed from cache. ' +
-				'Check chrome://identity-internals to confirm.');
 		}
 
 	}
@@ -222,8 +189,7 @@ var executionAPIExample = (function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				// JSON response assumed. Other APIs may have different responses.
 				options.callback(JSON.parse(xhr.responseText));
-			} else if (xhr.readyState === 4 && xhr.status !== 200) {
-			}
+			} else if (xhr.readyState === 4 && xhr.status !== 200) {}
 		};
 		xhr.open('POST', options.url, true);
 		// Set standard Google APIs authentication header.
@@ -232,92 +198,93 @@ var executionAPIExample = (function () {
 	}
 
 	function submit() {
-		getAuthToken({
-			'interactive': true,
-			'callback': submitCallback,
-		});
-	}
+        disableButton(submit_button);
+        submit_button.className = 'loading';
+        getAuthToken({
+            'interactive': false,
+            'callback': submitCallback,
+        });
+    }
 
 	//submission button:
 	//1. clears the previous inputs because the data will be saved
 	//2. store all nputs into an array
-	function submitCallback() {
-		localStorage.clear()
+	function submitCallback(token) {
+		inputArray = [];
 		var inputs = document.getElementsByTagName('input');
 		for (let index = 0; index < inputs.length; ++index) {
 			if (inputs[index].getAttribute('id')) {
-				console.log("here");
-				if ( inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
-					inputDictionary[inputs[index].getAttribute('id')] = "yes";
+				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
+					inputArray.push("yes");
 				} else {
-					inputDictionary[inputs[index].getAttribute('id')] = inputs[index].value;
+					inputArray.push(inputs[index].value);
 				}
 			}
+			localStorage.removeItem(inputs[index].getAttribute('id'));
 		}
+		//posting to google appscript
+		post({
+            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+            'callback': submitResponse,
+            'token': token,
+            'request': {
+                'function': 'submit',
+                'parameters': {
+                    'data': [inputArray],
+                    'url': localStorage.getItem('url')
+                }
+            }
+        });
 	}
 
-
+	function submitResponse(response) {
+        enableButton(submit_button);
+    }
 
 	function createSheet() {
-		getAuthToken({
-			'interactive': true,
-			'callback': createSheetCallback,
-		});
-	}
+        getAuthToken({
+            'interactive': false,
+            'callback': createSheetCallback,
+        });
+    }
 
-	function createSheetCallback(token) {
-		post({
-			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-			'callback': executionAPIResponse,
-			'token': token,
-			'request': {
-				'function': 'createGoogleSheetWithHeading',
-			}
-		});
-	}
+    function createSheetCallback(token) {
+        post({
+            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+            'callback': createSheetResponse,
+            'token': token,
+            'request': {
+                'function': 'createSheet',
+            }
+        });
+    }
 
-	function feedback() {
-		getAuthToken({
-			'interactive': true,
-			'callback': feedbackCallback,
-		});
-	}
+    function createSheetResponse(response) {
+		disableButton(create_button);
+		enableButton(submit_button);
+		if (response.response.result.status == 'ok') {
+			sheet_link = response.response.result.doc;
+			localStorage.setItem('url', sheet_link)
+			document.querySelector('#opensheet').setAttribute('href', localStorage.getItem('url'))
 
-	function feedbackCallback(token) {
-		post({
-			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-			'callback': executionAPIResponse,
-			'token': token,
-			'request': {
-				'function': 'feedbackEmail',
-				'parameters': {}
-			}
-		});
-	}
+		}
+    }
+
+
 
 	return {
 		onload: function () {
 			signin_button = document.querySelector('#signin');
 			signin_button.addEventListener('click', getAuthTokenInteractive);
 
-			xhr_button = document.querySelector('#getxhr');
-			xhr_button.addEventListener('click', sendDataToExecutionAPI.bind(xhr_button, true));
-
 			revoke_button = document.querySelector('#revoke');
 			revoke_button.addEventListener('click', revokeToken);
 
-			exec_info_div = document.querySelector('#exec_info');
-			exec_data = '[["Rank","NOC","Gold","Silver","Bronze","Total"],[1,"United States (USA)",46,37,38,121],[2,"Great Britain (GBR)",27,23,17,67],[3,"China (CHN)",26,18,26,70]]';
-			exec_result = document.querySelector('#exec_result');
-
 			submit_button = document.querySelector('#submit')
-			submit_button.addEventListener('click', submit);
+			submit_button.addEventListener('click', submit.bind(submit_button, true));
 
 			create_button = document.querySelector('#createsheet');
 			create_button.addEventListener('click', createSheet);
-
-			feedback_button = document.querySelector('#feedback');
-			feedback_button.addEventListener('click', feedback);
 
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 

@@ -31,6 +31,10 @@ jQuery(document).ready(function () {
 	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
 	$("#date").val(today);
 	
-
-
+	//adding sheet URL to the href
+	$('#opensheet').attr('href', localStorage.getItem('url'));
+	$('#deletesheet').click(function(){localStorage.removeItem('url')})
 });
+
+
+
