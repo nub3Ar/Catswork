@@ -9,9 +9,14 @@ jQuery(document).ready(function () {
 		"July", "August", "September", "October", "November", "December"
 	];
 	$(".datepicker").pickadate({
+		format: 'dd/mm/yyyy',
+		closeOnSelect: true,
 		selectMonths: true,
-		selectYears: 15,
+		selectYears: 5,
 	});
+
+
+	//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
 
 	//autosaving all of the inputs
@@ -40,13 +45,14 @@ jQuery(document).ready(function () {
 
 	})
 
+
+
+
 	//prefilling the date
 	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
 	$("#date").val(today);
 
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
-	$('#deletesheet').click(function () {
-		localStorage.removeItem('url')
-	})
+
 });

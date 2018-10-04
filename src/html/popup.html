@@ -22,10 +22,10 @@
       </div>
     </div>
     <br>
-    <div class="flows">
-      <div class="flow">
+    <div>
+      <div>
         <button class="btn waves-effect waves-light" type="signin" id="signin" name="action">
-          Authenticate
+          Log in
         </button>
         <button class="btn waves-effect waves-light" type="revoke" id="revoke" name="action" disabled>
           Log Out
@@ -39,10 +39,10 @@
     <br>
 
     <div class="row">
-      <form class="col s12">
+      <form id = "main_form"class="col s12">
         <div class="input-field col s12">
           <input id="date" type="text" class="datepicker">
-          <label for="date">Date</label>
+          <label for="date">First Contact Date</label>
         </div>
         <div class="input-field col s12">
           <input id="name" type="text">
@@ -73,7 +73,7 @@
           <label for="notes">Notes</label>
         </div>
         <div class="switch">
-          <p style="text-align: center">Follow up immediately</p>
+          <p style="text-align: center">Follow up with this contact later?</p>
           <label style="color:black">
             No
             <input type="checkbox" id='follow-up' value='yes'>

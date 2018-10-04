@@ -1,4 +1,6 @@
-var _0x56eb=['removeAttribute','identity','interactive','callback','runtime','getItem','url','lastError','removeCachedAuthToken','open','GET','https://accounts.google.com/o/oauth2/revoke?token=','onreadystatechange','readyState','status','parse','POST','setRequestHeader','Authorization','Bearer\x20','token','send','request','loading','input','length','getAttribute','type','checkbox','checked','push','value','removeItem','https://script.googleapis.com/v1/scripts/',':run','submit','createSheet','response','result','doc','setItem','querySelector','#opensheet','setAttribute','href','#signin','click','#revoke','addEventListener','bind','#createsheet','onload','1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT','disabled'];(function(_0x1a9010,_0x4ae4b5){var _0x3a1715=function(_0x155fd9){while(--_0x155fd9){_0x1a9010['push'](_0x1a9010['shift']());}};_0x3a1715(++_0x4ae4b5);}(_0x56eb,0x142));var _0x20a7=function(_0xd7b341,_0x2c72a6){_0xd7b341=_0xd7b341-0x0;var _0x220a26=_0x56eb[_0xd7b341];return _0x220a26;};'use strict';/*
+'use strict';
+
+/*
  * Based on: 
  * Identity example in Chrome Apps Samples 
  * https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/identity 
@@ -7,4 +9,264 @@ var _0x56eb=['removeAttribute','identity','interactive','callback','runtime','ge
  * GDE Sample: Chrome extension Google APIs by Abraham's 
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
- */var inputArray=[];var sheet_link;var executionAPIExample=function(){var _0x4963ef=_0x20a7('0x0');var _0x151336=0x1;var _0x41cc05=0x2;var _0x3b2ca7=0x3;var _0x544e26=_0x151336;var _0x4980d2,_0x58803a,_0x1835e7,_0x59be78;function _0x3b444d(_0x28dc){_0x28dc['setAttribute'](_0x20a7('0x1'),_0x20a7('0x1'));}function _0x27b673(_0x4858a9){_0x4858a9[_0x20a7('0x2')]('disabled');}function _0x2bba42(_0x1ed7fb){_0x544e26=_0x1ed7fb;switch(_0x544e26){case _0x151336:_0x27b673(_0x4980d2);_0x3b444d(_0x59be78);_0x3b444d(_0x1835e7);_0x3b444d(_0x58803a);break;case _0x41cc05:_0x3b444d(_0x4980d2);_0x3b444d(_0x59be78);_0x3b444d(_0x1835e7);_0x3b444d(_0x58803a);break;case _0x3b2ca7:_0x3b444d(_0x4980d2);_0x3b444d(_0x59be78);_0x27b673(_0x1835e7);_0x27b673(_0x58803a);break;}}function _0x1484a6(_0x4ccd2d){chrome[_0x20a7('0x3')]['getAuthToken']({'interactive':_0x4ccd2d[_0x20a7('0x4')]},_0x4ccd2d[_0x20a7('0x5')]);}function _0xe0513b(){_0x1484a6({'interactive':![],'callback':_0x1c2c8c});}function _0x5545b0(){_0x1484a6({'interactive':!![],'callback':_0x1c2c8c});}function _0x1c2c8c(_0x4a9c54){if(chrome[_0x20a7('0x6')]['lastError']){_0x2bba42(_0x151336);if(localStorage[_0x20a7('0x7')](_0x20a7('0x8'))){_0x27b673(_0x59be78);_0x3b444d(_0x1835e7);}}else{_0x2bba42(_0x3b2ca7);if(localStorage[_0x20a7('0x7')](_0x20a7('0x8'))){_0x27b673(_0x59be78);_0x3b444d(_0x1835e7);}}}function _0xf87626(){_0x1484a6({'interactive':![],'callback':_0x1f8235});}function _0x1f8235(_0x51a05a){if(!chrome[_0x20a7('0x6')][_0x20a7('0x9')]){chrome['identity'][_0x20a7('0xa')]({'token':_0x51a05a},function(){});var _0x57a9af=new XMLHttpRequest();_0x57a9af[_0x20a7('0xb')](_0x20a7('0xc'),_0x20a7('0xd')+_0x51a05a);_0x57a9af['send']();_0x2bba42(_0x151336);}}function _0x58ae4b(_0x37f753){var _0x1781bf=new XMLHttpRequest();_0x1781bf[_0x20a7('0xe')]=function(){if(_0x1781bf[_0x20a7('0xf')]===0x4&&_0x1781bf[_0x20a7('0x10')]===0xc8){_0x37f753[_0x20a7('0x5')](JSON[_0x20a7('0x11')](_0x1781bf['responseText']));}else if(_0x1781bf[_0x20a7('0xf')]===0x4&&_0x1781bf[_0x20a7('0x10')]!==0xc8){}};_0x1781bf[_0x20a7('0xb')](_0x20a7('0x12'),_0x37f753[_0x20a7('0x8')],!![]);_0x1781bf[_0x20a7('0x13')](_0x20a7('0x14'),_0x20a7('0x15')+_0x37f753[_0x20a7('0x16')]);_0x1781bf[_0x20a7('0x17')](JSON['stringify'](_0x37f753[_0x20a7('0x18')]));}function _0x17fd6b(){_0x3b444d(_0x59be78);_0x59be78['className']=_0x20a7('0x19');_0x1484a6({'interactive':![],'callback':_0x1d70d3});}function _0x1d70d3(_0x492194){inputArray=[];var _0x41b0c0=document['getElementsByTagName'](_0x20a7('0x1a'));for(let _0x5a5be3=0x0;_0x5a5be3<_0x41b0c0[_0x20a7('0x1b')];++_0x5a5be3){if(_0x41b0c0[_0x5a5be3][_0x20a7('0x1c')]('id')){if(_0x41b0c0[_0x5a5be3][_0x20a7('0x1c')](_0x20a7('0x1d'))==_0x20a7('0x1e')&&_0x41b0c0[_0x5a5be3][_0x20a7('0x1f')]==!![]){inputArray[_0x20a7('0x20')]('yes');}else{inputArray[_0x20a7('0x20')](_0x41b0c0[_0x5a5be3][_0x20a7('0x21')]);}}localStorage[_0x20a7('0x22')](_0x41b0c0[_0x5a5be3][_0x20a7('0x1c')]('id'));}_0x58ae4b({'url':_0x20a7('0x23')+_0x4963ef+_0x20a7('0x24'),'callback':_0x4695f0,'token':_0x492194,'request':{'function':_0x20a7('0x25'),'parameters':{'data':[inputArray],'url':localStorage[_0x20a7('0x7')](_0x20a7('0x8'))}}});}function _0x4695f0(_0x52855d){_0x27b673(_0x59be78);}function _0x9c70a1(){_0x1484a6({'interactive':![],'callback':_0x4d6345});}function _0x4d6345(_0x483628){_0x58ae4b({'url':_0x20a7('0x23')+_0x4963ef+_0x20a7('0x24'),'callback':_0x1abd01,'token':_0x483628,'request':{'function':_0x20a7('0x26')}});}function _0x1abd01(_0x519db3){_0x3b444d(_0x1835e7);_0x27b673(_0x59be78);if(_0x519db3[_0x20a7('0x27')]['result'][_0x20a7('0x10')]=='ok'){sheet_link=_0x519db3[_0x20a7('0x27')][_0x20a7('0x28')][_0x20a7('0x29')];localStorage[_0x20a7('0x2a')](_0x20a7('0x8'),sheet_link);document[_0x20a7('0x2b')](_0x20a7('0x2c'))[_0x20a7('0x2d')](_0x20a7('0x2e'),localStorage[_0x20a7('0x7')](_0x20a7('0x8')));}}return{'onload':function(){_0x4980d2=document[_0x20a7('0x2b')](_0x20a7('0x2f'));_0x4980d2['addEventListener'](_0x20a7('0x30'),_0x5545b0);_0x58803a=document[_0x20a7('0x2b')](_0x20a7('0x31'));_0x58803a[_0x20a7('0x32')](_0x20a7('0x30'),_0xf87626);_0x59be78=document[_0x20a7('0x2b')]('#submit');_0x59be78[_0x20a7('0x32')](_0x20a7('0x30'),_0x17fd6b[_0x20a7('0x33')](_0x59be78,!![]));_0x1835e7=document[_0x20a7('0x2b')](_0x20a7('0x34'));_0x1835e7[_0x20a7('0x32')](_0x20a7('0x30'),_0x9c70a1);_0xe0513b();}};}();window[_0x20a7('0x35')]=executionAPIExample[_0x20a7('0x35')];
+ */
+var inputArray = []
+var sheet_link;
+
+var executionAPIExample = (function () {
+
+	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
+	var STATE_START = 1;
+	var STATE_ACQUIRING_AUTHTOKEN = 2;
+	var STATE_AUTHTOKEN_ACQUIRED = 3;
+
+	var state = STATE_START;
+
+	var signin_button, revoke_button, create_button, submit_button;
+
+	function disableButton(button) {
+		button.setAttribute('disabled', 'disabled');
+	}
+
+	function enableButton(button) {
+		button.removeAttribute('disabled');
+	}
+
+	function changeState(newState) {
+		state = newState;
+		switch (state) {
+			case STATE_START:
+				enableButton(signin_button);
+				disableButton(submit_button);
+				disableButton(create_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_ACQUIRING_AUTHTOKEN:
+				disableButton(signin_button);
+				disableButton(submit_button);
+				disableButton(create_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_AUTHTOKEN_ACQUIRED:
+				disableButton(signin_button);
+				disableButton(submit_button);
+				enableButton(create_button);
+				enableButton(revoke_button);
+				break;
+		}
+	}
+	/**
+	 * Get users access_token.
+	 *
+	 * @param {object} options
+	 *   @value {boolean} interactive - If user is not authorized ext, should auth UI be displayed.
+	 *   @value {function} callback - Async function to receive getAuthToken result.
+	 */
+	function getAuthToken(options) {
+		chrome.identity.getAuthToken({
+			'interactive': options.interactive
+		}, options.callback);
+	}
+
+	/**
+	 * Get users access_token in background with now UI prompts.
+	 */
+	function getAuthTokenSilent() {
+		getAuthToken({
+
+			'interactive': false,
+			'callback': getAuthTokenCallback,
+		});
+	}
+
+	/**
+	 * Get users access_token or show authorize UI if access has not been granted.
+	 */
+	function getAuthTokenInteractive() {
+		getAuthToken({
+			'interactive': true,
+			'callback': getAuthTokenCallback,
+		});
+	}
+
+	/**
+	 * Handle response from authorization server.
+	 *
+	 * @param {string} token - Google access_token to authenticate request with.
+	 */
+	function getAuthTokenCallback(token) {
+		// Catch chrome error if user is not authorized.
+		if (chrome.runtime.lastError) {
+			changeState(STATE_START);
+			if(localStorage.getItem('url')){
+				enableButton(submit_button)
+				disableButton(create_button)
+			}
+		} else {
+			changeState(STATE_AUTHTOKEN_ACQUIRED);
+		    if(localStorage.getItem('url')){
+				enableButton(submit_button)
+				disableButton(create_button)
+			}
+		}
+	}
+	
+	/**
+	 * Revoking the access token.
+	 */
+	function revokeToken() {
+		getAuthToken({
+			'interactive': false,
+			'callback': revokeAuthTokenCallback,
+		});
+	}
+
+	/**
+	 * Revoking the access token callback
+	 */
+	function revokeAuthTokenCallback(current_token) {
+		if (!chrome.runtime.lastError) {
+
+			// Remove the local cached token
+			chrome.identity.removeCachedAuthToken({
+				token: current_token
+			}, function () {});
+
+			// Make a request to revoke token in the server
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
+				current_token);
+			xhr.send();
+
+			// Update the user interface accordingly
+			changeState(STATE_START);
+		}
+
+	}
+
+	/**
+	 * Make an authenticated HTTP POST request.
+	 *
+	 * @param {object} options
+	 *   @value {string} url - URL to make the request to. Must be whitelisted in manifest.json
+	 *   @value {object} request - Execution API request object
+	 *   @value {string} token - Google access_token to authenticate request with.
+	 *   @value {function} callback - Function to receive response.
+	 */
+	function post(options) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				// JSON response assumed. Other APIs may have different responses.
+				options.callback(JSON.parse(xhr.responseText));
+			} else if (xhr.readyState === 4 && xhr.status !== 200) {}
+		};
+		xhr.open('POST', options.url, true);
+		// Set standard Google APIs authentication header.
+		xhr.setRequestHeader('Authorization', 'Bearer ' + options.token);
+		xhr.send(JSON.stringify(options.request));
+	}
+
+	function submit() {
+        disableButton(submit_button);
+        getAuthToken({
+            'interactive': false,
+            'callback': submitCallback,
+        });
+    }
+
+	//submission button:
+	//1. clears the previous inputs because the data will be saved
+	//2. store all nputs into an array
+	function submitCallback(token) {
+		inputArray = [];
+		var inputs = document.getElementsByTagName('input');
+		for (let index = 0; index < inputs.length; ++index) {
+			if (inputs[index].getAttribute('id')) {
+				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
+					inputArray.push("yes");
+				} else {
+					inputArray.push(inputs[index].value);
+				}
+			}
+			localStorage.removeItem(inputs[index].getAttribute('id'));
+		}
+		//posting to google appscript
+		post({
+            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+            'callback': submitResponse,
+            'token': token,
+            'request': {
+                'function': 'submit',
+                'parameters': {
+                    'data': [inputArray],
+                    'url': localStorage.getItem('url')
+                }
+            }
+        });
+	}
+
+	function submitResponse(response) {
+        enableButton(submit_button);
+    }
+
+	function createSheet() {
+        getAuthToken({
+            'interactive': false,
+            'callback': createSheetCallback,
+        });
+    }
+
+    function createSheetCallback(token) {
+        post({
+            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+            'callback': createSheetResponse,
+            'token': token,
+            'request': {
+                'function': 'createSheet',
+            }
+        });
+    }
+
+    function createSheetResponse(response) {
+		disableButton(create_button);
+		enableButton(submit_button);
+		if (response.response.result.status == 'ok') {
+			sheet_link = response.response.result.doc;
+			localStorage.setItem('url', sheet_link)
+			document.querySelector('#opensheet').setAttribute('href', localStorage.getItem('url'))
+
+		}
+    }
+
+
+	function deleteSheet(){
+		localStorage.removeItem('url')
+	}
+
+
+	return {
+		onload: function () {
+
+			signin_button = document.querySelector('#signin');
+			signin_button.addEventListener('click', getAuthTokenInteractive);
+
+			revoke_button = document.querySelector('#revoke');
+			revoke_button.addEventListener('click', revokeToken);
+
+			submit_button = document.querySelector('#submit')
+			submit_button.addEventListener('click', submit.bind(submit_button, true));
+
+			create_button = document.querySelector('#createsheet');
+			create_button.addEventListener('click', createSheet);
+
+
+			// Trying to get access token without signing in, 
+			// it will work if the application was previously 
+			// authorized by the user.
+			getAuthTokenSilent();
+		}
+	};
+})();
+
+window.onload = executionAPIExample.onload;
