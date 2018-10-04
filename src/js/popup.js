@@ -1,5 +1,3 @@
-
-
 //----------------------------------------------------------------------------------------------------------
 //Barry's UI/UX, strictly use for front-end features
 
@@ -8,11 +6,13 @@ jQuery(document).ready(function () {
 	//modal and datepicker
 	var date = new Date();
 	var monthNames = ["January", "February", "March", "April", "May", "June",
-		"July", "August", "September", "October", "November", "December"];
+		"July", "August", "September", "October", "November", "December"
+	];
 	$(".datepicker").pickadate({
 		selectMonths: true,
 		selectYears: 15,
 	});
+	$('#submit_notif').hide();
 
 	//autosaving all of the inputs
 	var allInputs = $(":input");
@@ -26,14 +26,27 @@ jQuery(document).ready(function () {
 		$(this).val(localStorage.getItem($(this).attr("id")));
 	});
 
+	//Submitted notification
+	$('#submit').click(function () {
+		allInputs.each(function (input) {
+			if ($(this).attr("id") != "date") {
+				$(this).val("")
+			}
+		})
+		$(this).prop('disabled', true).delay(1000);
+		$('#submit_notif').show(1500).delay(1000);
+		$('#submit_notif').hide(1500);
+		$('#submit').prop('disabled', false);
+
+	})
+
 	//prefilling the date
 	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
 	$("#date").val(today);
-	
+
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
-	$('#deletesheet').click(function(){localStorage.removeItem('url')})
+	$('#deletesheet').click(function () {
+		localStorage.removeItem('url')
+	})
 });
-
-
-

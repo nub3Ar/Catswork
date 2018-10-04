@@ -12,7 +12,7 @@
   <script src="../js/sample_support.js"></script>
 </head>
 
-<body style="background-color:rgba(0, 0, 0, 0.05); padding: 5%; min-width:300px;">
+<body style="background-color:rgba(0, 0, 0, 0.05); padding: 5%; width:310px; height:600px">
   <center>
     <div class="row">
       <div class="col s6"> <img src="../image/logo.png" width="100%"></div>
@@ -30,6 +30,10 @@
         <button class="btn waves-effect waves-light" type="revoke" id="revoke" name="action" disabled>
           Log Out
         </button>
+        <br>
+        <button class="btn waves-effect waves-light" id="createsheet">
+          <i class="material-icons right">fiber_new</i>
+          Create SpreadSheet</button>
       </div>
     </div>
     <br>
@@ -65,7 +69,7 @@
           <label for="phone">Phone</label>
         </div>
         <div class="input-field col s12">
-          <input id="notes"type="text"></input>
+          <input id="notes" type="text"></input>
           <label for="notes">Notes</label>
         </div>
         <div class="switch">
@@ -85,17 +89,19 @@
       Submit
       <i class="material-icons right">send</i>
     </button>
+    <br>
+    <br>
+    <div id="submit_notif">
+      <h6>Contact Submitted!</h6>
+    </div>
   </center>
   <br>
   <br>
-  <button class="waves-effect waves-light btn-flat" id="createsheet">
-    <i class="material-icons right">fiber_new</i>
-    Create SpreadSheet</button>
-    <button class="waves-effect waves-light btn-flat" id="deletesheet">
-      <i class="material-icons right">delete</i>
-      Delete SpreadSheet</button>
+  <button class="waves-effect waves-light btn-flat" id="deletesheet">
+    <i class="material-icons right">delete</i>
+    Delete SpreadSheet</button>
   <br>
-  <a class="waves-effect waves-light btn-flat" href="" target = "_blank" id="opensheet">
+  <a class="waves-effect waves-light btn-flat" href="" target="_blank" id="opensheet">
     <i class="material-icons right">assignment</i>
     Open SpreadSheet</a>
   <br>
@@ -103,7 +109,7 @@
     <i class="material-icons right">business_center</i>
     NCA Resources</a>
   <br>
-  <a class="waves-effect waves-light btn-flat" id="feedback" href = "mailto:catworks2018@gmail.com" target = "_blank">
+  <a class="waves-effect waves-light btn-flat" id="feedback" href="mailto:catworks2018@gmail.com" target="_blank">
     <i class="material-icons right">feedback</i>
     Feedback</a>
   <br>
