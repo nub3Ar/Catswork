@@ -55,4 +55,8 @@ jQuery(document).ready(function () {
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
 
+	$('#deletesheet').click(function(){
+		localStorage.removeItem('url');
+	})
+
 });
