@@ -18,6 +18,7 @@ jQuery(document).ready(function () {
 
 	//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
+	$('#create_notif').hide()
 
 	//autosaving all of the inputs
 	var allInputs = $(":input");
@@ -45,6 +46,12 @@ jQuery(document).ready(function () {
 
 	})
 
+	function create_sheet_error() {
+		$('#create_notif').show(1500).delay(1000);
+		$('#create_notif').hide(1500);
+
+	}
+
 
 
 
@@ -55,7 +62,7 @@ jQuery(document).ready(function () {
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
 
-	$('#deletesheet').click(function(){
+	$('#deletesheet').click(function () {
 		localStorage.removeItem('url');
 	})
 

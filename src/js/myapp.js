@@ -193,17 +193,17 @@ var executionAPIExample = (function () {
 		}
 		//posting to google appscript
 		post({
-            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-            'callback': submitResponse,
-            'token': token,
-            'request': {
-                'function': 'submit',
-                'parameters': {
-                    'data': [inputArray],
-                    'url': localStorage.getItem('url')
-                }
-            }
-        });
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': submitResponse,
+			'token': token,
+			'request': {
+				'function': 'submit',
+				'parameters': {
+					'data': [inputArray],
+					'url': localStorage.getItem('url')
+				}
+			}
+		});
 	}
 
 	function submitResponse(response) {
@@ -216,7 +216,9 @@ var executionAPIExample = (function () {
             'callback': createSheetCallback,
         });
     }
-
+	/**
+	* @param {string} token
+	*/
     function createSheetCallback(token) {
         post({
             'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
