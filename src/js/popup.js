@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
 		"July", "August", "September", "October", "November", "December"
 	];
 	$(".datepicker").pickadate({
-		format: 'dd/mm/yyyy',
+		format: 'mm/dd/yyyy',
 		closeOnSelect: true,
 		selectMonths: true,
 		selectYears: 5,
@@ -34,11 +34,6 @@ jQuery(document).ready(function () {
 
 	//Submitted notification
 	$('#submit').click(function () {
-		allInputs.each(function (input) {
-			if ($(this).attr("id") != "date") {
-				$(this).val("")
-			}
-		})
 		$(this).prop('disabled', true).delay(1000);
 		$('#submit_notif').show(1500).delay(1000);
 		$('#submit_notif').hide(1500);
@@ -46,17 +41,8 @@ jQuery(document).ready(function () {
 
 	})
 
-	function create_sheet_error() {
-		$('#create_notif').show(1500).delay(1000);
-		$('#create_notif').hide(1500);
-
-	}
-
-
-
-
 	//prefilling the date
-	var today = date.getDate() + " " + monthNames[date.getMonth()] + " ," + date.getFullYear();
+	var today = monthNames[date.getMonth()] + " " + date.getDate() + " ," + date.getFullYear();
 	$("#date").val(today);
 
 	//adding sheet URL to the href

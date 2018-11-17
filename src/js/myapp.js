@@ -191,6 +191,9 @@ var executionAPIExample = (function () {
 			}
 			localStorage.removeItem(inputs[index].getAttribute('id'));
 		}
+
+		localStorage.removeItem('array');
+		localStorage.setItem('array', inputArray)
 		//posting to google appscript
 		post({
 			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
@@ -243,7 +246,7 @@ var executionAPIExample = (function () {
 
 
 	function deleteSheet(){
-		localStorage.removeItem('url')
+		localStorage.removeItem('url');
 	}
 
 
