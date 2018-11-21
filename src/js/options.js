@@ -103,7 +103,7 @@ var authentication = (function () {
 
 	var state = STATE_START;
 
-	var signin_button, revoke_button, create_button, submit_button;
+	var signin_button, revoke_button, create_button, delete_button;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -118,18 +118,24 @@ var authentication = (function () {
 		switch (state) {
 			case STATE_START:
 				enableButton(signin_button);
+				disableButton(delete_button);
+				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(signin_button);
+				disableButton(delete_button);
+				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
+				enableButton(delete_button);
+				enableButton(create_button);
 				enableButton(revoke_button);
 				break;
 		}
-  }
+	}
 
   /**
 	 * Get users access_token.
@@ -180,7 +186,8 @@ var authentication = (function () {
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		    if(localStorage.getItem('url')){
-				disableButton(create_button)
+        enableButton(create_button)
+        enableButton(delete_button)
 			}
 		}
 	}
@@ -218,7 +225,91 @@ var authentication = (function () {
 
   }
 
+  /**
+	 * Make an authenticated HTTP POST request.
+	 *
+	 * @param {object} options
+	 *   @value {string} url - URL to make the request to. Must be whitelisted in manifest.json
+	 *   @value {object} request - Execution API request object
+	 *   @value {string} token - Google access_token to authenticate request with.
+	 *   @value {function} callback - Function to receive response.
+	 */
+	function post(options) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				// JSON response assumed. Other APIs may have different responses.
+				options.callback(JSON.parse(xhr.responseText));
+			} else if (xhr.readyState === 4 && xhr.status !== 200) {}
+		};
+		xhr.open('POST', options.url, true);
+		// Set standard Google APIs authentication header.
+		xhr.setRequestHeader('Authorization', 'Bearer ' + options.token);
+		xhr.send(JSON.stringify(options.request));
+	}
+
+  function createSheet() {
+    getAuthToken({
+        'interactive': false,
+        'callback': createSheetCallback,
+    });
+  }
+
+  /**
+	* @param {string} token
+	*/
+  function createSheetCallback(token) {
+    post({
+        'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+        'callback': createSheetResponse,
+        'token': token,
+        'request': {
+            'function': 'createSheet',
+        }
+    });
+}
+
+function createSheetResponse(response) {
+disableButton(create_button);
+enableButton(delete_button);
+if (response.response.result.status == 'ok') {
+  sheet_link = response.response.result.doc;
+  localStorage.setItem('url', sheet_link)
+  document.querySelector('#opensheet').setAttribute('href', localStorage.getItem('url'))
+
+  }
+}
+
+function deleteSheet() {
+  getAuthToken({
+    'interactive': false,
+    'callback': deleteSheetCallback,
+  });
+}
   
+/**
+* @param {string} token
+*/
+function deleteSheetCallback(token) {
+   post({
+  'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+  'callback': deleteSheetResponse,
+  'token': token,
+  'request': {
+      'function': 'deleteSheet',
+    }
+  });
+}
+
+
+function deleteSheetResponse(response) {
+  disableButton(delete_button);
+  enableButton(create_button);
+  if (response.response.result.status == 'ok') {
+    localStorage.removeItem('url')
+    }
+  }
+
 	return {
 		onload: function () {
 
@@ -226,8 +317,13 @@ var authentication = (function () {
 			signin_button.addEventListener('click', getAuthTokenInteractive);
 
 			revoke_button = document.querySelector('#revoke');
-			revoke_button.addEventListener('click', revokeToken);
-
+      revoke_button.addEventListener('click', revokeToken);
+      
+			create_button = document.querySelector('#createsheet');
+      create_button.addEventListener('click', createSheet);
+      
+      delete_button = document.querySelector('#deletesheet');
+      delete_button.addEventListener('click', deleteSheet)
 
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 
