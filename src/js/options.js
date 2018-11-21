@@ -1,3 +1,5 @@
+'use strict';
+
 //A list of items that need to be saved
 var data_tracked = [];
 var tracking_method;
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //Preloading needed elements
-loadUseroptions();
+//oadUseroptions();
 
 
 //page action js
@@ -89,3 +91,150 @@ jQuery(document).ready(function () {
   $("#prefered_name").val(prefered_name)
 
 });
+
+// Authentication Functions
+
+var authentication = (function () {
+
+	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
+	var STATE_START = 1;
+	var STATE_ACQUIRING_AUTHTOKEN = 2;
+	var STATE_AUTHTOKEN_ACQUIRED = 3;
+
+	var state = STATE_START;
+
+	var signin_button, revoke_button, create_button, submit_button;
+
+	function disableButton(button) {
+		button.setAttribute('disabled', 'disabled');
+	}
+
+	function enableButton(button) {
+		button.removeAttribute('disabled');
+	}
+
+	function changeState(newState) {
+		state = newState;
+		switch (state) {
+			case STATE_START:
+				enableButton(signin_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_ACQUIRING_AUTHTOKEN:
+				disableButton(signin_button);
+				disableButton(revoke_button);
+				break;
+			case STATE_AUTHTOKEN_ACQUIRED:
+				disableButton(signin_button);
+				enableButton(revoke_button);
+				break;
+		}
+  }
+
+  /**
+	 * Get users access_token.
+	 *
+	 * @param {object} options
+	 *   @value {boolean} interactive - If user is not authorized ext, should auth UI be displayed.
+	 *   @value {function} callback - Async function to receive getAuthToken result.
+	 */
+	function getAuthToken(options) {
+		chrome.identity.getAuthToken({
+			'interactive': options.interactive
+		}, options.callback);
+  }
+  
+/**
+	 * Get users access_token in background with now UI prompts.
+	 */
+	function getAuthTokenSilent() {
+		getAuthToken({
+
+			'interactive': false,
+			'callback': getAuthTokenCallback,
+		});
+	}
+
+	/**
+	 * Get users access_token or show authorize UI if access has not been granted.
+	 */
+	function getAuthTokenInteractive() {
+		getAuthToken({
+			'interactive': true,
+			'callback': getAuthTokenCallback,
+		});
+  }
+  
+  	/**
+	 * Handle response from authorization server.
+	 *
+	 * @param {string} token - Google access_token to authenticate request with.
+	 */
+	function getAuthTokenCallback(token) {
+		// Catch chrome error if user is not authorized.
+		if (chrome.runtime.lastError) {
+			changeState(STATE_START);
+			if(localStorage.getItem('url')){
+				disableButton(create_button)
+			}
+		} else {
+			changeState(STATE_AUTHTOKEN_ACQUIRED);
+		    if(localStorage.getItem('url')){
+				disableButton(create_button)
+			}
+		}
+	}
+  
+	/**
+	 * Revoking the access token.
+	 */
+	function revokeToken() {
+		getAuthToken({
+			'interactive': false,
+			'callback': revokeAuthTokenCallback,
+		});
+	}
+
+  /**
+	 * Revoking the access token callback
+	 */
+	function revokeAuthTokenCallback(current_token) {
+		if (!chrome.runtime.lastError) {
+
+			// Remove the local cached token
+			chrome.identity.removeCachedAuthToken({
+				token: current_token
+			}, function () {});
+
+			// Make a request to revoke token in the server
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
+				current_token);
+			xhr.send();
+
+			// Update the user interface accordingly
+			changeState(STATE_START);
+		}
+
+  }
+
+  
+	return {
+		onload: function () {
+
+			signin_button = document.querySelector('#signin');
+			signin_button.addEventListener('click', getAuthTokenInteractive);
+
+			revoke_button = document.querySelector('#revoke');
+			revoke_button.addEventListener('click', revokeToken);
+
+
+			// Trying to get access token without signing in, 
+			// it will work if the application was previously 
+			// authorized by the user.
+			getAuthTokenSilent();
+		}
+	};
+})();
+
+window.onload = authentication.onload;
