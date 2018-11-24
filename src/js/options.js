@@ -273,10 +273,8 @@ function createSheetResponse(response) {
 disableButton(create_button);
 enableButton(delete_button);
 if (response.response.result.status == 'ok') {
-  sheet_link = response.response.result.doc;
-  localStorage.setItem('url', sheet_link)
-  document.querySelector('#opensheet').setAttribute('href', localStorage.getItem('url'))
-
+	console.log(response.response.result.doc);
+  localStorage.setItem('url', response.response.result.doc);
   }
 }
 
