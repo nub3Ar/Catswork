@@ -19,6 +19,11 @@ var authentication = (function () {
 
 	var signin_button, revoke_button, create_button, delete_button;
 
+
+
+
+
+
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
 	}
@@ -237,6 +242,10 @@ function deleteSheetResponse(response) {
       
       delete_button = document.querySelector('#deletesheet');
       delete_button.addEventListener('click', deleteSheet)
+
+			if (localStorage.getItem('url')){
+				disableButton(create_button);
+			}
 
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 

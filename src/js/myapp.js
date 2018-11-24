@@ -36,22 +36,14 @@ var executionAPIExample = (function () {
 		state = newState;
 		switch (state) {
 			case STATE_START:
-				enableButton(signin_button);
+
 				disableButton(submit_button);
-				disableButton(create_button);
-				disableButton(revoke_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
-				disableButton(signin_button);
 				disableButton(submit_button);
-				disableButton(create_button);
-				disableButton(revoke_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
-				disableButton(signin_button);
 				disableButton(submit_button);
-				enableButton(create_button);
-				enableButton(revoke_button);
 				break;
 		}
 	}
@@ -119,29 +111,6 @@ var executionAPIExample = (function () {
 			'interactive': false,
 			'callback': revokeAuthTokenCallback,
 		});
-	}
-
-	/**
-	 * Revoking the access token callback
-	 */
-	function revokeAuthTokenCallback(current_token) {
-		if (!chrome.runtime.lastError) {
-
-			// Remove the local cached token
-			chrome.identity.removeCachedAuthToken({
-				token: current_token
-			}, function () {});
-
-			// Make a request to revoke token in the server
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
-				current_token);
-			xhr.send();
-
-			// Update the user interface accordingly
-			changeState(STATE_START);
-		}
-
 	}
 
 	/**
@@ -213,58 +182,10 @@ var executionAPIExample = (function () {
         enableButton(submit_button);
     }
 
-	function createSheet() {
-        getAuthToken({
-            'interactive': false,
-            'callback': createSheetCallback,
-        });
-    }
-	/**
-	* @param {string} token
-	*/
-    function createSheetCallback(token) {
-        post({
-            'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-            'callback': createSheetResponse,
-            'token': token,
-            'request': {
-                'function': 'createSheet',
-            }
-        });
-    }
-
-    function createSheetResponse(response) {
-		disableButton(create_button);
-		enableButton(submit_button);
-		if (response.response.result.status == 'ok') {
-			sheet_link = response.response.result.doc;
-			localStorage.setItem('url', sheet_link)
-			document.querySelector('#opensheet').setAttribute('href', localStorage.getItem('url'))
-
-		}
-    }
-
-
-	function deleteSheet(){
-		localStorage.removeItem('url');
-	}
-
-
 	return {
 		onload: function () {
-
-			signin_button = document.querySelector('#signin');
-			signin_button.addEventListener('click', getAuthTokenInteractive);
-
-			revoke_button = document.querySelector('#revoke');
-			revoke_button.addEventListener('click', revokeToken);
-
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
-
-			create_button = document.querySelector('#createsheet');
-			create_button.addEventListener('click', createSheet);
-
 
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 
