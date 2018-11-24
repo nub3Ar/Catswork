@@ -243,7 +243,7 @@ function deleteSheetResponse(response) {
       delete_button = document.querySelector('#deletesheet');
       delete_button.addEventListener('click', deleteSheet)
 
-			if (localStorage.getItem('url')){
+			if ((localStorage.getItem('url') != "undefined"){
 				disableButton(create_button);
 			}
 
