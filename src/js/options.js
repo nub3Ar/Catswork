@@ -2,9 +2,8 @@
 
 //page action js
 jQuery(document).ready(function () {
-
+	$(".modal").modal();
 });
-
 
 
 // Authentication Functions
@@ -243,7 +242,7 @@ function deleteSheetResponse(response) {
       delete_button = document.querySelector('#deletesheet');
       delete_button.addEventListener('click', deleteSheet)
 
-			if ((localStorage.getItem('url') != "undefined"){
+			if (localStorage.getItem('url')){
 				disableButton(create_button);
 			}
 
