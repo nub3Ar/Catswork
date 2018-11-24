@@ -192,8 +192,9 @@ function createSheetResponse(response) {
 disableButton(create_button);
 enableButton(delete_button);
 if (response.response.result.status == 'ok') {
-	console.log(response.response.result.doc);
-  localStorage.setItem('url', response.response.result.doc);
+	console.log(response.response.result.url);
+	localStorage.setItem('url', response.response.result.url);
+	localStorage.setItem('id', response.response.result.id);
   }
 }
 
@@ -213,19 +214,26 @@ function deleteSheetCallback(token) {
   'callback': deleteSheetResponse,
   'token': token,
   'request': {
-      'function': 'deleteSheet',
+			'function': 'deleteSheet',
+			'parameters': {
+				'sheet_id': localStorage.getItem('id')
+			}
     }
   });
 }
 
 
 function deleteSheetResponse(response) {
-  disableButton(delete_button);
-  enableButton(create_button);
   if (response.response.result.status == 'ok') {
+		disableButton(delete_button);
+  	enableButton(create_button);
 		Materialize.toast('Information deleted, Please reload the page', 3000);
-    localStorage.removeItem('url')
-    }
+		localStorage.removeItem('url')
+		localStorage.removeItem('id')
+		}
+	else{
+		Materialize.toast('Deletion Error. Please Try Again', 3000);
+		}
   }
 
 	return {
