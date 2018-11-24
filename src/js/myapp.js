@@ -22,7 +22,7 @@ var executionAPIExample = (function () {
 
 	var state = STATE_START;
 
-	var signin_button, revoke_button, create_button, submit_button;
+	var submit_button;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -92,26 +92,15 @@ var executionAPIExample = (function () {
 			changeState(STATE_START);
 			if(localStorage.getItem('url')){
 				enableButton(submit_button)
-				disableButton(create_button)
 			}
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		    if(localStorage.getItem('url')){
 				enableButton(submit_button)
-				disableButton(create_button)
 			}
 		}
 	}
 	
-	/**
-	 * Revoking the access token.
-	 */
-	function revokeToken() {
-		getAuthToken({
-			'interactive': false,
-			'callback': revokeAuthTokenCallback,
-		});
-	}
 
 	/**
 	 * Make an authenticated HTTP POST request.

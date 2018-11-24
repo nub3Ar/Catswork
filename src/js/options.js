@@ -215,7 +215,6 @@ function deleteSheetCallback(token) {
   });
 }
 
-
 function deleteSheetResponse(response) {
   if (response.response.result.status == 'ok') {
 		disableButton(delete_button);
