@@ -19,11 +19,6 @@ var authentication = (function () {
 
 	var signin_button, revoke_button, create_button, delete_button;
 
-
-
-
-
-
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
 	}
@@ -50,7 +45,6 @@ var authentication = (function () {
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
 				enableButton(delete_button);
-				enableButton(create_button);
 				enableButton(revoke_button);
 				break;
 		}
@@ -105,7 +99,6 @@ var authentication = (function () {
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		    if(localStorage.getItem('url')){
-        enableButton(create_button)
         enableButton(delete_button)
 			}
 		}
