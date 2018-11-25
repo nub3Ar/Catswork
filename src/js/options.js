@@ -2,7 +2,11 @@
 
 //page action js
 jQuery(document).ready(function () {
-	$(".modal").modal();
+	$('.modal').modal();
+	if(!localStorage.getItem('url')){
+		$('#sheet_iframe').hide()
+	}
+	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 });
 
 
@@ -16,7 +20,7 @@ var authentication = (function () {
 
 	var state = STATE_START;
 
-	var signin_button, revoke_button, create_button, delete_button;
+	var signin_button, revoke_button, create_button, delete_button, delete_trigger;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -31,19 +35,19 @@ var authentication = (function () {
 		switch (state) {
 			case STATE_START:
 				enableButton(signin_button);
-				disableButton(delete_button);
+				disableButton(delete_trigger);
 				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(signin_button);
-				disableButton(delete_button);
+				disableButton(delete_trigger);
 				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
-				enableButton(delete_button);
+				enableButton(delete_trigger);
 				enableButton(revoke_button);
 				break;
 		}
@@ -98,7 +102,7 @@ var authentication = (function () {
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 		    if(localStorage.getItem('url')){
-        enableButton(delete_button)
+        enableButton(delete_trigger)
 			}
 		}
 	}
@@ -182,12 +186,13 @@ var authentication = (function () {
 
 function createSheetResponse(response) {
 disableButton(create_button);
-enableButton(delete_button);
+enableButton(delete_trigger);
 if (response.response.result.status == 'ok') {
 	console.log(response.response.result.url);
 	localStorage.setItem('url', response.response.result.url);
 	localStorage.setItem('id', response.response.result.id);
-  }
+	}
+	window.location.reload();
 }
 
 function deleteSheet() {
@@ -216,11 +221,12 @@ function deleteSheetCallback(token) {
 
 function deleteSheetResponse(response) {
   if (response.response.result.status == 'ok') {
-		disableButton(delete_button);
+		disableButton(delete_trigger);
   	enableButton(create_button);
 		Materialize.toast('Information deleted, Please reload the page', 3000);
 		localStorage.removeItem('url')
 		localStorage.removeItem('id')
+		window.location.reload();
 		}
 	else{
 		Materialize.toast('Deletion Error. Please Try Again', 3000);
@@ -239,7 +245,8 @@ function deleteSheetResponse(response) {
 			create_button = document.querySelector('#createsheet');
       create_button.addEventListener('click', createSheet);
       
-      delete_button = document.querySelector('#deletesheet');
+			delete_trigger = document.querySelector('#deletesheet_btn');
+			delete_button = document.querySelector('#deletesheet')
       delete_button.addEventListener('click', deleteSheet)
 
 			if (localStorage.getItem('url')){
