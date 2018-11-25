@@ -49,3 +49,13 @@ input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
   -webkit-transform: scale(2.4);
           transform: scale(2.4);
 }
+
+.collapsible {
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav{
+  box-shadow: unset
+}

@@ -21,108 +21,137 @@
       </div>
     </div>
     <br>
-    <div class="row">
-      <form id="main_form" class="col s12">
 
-        <div class="input-field col s12" id = "field1">
-          <input id="name" type="text">
-          <label for="name">Name</label>
-        </div>
-        <div class="input-field col s12" id = "field2">
-          <input id="firm" type="text">
-          <label for="firm">Firm</label>
-        </div>
-        <div class="input-field col s12" id = "field3">
-          <input id="email" type="text">
-          <label for="email">Email</label>
-        </div>
-        <div class="input-field col s12" id = "field4">
-          <input id="email" type="text">
-          <label for="email">Phone</label>
-        </div>
-        <div class="input-field col s12" id = "field5">
-          <input id="industry" type="text">
-          <label for="industry">Industry</label>
-        </div>
-        <div class="input-field col s12" id = "field6">
-          <input id="city" type="text">
-          <label for="city">City</label>
-        </div>
-        <div class="input-field col s12" id = "field7">
-          <input id="position" type="text">
-          <label for="position">Position</label>
-        </div>
-        <div class="input-field col s12" id = "field8">
-          <input id="education" type="email" class="validate">
-          <label for="education">Education</label>
-        </div>
-        <div class="input-field col s12" id = "field9">
-          <input id="Source" type="text">
-          <label for="Source">Source</label>
-        </div>
-        <div class="input-field col s12" id = "field10">
-          <input id="alternative" type="tel" class="validate">
-          <label for="alternative">Alternative Contact</label>
-        </div>
-        <div class="input-field col s12" id = "field11">
-          <input id="date" type="text" class="datepicker">
-          <label for="date">First Contact Date</label>
-        </div>
-        <div class="input-field col s12" id = "field12">
-          <input id="schedule" type="text"></input>
-          <label for="schedule">Scheduled Contact</label>
-        </div>
-        <div class="input-field col s12" id = "field13">
-          <input id="linkedin" type="text"></input>
-          <label for="linkedin">LinkedIn/Website</label>
-        </div>
-        <div class="input-field col s12" id = "field14">
-          <input id="notes" type="text"></input>
-          <label for="notes">Notes</label>
-        </div>
-        <div class="switch">
-          <p style="text-align: center">Follow up with this contact later?</p>
-          <label style="color:black">
-            No
-            <input type="checkbox" id='follow-up' value='yes'>
-            <span class="lever"></span>
-            Yes
-          </label>
-        </div>
-      </form>
+    <div id="log_in">
+      <p>
+        Welcome to CatsWork! We find that you have not logged in yet.
+      </p>
+      <a class="btn-large waves-effect waves-light" href="../html/options.html" type="submit" id="login_link" target="_blank">
+        Log In
+      </a>
     </div>
 
-
-    <button class="btn-large waves-effect waves-light" type="submit" id="submit" name="action">
-      Submit
-      <i class="material-icons right">send</i>
-    </button>
-    <br>
-    <br>
-    <div id="submit_notif">
-      <h6>Contact Submitted!</h6>
+    <div id="createsheet">
+      <p>
+        Welcome to CatsWork! We find that you do not have a connected Google spreadsheet.
+      </p>
+      <a class="btn-large waves-effect waves-light" href="../html/options.html" type="submit" id="create_link" target="_blank">
+        Create SpreadSheet
+      </a>
     </div>
-  </center>
-  <a class="waves-effect waves-light btn-flat" href="" target="_blank" id="opensheet">
-    <i class="material-icons right">assignment</i>
-    Open SpreadSheet</a>
-  <br>
-  <a class="waves-effect waves-light btn-flat" href="https://www.northwestern.edu/careers" target="_blank">
-    <i class="material-icons right">business_center</i>
-    NCA Resources</a>
-  <br>
-  <a class="waves-effect waves-light btn-flat" id="feedback" href="mailto:catworks2018@gmail.com" target="_blank">
-    <i class="material-icons right">feedback</i>
-    Feedback</a>
-  <br>
-  <a class="waves-effect waves-light btn-flat" id="help" href="../html/options.html" target="_blank">
-    <i class="material-icons right">help</i>
-    Help</a>
-  <br>
-  <center>
-    <a href="http://www.catswork.io/">Term of Service & Privacy Policy</a>
-  </center>
-  <br>
+
+    <div id='catswork'>
+      <ul class='collapsible'>
+        <li>
+          <div class='collapsible-header'><i class='material-icons'>filter_drama</i>Tracker</div>
+          <div class='collapsible-body'>
+            <div class="row">
+              <form id="main_form" class="col s12">
+
+                <div class="input-field col s12" id="field1">
+                  <input id="name" type="text">
+                  <label for="name">Name</label>
+                </div>
+                <div class="input-field col s12" id="field2">
+                  <input id="firm" type="text">
+                  <label for="firm">Firm</label>
+                </div>
+                <div class="input-field col s12" id="field3">
+                  <input id="email" type="text">
+                  <label for="email">Email</label>
+                </div>
+                <div class="input-field col s12" id="field4">
+                  <input id="email" type="text">
+                  <label for="email">Phone</label>
+                </div>
+                <div class="input-field col s12" id="field5">
+                  <input id="industry" type="text">
+                  <label for="industry">Industry</label>
+                </div>
+                <div class="input-field col s12" id="field6">
+                  <input id="city" type="text">
+                  <label for="city">City</label>
+                </div>
+                <div class="input-field col s12" id="field7">
+                  <input id="position" type="text">
+                  <label for="position">Position</label>
+                </div>
+                <div class="input-field col s12" id="field8">
+                  <input id="education" type="email" class="validate">
+                  <label for="education">Education</label>
+                </div>
+                <div class="input-field col s12" id="field9">
+                  <input id="Source" type="text">
+                  <label for="Source">Source</label>
+                </div>
+                <div class="input-field col s12" id="field10">
+                  <input id="alternative" type="tel" class="validate">
+                  <label for="alternative">Alternative Contact</label>
+                </div>
+                <div class="input-field col s12" id="field11">
+                  <input id="date" type="text" class="datepicker">
+                  <label for="date">First Contact Date</label>
+                </div>
+                <div class="input-field col s12" id="field12">
+                  <input id="schedule" type="text"></input>
+                  <label for="schedule">Scheduled Contact</label>
+                </div>
+                <div class="input-field col s12" id="field13">
+                  <input id="linkedin" type="text"></input>
+                  <label for="linkedin">LinkedIn/Website</label>
+                </div>
+                <div class="input-field col s12" id="field14">
+                  <input id="notes" type="text"></input>
+                  <label for="notes">Notes</label>
+                </div>
+                <div class="switch">
+                  <p style="text-align: center">Follow up with this contact later?</p>
+                  <label style="color:black">
+                    No
+                    <input type="checkbox" id='follow-up' value='yes'>
+                    <span class="lever"></span>
+                    Yes
+                  </label>
+                </div>
+              </form>
+            </div>
+            <button class="btn-large waves-effect waves-light" type="submit" id="submit" name="action">
+              Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <br>
+            <br>
+            <div id="submit_notif">
+              <h6>Contact Submitted!</h6>
+            </div>
+          </div>
+        </li>
+      </ul>
+  </div>
+</center>
+
+  <div id='bottom_tools'>
+    <a class="waves-effect waves-light btn-flat" href="" target="_blank" id="opensheet">
+      <i class="material-icons right">assignment</i>
+      Open SpreadSheet</a>
+    <br>
+    <a class="waves-effect waves-light btn-flat" href="https://www.northwestern.edu/careers" target="_blank">
+      <i class="material-icons right">business_center</i>
+      NCA Resources</a>
+    <br>
+    <a class="waves-effect waves-light btn-flat" id="feedback" href="mailto:catworks2018@gmail.com" target="_blank">
+      <i class="material-icons right">feedback</i>
+      Feedback</a>
+    <br>
+    <a class="waves-effect waves-light btn-flat" id="help" href="../html/options.html" target="_blank">
+      <i class="material-icons right">help</i>
+      Help</a>
+    <br>
+    <center>
+      <a href="http://www.catswork.io/">Term of Service & Privacy Policy</a>
+    </center>
+    <br>
+  </div>
 </body>
 
 

@@ -4,6 +4,18 @@
 //Front-End JQuery
 jQuery(document).ready(function () {
 	//modal and datepicker
+	if (localStorage.getItem('token_exist') == 'false'){
+		state = 'not logged in'
+	}
+	else{
+		if (!localStorage.getItem('url')){
+			state = 'no sheet'
+		}
+		else{
+			state = 'good'
+		}
+	}
+
 	var date = new Date();
 	var monthNames = ["January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December"
@@ -62,5 +74,24 @@ jQuery(document).ready(function () {
 	$('#deletesheet').click(function () {
 		localStorage.removeItem('url');
 	})
+
+	switch (state) {
+		case ('not logged in'):
+			$("#log_in").show();
+			$("#createsheet").hide();
+			$("#catswork").hide();
+			$("#bottom_tools").hide();
+			break;
+		case ('no sheet'):
+			$("#log_in").hide();
+			$("#createsheet").show();
+			$("#catswork").hide();
+			$("#bottom_tools").hide();
+			break;
+		default:
+			$("#log_in").hide();
+			$("#createsheet").hide();
+	}
+
 
 });

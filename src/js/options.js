@@ -40,6 +40,7 @@ var authentication = (function () {
 				disableButton(setting_trigger)
 				disableButton(create_button);
 				disableButton(revoke_button);
+				localStorage.setItem('token_exist', false)
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(signin_button);
@@ -51,6 +52,7 @@ var authentication = (function () {
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
 				enableButton(revoke_button);
+				localStorage.setItem('token_exist', true)
 				break;
 		}
 	}
@@ -97,8 +99,10 @@ var authentication = (function () {
 	function getAuthTokenCallback(token) {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
+			localStorage.setItem('token_exist', false)
 			changeState(STATE_START);
 		} else {
+			localStorage.setItem('token_exist', true)
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 			if (localStorage.getItem('url')) {
 				disableButton(create_button)
@@ -136,7 +140,8 @@ var authentication = (function () {
 			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
 				current_token);
 			xhr.send();
-
+			
+			localStorage.setItem('token_exist', false)
 			// Update the user interface accordingly
 			changeState(STATE_START);
 		}
