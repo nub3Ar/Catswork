@@ -9,7 +9,6 @@ jQuery(document).ready(function () {
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 });
 
-
 // Authentication Functions
 var authentication = (function () {
 

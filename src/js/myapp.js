@@ -36,14 +36,15 @@ var executionAPIExample = (function () {
 		state = newState;
 		switch (state) {
 			case STATE_START:
-
 				disableButton(submit_button);
+				localStorage.setItem('token_exist', false)
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(submit_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(submit_button);
+				localStorage.setItem('token_exist', true)
 				break;
 		}
 	}
