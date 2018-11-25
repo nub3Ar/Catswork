@@ -3,10 +3,11 @@
 //page action js
 jQuery(document).ready(function () {
 	$('.modal').modal();
-	if(!localStorage.getItem('url')){
+	if (!localStorage.getItem('url')) {
 		$('#sheet_iframe').hide()
 	}
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
+	$('#option1').click(function(){console.log($('#option1').val())})
 });
 
 
@@ -20,7 +21,7 @@ var authentication = (function () {
 
 	var state = STATE_START;
 
-	var signin_button, revoke_button, create_button, delete_button, delete_trigger;
+	var signin_button, revoke_button, create_button, delete_button, delete_trigger, setting_button, setting_trigger;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -36,24 +37,25 @@ var authentication = (function () {
 			case STATE_START:
 				enableButton(signin_button);
 				disableButton(delete_trigger);
+				disableButton(setting_trigger)
 				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(signin_button);
 				disableButton(delete_trigger);
+				disableButton(setting_trigger)
 				disableButton(create_button);
 				disableButton(revoke_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
 				disableButton(signin_button);
-				enableButton(delete_trigger);
 				enableButton(revoke_button);
 				break;
 		}
 	}
 
-  /**
+	/**
 	 * Get users access_token.
 	 *
 	 * @param {object} options
@@ -64,9 +66,9 @@ var authentication = (function () {
 		chrome.identity.getAuthToken({
 			'interactive': options.interactive
 		}, options.callback);
-  }
-  
-/**
+	}
+
+	/**
 	 * Get users access_token in background with now UI prompts.
 	 */
 	function getAuthTokenSilent() {
@@ -85,9 +87,9 @@ var authentication = (function () {
 			'interactive': true,
 			'callback': getAuthTokenCallback,
 		});
-  }
-  
-  	/**
+	}
+
+	/**
 	 * Handle response from authorization server.
 	 *
 	 * @param {string} token - Google access_token to authenticate request with.
@@ -96,17 +98,18 @@ var authentication = (function () {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
 			changeState(STATE_START);
-			if(localStorage.getItem('url')){
-				disableButton(create_button)
-			}
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
-		    if(localStorage.getItem('url')){
-        enableButton(delete_trigger)
+			if (localStorage.getItem('url')) {
+				disableButton(create_button)
+				enableButton(delete_trigger)
+			}
+			else{
+				enableButton(create_button)
 			}
 		}
 	}
-  
+
 	/**
 	 * Revoking the access token.
 	 */
@@ -117,7 +120,7 @@ var authentication = (function () {
 		});
 	}
 
-  /**
+	/**
 	 * Revoking the access token callback
 	 */
 	function revokeAuthTokenCallback(current_token) {
@@ -138,9 +141,9 @@ var authentication = (function () {
 			changeState(STATE_START);
 		}
 
-  }
+	}
 
-  /**
+	/**
 	 * Make an authenticated HTTP POST request.
 	 *
 	 * @param {object} options
@@ -163,75 +166,125 @@ var authentication = (function () {
 		xhr.send(JSON.stringify(options.request));
 	}
 
-  function createSheet() {
-    getAuthToken({
-        'interactive': false,
-        'callback': createSheetCallback,
-    });
-  }
-
-  /**
-	* @param {string} token
-	*/
-  function createSheetCallback(token) {
-    post({
-        'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-        'callback': createSheetResponse,
-        'token': token,
-        'request': {
-            'function': 'createSheet',
-        }
-    });
-}
-
-function createSheetResponse(response) {
-disableButton(create_button);
-enableButton(delete_trigger);
-if (response.response.result.status == 'ok') {
-	console.log(response.response.result.url);
-	localStorage.setItem('url', response.response.result.url);
-	localStorage.setItem('id', response.response.result.id);
+	function createSheet() {
+		getAuthToken({
+			'interactive': false,
+			'callback': createSheetCallback,
+		});
 	}
-	window.location.reload();
-}
 
-function deleteSheet() {
-  getAuthToken({
-    'interactive': false,
-    'callback': deleteSheetCallback,
-  });
-}
-  
-/**
-* @param {string} token
-*/
-function deleteSheetCallback(token) {
-   post({
-  'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-  'callback': deleteSheetResponse,
-  'token': token,
-  'request': {
-			'function': 'deleteSheet',
-			'parameters': {
-				'sheet_id': localStorage.getItem('id')
+	/**
+	 * @param {string} token
+	 */
+	function createSheetCallback(token) {
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': createSheetResponse,
+			'token': token,
+			'request': {
+				'function': 'createSheet',
 			}
-    }
-  });
-}
+		});
+	}
 
-function deleteSheetResponse(response) {
-  if (response.response.result.status == 'ok') {
-		disableButton(delete_trigger);
-  	enableButton(create_button);
-		Materialize.toast('Information deleted, Please reload the page', 3000);
-		localStorage.removeItem('url')
-		localStorage.removeItem('id')
-		window.location.reload();
+	function createSheetResponse(response) {
+		disableButton(create_button);
+		enableButton(setting_trigger);
+		enableButton(delete_trigger);
+		if (response.response.result.status == 'ok') {
+			console.log(response.response.result.url);
+			localStorage.setItem('url', response.response.result.url);
+			localStorage.setItem('id', response.response.result.id);
 		}
-	else{
-		Materialize.toast('Deletion Error. Please Try Again', 3000);
+	}
+
+	function userSetting() {
+		getAuthToken({
+			'interactive': false,
+			'callback': userSettingCallback,
+		});
+	}
+
+	/**
+	 * @param {string} token
+	 */
+	function userSettingCallback(token) {
+		let option_array = [];
+		var inputs = document.getElementsByTagName('input');
+		for (let index = 0; index < inputs.length; ++index) {
+			if (inputs[index].getAttribute('id') && inputs[index].getAttribute('id').includes('option')) {
+				if (inputs[index].checked == true){
+					option_array.push(inputs[index].value)
+				}
+				else{
+					option_array.push("no")
+			}
+			localStorage.setItem('optionArray', option_array);
+				}
 		}
-  }
+
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': userSettingResponse,
+			'token': token,
+			'request': {
+				'function': 'settingColumns',
+				'parameters': {
+					'option_array': option_array,
+					'url': localStorage.getItem('url')
+				}
+			}
+		});
+	}
+
+	function userSettingResponse(response) {
+		if (response.response.result.status == 'ok') {
+			window.location.reload();
+		}
+		else{
+			console.log(response.response.result.status)
+		}
+
+	}
+
+	function deleteSheet() {
+		getAuthToken({
+			'interactive': false,
+			'callback': deleteSheetCallback,
+		});
+	}
+
+	/**
+	 * @param {string} token
+	 */
+	function deleteSheetCallback(token) {
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': deleteSheetResponse,
+			'token': token,
+			'request': {
+				'function': 'deleteSheet',
+				'parameters': {
+					'sheet_id': localStorage.getItem('id')
+				}
+			}
+		});
+	}
+
+	function deleteSheetResponse(response) {
+		if (response.response.result.status == 'ok') {
+			disableButton(delete_trigger);
+			disableButton(setting_trigger);
+			enableButton(create_button);
+			Materialize.toast('Information deleted, Please reload the page', 3000);
+			localStorage.removeItem('url');
+			localStorage.removeItem('id');
+			setTimeout(function(){window.location.reload();}, 2000)
+
+		} else {
+			Materialize.toast('Deletion Error. Please Try Again', 3000);
+		}
+	}
 
 	return {
 		onload: function () {
@@ -240,17 +293,26 @@ function deleteSheetResponse(response) {
 			signin_button.addEventListener('click', getAuthTokenInteractive);
 
 			revoke_button = document.querySelector('#revoke');
-      revoke_button.addEventListener('click', revokeToken);
-      
+			revoke_button.addEventListener('click', revokeToken);
+
 			create_button = document.querySelector('#createsheet');
-      create_button.addEventListener('click', createSheet);
-      
+			create_button.addEventListener('click', createSheet);
+
 			delete_trigger = document.querySelector('#deletesheet_btn');
 			delete_button = document.querySelector('#deletesheet')
-      delete_button.addEventListener('click', deleteSheet)
+			delete_button.addEventListener('click', deleteSheet)
 
-			if (localStorage.getItem('url')){
+			setting_trigger = document.querySelector('#setting_btn')
+			setting_button = document.querySelector('#save_setting')
+			setting_button.addEventListener('click', userSetting)
+
+
+			if (localStorage.getItem('url')) {
 				disableButton(create_button);
+			}
+			else{
+				disableButton(delete_button);
+				disableButton(setting_trigger);
 			}
 
 			// Trying to get access token without signing in, 
