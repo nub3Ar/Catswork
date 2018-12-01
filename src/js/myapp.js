@@ -162,6 +162,7 @@ var executionAPIExample = (function () {
 				'function': 'submit',
 				'parameters': {
 					'data': [inputArray],
+					'submitRow': autofill_row,
 					'url': localStorage.getItem('url')
 				}
 			}
@@ -203,13 +204,49 @@ var executionAPIExample = (function () {
 			var names_dict = {};
 			console.log(names_list)
 			for (var i = 1; i < names_list.length; i++){
-				names_dict[names_list[i]] = null;
+				names_dict[names_list[i]] = i+1;
 			}
 			var stringified_names_dict = JSON.stringify(names_dict);	
 			console.log(stringified_names_dict)
 			localStorage.setItem('names', stringified_names_dict);
 		}
+	}
 
+	function autoFill() {
+        getAuthToken({
+            'interactive': false,
+            'callback': autoFillCallback,
+        });
+    }
+
+	//submission button:
+	//1. clears the previous inputs because the data will be saved
+	//2. store all nputs into an array
+	function autoFillCallback(token) {
+		//posting to google appscript
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': autoFillResponse,
+			'token': token,
+			'request': {
+				'function': 'autoFill',
+				'parameters': {
+					'url': localStorage.getItem('url'),
+					'row': autofill_row
+				}
+			}
+		});
+	}
+
+	function autoFillResponse(response) {
+		if (response.response.result.status == 'ok') {
+			var info_list = response.response.result.info;
+			var allInputs = document.getElementsByTagName('input');
+			for (var i = 0; i < allInputs; i++){
+				allInputs[i].value = info_list[i]
+				document.getElementById("submit").innerHTML = "Update <i class='material-icons right'>send</i>"
+			}
+		}
 	}
 
 	return {
@@ -221,6 +258,16 @@ var executionAPIExample = (function () {
 				getNames();
 			}
 
+			document.getElementById("nam3").blur(function(){
+				autoFill();
+				autoFill_name = document.getElementById("nam3").value;
+				if (JSON.parse(localStorage.getItem("names"))[autoFill_name]){
+					autoFill_row = JSON.parse(localStorage.getItem("names"))[autoFill_name]
+				}
+				autofill_row = 0
+
+			});
+			
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 
 			// authorized by the user.

@@ -1,21 +1,9 @@
 //----------------------------------------------------------------------------------------------------------
-//Barry's UI/UX, strictly use for front-end features
+//UI/UX, strictly use for front-end features
 
 //Front-End JQuery
 jQuery(document).ready(function () {
-	//modal and datepicker
-	if (localStorage.getItem('token_exist') == 'false'){
-		state = 'not logged in'
-	}
-	else{
-		if (!localStorage.getItem('url')){
-			state = 'no sheet'
-		}
-		else{
-			state = 'good'
-		}
-	}
-
+	//Front-end features
 	var date = new Date();
 	var monthNames = ["January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December"
@@ -27,17 +15,18 @@ jQuery(document).ready(function () {
 		selectYears: 5,
 	});
 
-	$(document).ready(function(){
-		$('input.autocomplete').autocomplete({
-		  data: JSON.parse(localStorage.getItem('names'))
-		});
-	  });
+	$('input.autocomplete').autocomplete({
+		data: JSON.parse(localStorage.getItem('names'))
+	});
 
-	//disabling user interaction until authentification (most button logics are in myapp.js)
+		//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
 	$('#create_notif').hide()
+	
 
-	//autosaving all of the inputs
+
+
+		//autosaving all of the inputs
 	var allInputs = $(":input");
 	allInputs.each(function (input) {
 		$(this).blur(function (input) {
@@ -49,7 +38,7 @@ jQuery(document).ready(function () {
 		$(this).val(localStorage.getItem($(this).attr("id")));
 	});
 
-
+	
 	let optionArray = localStorage.getItem('optionArray').split(',')
 	for (let i = 0; i<14; ++i){
 		if(optionArray[i] == "no"){
@@ -57,7 +46,6 @@ jQuery(document).ready(function () {
 			console.log(name)
 			$(name).hide()
 		}
-		console.log("he")
 	}
 
 	//Submitted notification
@@ -72,14 +60,25 @@ jQuery(document).ready(function () {
 	//prefilling the date
 	var today = monthNames[date.getMonth()] + " " + date.getDate() + " ," + date.getFullYear();
 	$("#date").val(today);
-
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
-
 	$('#deletesheet').click(function () {
 		localStorage.removeItem('url');
 	})
 
+
+
+	if (localStorage.getItem('token_exist') == 'false'){
+		state = 'not logged in'
+	}
+	else{
+		if (!localStorage.getItem('url')){
+			state = 'no sheet'
+		}
+		else{
+			state = 'good'
+		}
+	}
 	switch (state) {
 		case ('not logged in'):
 			$("#log_in").show();
