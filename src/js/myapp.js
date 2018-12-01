@@ -170,12 +170,56 @@ var executionAPIExample = (function () {
 
 	function submitResponse(response) {
         enableButton(submit_button);
+	}
+	
+	function getNames() {
+        getAuthToken({
+            'interactive': false,
+            'callback': getNamesCallback,
+        });
     }
+
+	//submission button:
+	//1. clears the previous inputs because the data will be saved
+	//2. store all nputs into an array
+	function getNamesCallback(token) {
+		//posting to google appscript
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': getNamesResponse,
+			'token': token,
+			'request': {
+				'function': 'getNames',
+				'parameters': {
+					'url': localStorage.getItem('url')
+				}
+			}
+		});
+	}
+
+	function getNamesResponse(response) {
+		if (response.response.result.status == 'ok') {
+			var names_list = response.response.result.names_array;
+			var names_dict = {};
+			console.log(names_list)
+			for (var i = 1; i < names_list.length; i++){
+				names_dict[names_list[i]] = null;
+			}
+			var stringified_names_dict = JSON.stringify(names_dict);	
+			console.log(stringified_names_dict)
+			localStorage.setItem('names', stringified_names_dict);
+		}
+
+	}
 
 	return {
 		onload: function () {
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
+
+			if (localStorage.getItem('url')){
+				getNames();
+			}
 
 			// Trying to get access token without signing in, 
 			// it will work if the application was previously 

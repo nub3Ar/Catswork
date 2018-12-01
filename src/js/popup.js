@@ -27,6 +27,11 @@ jQuery(document).ready(function () {
 		selectYears: 5,
 	});
 
+	$(document).ready(function(){
+		$('input.autocomplete').autocomplete({
+		  data: JSON.parse(localStorage.getItem('names'))
+		});
+	  });
 
 	//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
