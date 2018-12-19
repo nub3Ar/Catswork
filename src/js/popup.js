@@ -38,15 +38,17 @@ jQuery(document).ready(function () {
 		$(this).val(localStorage.getItem($(this).attr("id")));
 	});
 
-	
-	let optionArray = localStorage.getItem('optionArray').split(',')
-	for (let i = 0; i<14; ++i){
-		if(optionArray[i] == "no"){
-			let name = '#field'+(i+1)
-			console.log(name)
-			$(name).hide()
+	if (localStorage.getItem('optionArray')){
+		let optionArray = localStorage.getItem('optionArray').split(',')
+		for (let i = 0; i<14; ++i){
+			if(optionArray[i] == "no"){
+				let name = '#field'+(i+1)
+				console.log(name)
+				$(name).hide()
+			}
 		}
 	}
+
 
 	//Submitted notification
 	$('#submit').click(function () {

@@ -201,6 +201,9 @@ var authentication = (function () {
 			localStorage.setItem('url', response.response.result.url);
 			localStorage.setItem('id', response.response.result.id);
 		}
+		else{
+			console.log(response.response.result.status)
+		}
 	}
 
 	function userSetting() {
@@ -248,6 +251,7 @@ var authentication = (function () {
 		}
 		else{
 			console.log(response.response.result.status)
+			console.log(response.response.result.parameters)
 		}
 
 	}
