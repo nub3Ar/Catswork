@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
 	})
 
 	//prefilling the date
-	var today = monthNames[date.getMonth()] + " " + date.getDate() + " ," + date.getFullYear();
+	var today = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
 	$("#date").val(today);
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));

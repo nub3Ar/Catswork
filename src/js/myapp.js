@@ -10,9 +10,6 @@
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
  */
-var inputArray = []
-var sheet_link;
-
 var executionAPIExample = (function () {
 
 	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
@@ -23,6 +20,10 @@ var executionAPIExample = (function () {
 	var state = STATE_START;
 
 	var submit_button;
+	var names_dict_index;
+	var inputArray = [];
+	var sheet_link;
+	var autoFill_row = 0;
 
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
@@ -144,7 +145,9 @@ var executionAPIExample = (function () {
 			if (inputs[index].getAttribute('id')) {
 				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
 					inputArray.push("yes");
-				} else {
+				} 
+				else {
+					
 					inputArray.push(inputs[index].value);
 				}
 			}
@@ -162,7 +165,7 @@ var executionAPIExample = (function () {
 				'function': 'submit',
 				'parameters': {
 					'data': [inputArray],
-					'submitRow': autofill_row,
+					'submitRow': autoFill_row,
 					'url': localStorage.getItem('url')
 				}
 			}
@@ -170,6 +173,7 @@ var executionAPIExample = (function () {
 	}
 
 	function submitResponse(response) {
+		console.log(response)
         enableButton(submit_button);
 	}
 	
@@ -202,9 +206,11 @@ var executionAPIExample = (function () {
 		if (response.response.result.status == 'ok') {
 			var names_list = response.response.result.names_array;
 			var names_dict = {};
+			names_dict_index = {}
 			console.log(names_list)
 			for (var i = 1; i < names_list.length; i++){
-				names_dict[names_list[i]] = i+1;
+				names_dict[names_list[i]] = null
+				names_dict_index[names_list[i]] = i+1
 			}
 			var stringified_names_dict = JSON.stringify(names_dict);	
 			console.log(stringified_names_dict)
@@ -232,7 +238,7 @@ var executionAPIExample = (function () {
 				'function': 'autoFill',
 				'parameters': {
 					'url': localStorage.getItem('url'),
-					'row': autofill_row
+					'row': autoFill_row
 				}
 			}
 		});
@@ -240,12 +246,23 @@ var executionAPIExample = (function () {
 
 	function autoFillResponse(response) {
 		if (response.response.result.status == 'ok') {
-			var info_list = response.response.result.info;
-			var allInputs = document.getElementsByTagName('input');
-			for (var i = 0; i < allInputs; i++){
-				allInputs[i].value = info_list[i]
-				document.getElementById("submit").innerHTML = "Update <i class='material-icons right'>send</i>"
+			var info_list = JSON.parse(response.response.result.info);
+			var allInputs = document.getElementsByTagName('input')
+			console.log(allInputs.length, info_list.length)
+			for (var i = 1; i < allInputs.length; i++){
+				if (i == 10){
+					var return_date = new Date(info_list[i]);
+					allInputs[i].value = return_date.toLocaleDateString("en-US")
+				}
+				else{
+					allInputs[i].value = info_list[i]
+				}
+
 			}
+			document.getElementById("submit").innerHTML = "Update <i class='material-icons right'>send</i>"
+		}
+		else{
+			console.log("Error")
 		}
 	}
 
@@ -254,17 +271,23 @@ var executionAPIExample = (function () {
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
 
+
 			if (localStorage.getItem('url')){
 				getNames();
 			}
 
-			document.getElementById("nam3").blur(function(){
-				autoFill();
-				autoFill_name = document.getElementById("nam3").value;
-				if (JSON.parse(localStorage.getItem("names"))[autoFill_name]){
-					autoFill_row = JSON.parse(localStorage.getItem("names"))[autoFill_name]
+			document.getElementById("nam3").addEventListener("blur", function(){
+				var autoFill_name = document.getElementById("nam3").value;
+				console.log(autoFill_name)
+				if (names_dict_index[autoFill_name]){
+					autoFill_row = names_dict_index[autoFill_name]
+					console.log(autoFill_row)
 				}
-				autofill_row = 0
+				else{
+					autoFill_row = 0
+				}
+				autoFill();
+
 
 			});
 			
