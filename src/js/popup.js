@@ -49,7 +49,6 @@ jQuery(document).ready(function () {
 		}
 	}
 
-
 	//Submitted notification
 	$('#submit').click(function () {
 		$(this).prop('disabled', true).delay(1000);

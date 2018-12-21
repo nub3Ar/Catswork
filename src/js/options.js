@@ -8,6 +8,22 @@ jQuery(document).ready(function () {
 	}
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 	$('#option1').click(function(){console.log($('#option1').val())})
+	$('#modal1').modal({
+		ready: function(){
+			if (localStorage.getItem('optionArray')) {
+				let optionArray = localStorage.getItem('optionArray').split(',')
+				for (let i = 0; i<14; ++i){
+					let name = '#option'+(i+1)
+					console.log(name)
+					console.log(optionArray[i])
+	
+					if (optionArray[i] == 'no'){
+						$(name).prop('checked', false);
+					}
+				}
+			}
+		}
+	})
 });
 
 
@@ -201,9 +217,6 @@ var authentication = (function () {
 			localStorage.setItem('url', response.response.result.url);
 			localStorage.setItem('id', response.response.result.id);
 		}
-		else{
-			console.log(response.response.result.status)
-		}
 	}
 
 	function userSetting() {
@@ -251,7 +264,6 @@ var authentication = (function () {
 		}
 		else{
 			console.log(response.response.result.status)
-			console.log(response.response.result.parameters)
 		}
 
 	}

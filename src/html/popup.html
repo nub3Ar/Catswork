@@ -17,18 +17,20 @@
     <div class="row">
       <div class="col s6"> <img src="../image/logo.png" width="100%"></div>
       <div class="col s6">
-        <h4>CatSWORK</h4>
-        <h6>Networking Tracker</h6>
+        <a class="btn-floating btn-small waves-effect waves-light red" id="setting" href="options.html" target="_blank">
+          <i class="material-icons center">settings</i>
+        </a>
+        <br>
       </div>
     </div>
     <br>
 
     <div id="log_in">
       <p>
-        Welcome to CatsWork! We find that you have not logged in yet.
+        Welcome to CatsWork! We find that you have not logged in yet. Click the button below and navigate to your CatsWork Dashboard!
       </p>
       <a class="btn-large waves-effect waves-light" href="../html/options.html" type="submit" id="login_link" target="_blank">
-        Log In
+        Get Started
       </a>
     </div>
 
@@ -44,7 +46,7 @@
     <div id='catswork'>
       <ul class='collapsible'>
         <li>
-          <div class='collapsible-header'>Open Tracker</div>
+          <div class='collapsible-header'>CatsTrack</div>
           <div class='collapsible-body'>
             <div class="row">
               <form id="main_form" class="col s12">
@@ -124,6 +126,15 @@
             <div id="submit_notif">
               <h6>Contact Submitted!</h6>
             </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class='collapsible'>
+        <li>
+          <div class='collapsible-header'>CatsChat</div>
+          <div class='collapsible-body'>
+            <iframe width="95%" height="200" id="catschat_iframe"></iframe>
           </div>
         </li>
       </ul>
