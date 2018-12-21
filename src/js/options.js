@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
 
 // Authentication Functions
 var authentication = (function () {
-
+	localStorage.setItem('new_user', true)
 	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
 	var STATE_START = 1;
 	var STATE_ACQUIRING_AUTHTOKEN = 2;
@@ -127,6 +127,13 @@ var authentication = (function () {
 			else{
 				enableButton(create_button)
 			}
+		}
+		if (localStorage.getItem('token_exist') && localStorage.getItem('new_user') == true){
+			Materialize.toast('Login successful, please view tutorial below', 3000);
+			localStorage.setItem('new_user', false)
+		}
+		if (localStorage.getItem('token_exist') && localStorage.getItem('new_user') != true){
+			Materialize.toast('Login successful, welcome back!', 3000);
 		}
 	}
 
