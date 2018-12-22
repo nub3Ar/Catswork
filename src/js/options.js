@@ -10,13 +10,15 @@ jQuery(document).ready(function () {
 	$('#option1').click(function(){console.log($('#option1').val())})
 	$('#modal1').modal({
 		ready: function(){
+			if (!localStorage.getItem('url')){
+				$('#modal3').modal('open')
+			}
 			if (localStorage.getItem('optionArray')) {
 				let optionArray = localStorage.getItem('optionArray').split(',')
 				for (let i = 0; i<14; ++i){
 					let name = '#option'+(i+1)
 					console.log(name)
 					console.log(optionArray[i])
-	
 					if (optionArray[i] == 'no'){
 						$(name).prop('checked', false);
 					}
@@ -118,6 +120,7 @@ var authentication = (function () {
 			localStorage.setItem('token_exist', false)
 			changeState(STATE_START);
 		} else {
+			Materialize.toast('Login successful!', 3000);
 			localStorage.setItem('token_exist', true)
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
 			if (localStorage.getItem('url')) {
@@ -127,14 +130,7 @@ var authentication = (function () {
 			else{
 				enableButton(create_button)
 			}
-		}
-		if (localStorage.getItem('token_exist') && localStorage.getItem('new_user') == true){
-			Materialize.toast('Login successful, please view tutorial below', 3000);
-			localStorage.setItem('new_user', false)
-		}
-		if (localStorage.getItem('token_exist') && localStorage.getItem('new_user') != true){
-			Materialize.toast('Login successful, welcome back!', 3000);
-		}
+		}	
 	}
 
 	/**
