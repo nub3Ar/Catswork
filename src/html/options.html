@@ -56,7 +56,7 @@
             <a href="#modal1" class="btn waves-effect waves-light purple" id="createsheet">
                 <i class="material-icons right">fiber_new</i>
                 Create SpreadSheet</a>
-            <a href="#modal2" class="btn waves-effect waves-light purple" id="deletesheet_btn">
+            <a href="#modal2" class="btn waves-effect waves-light purple" id="deletesheet_btn" disabled>
                 <i class="material-icons right">delete</i>
                 Delete SpreadSheet</a>
             <a href="#modal1" class="btn waves-effect waves-light purple modal-trigger" id="setting_btn">
@@ -75,19 +75,6 @@
     </main>
 
     <!--modals -->
-
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <h4>User Tutorial</h4>
-        </div>
-        <div class="carousel">
-            <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
-            <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
-          </div>
-        <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect btn purple" type="button">Close</button>
-        </div>
-    </div>
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4>Custom Setting</h4>
@@ -228,13 +215,38 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
+    <div id="modal3" class="modal">
+        <div class="slider">
+                <ul class="slides">
+                  <li> 
+                    <img src="https://www.quotemaster.org/images/20/201f7f0238a9f9032c86cde61dc1bd49.png" alt="">
+                    <div class="caption left-align">
+                      <h3></h3>
+                      <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="http://digm.drexel.edu/acelab/wp-content/uploads/2013/10/PosterCollage.jpg" alt="">
+                    <div class="caption right-align">
+                      <h3></h3>
+                      <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="https://i.ytimg.com/vi/8l4a6H1wC7M/maxresdefault.jpg" alt="">
+                    <div class="caption center-align">
+                      <h3>Everybody has something that chews them up and, for me, that thing was always loneliness. The cinema has the
+                        power to make you not feel lonely, even when you are.</h3>
+                      <h5 class="light grey-text text-lighten-3">---Tom Hanks</h5>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+        <div class="modal-footer">
+            <button id = "tutorial done" class="modal-action waves-effect btn purple modal-close" type="button">OK!</button>
+            <button id = "tutorial done" class="modal-action waves-effect btn purple modal-close" type="button">Close</button>
+        </div>
+    </div>
 
 
 

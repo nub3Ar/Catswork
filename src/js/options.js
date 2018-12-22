@@ -3,28 +3,34 @@
 //page action js
 jQuery(document).ready(function () {
 	$('.modal').modal();
+	$('.slider').slider();
 	if (!localStorage.getItem('url')) {
 		$('#sheet_iframe').hide()
+		$('#modal3').modal('open')
 	}
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
-	$('#option1').click(function(){console.log($('#option1').val())})
+	$('#option1').click(function () {
+		console.log($('#option1').val())
+	})
+
+	//$('#modal1').modal({onOpenStart: function () {
+	//	console.log("hello, onstart event triggered")
+	//	$('#modal3').modal('open')
+	//}})
 	$('#modal1').modal({
-		ready: function(){
-			if (!localStorage.getItem('url')){
-				$('#modal3').modal('open')
-			}
+		ready: function () {
 			if (localStorage.getItem('optionArray')) {
 				let optionArray = localStorage.getItem('optionArray').split(',')
-				for (let i = 0; i<14; ++i){
-					let name = '#option'+(i+1)
-					console.log(name)
-					console.log(optionArray[i])
-					if (optionArray[i] == 'no'){
+				for (let i = 0; i < 14; ++i) {
+					let name = '#option' + (i + 1)
+					if (optionArray[i] == 'no') {
 						$(name).prop('checked', false);
 					}
 				}
 			}
+
 		}
+
 	})
 });
 
@@ -126,11 +132,10 @@ var authentication = (function () {
 			if (localStorage.getItem('url')) {
 				disableButton(create_button)
 				enableButton(delete_trigger)
-			}
-			else{
+			} else {
 				enableButton(create_button)
 			}
-		}	
+		}
 	}
 
 	/**
@@ -159,7 +164,7 @@ var authentication = (function () {
 			xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
 				current_token);
 			xhr.send();
-			
+
 			localStorage.setItem('token_exist', false)
 			// Update the user interface accordingly
 			changeState(STATE_START);
@@ -237,14 +242,13 @@ var authentication = (function () {
 		var inputs = document.getElementsByTagName('input');
 		for (let index = 0; index < inputs.length; ++index) {
 			if (inputs[index].getAttribute('id') && inputs[index].getAttribute('id').includes('option')) {
-				if (inputs[index].checked == true){
+				if (inputs[index].checked == true) {
 					option_array.push(inputs[index].value)
-				}
-				else{
+				} else {
 					option_array.push("no")
-			}
-			localStorage.setItem('optionArray', option_array);
 				}
+				localStorage.setItem('optionArray', option_array);
+			}
 		}
 
 		post({
@@ -264,8 +268,7 @@ var authentication = (function () {
 	function userSettingResponse(response) {
 		if (response.response.result.status == 'ok') {
 			window.location.reload();
-		}
-		else{
+		} else {
 			console.log(response.response.result.status)
 		}
 
@@ -303,7 +306,9 @@ var authentication = (function () {
 			Materialize.toast('Information deleted. Page reloading...', 3000);
 			localStorage.removeItem('url');
 			localStorage.removeItem('id');
-			setTimeout(function(){window.location.reload();}, 2000)
+			setTimeout(function () {
+				window.location.reload();
+			}, 2000)
 
 		} else {
 			Materialize.toast('Deletion Error. Please Try Again', 3000);
@@ -333,8 +338,7 @@ var authentication = (function () {
 
 			if (localStorage.getItem('url')) {
 				disableButton(create_button);
-			}
-			else{
+			} else {
 				disableButton(delete_button);
 				disableButton(setting_trigger);
 			}
