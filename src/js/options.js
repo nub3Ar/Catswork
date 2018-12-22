@@ -300,7 +300,7 @@ var authentication = (function () {
 			disableButton(delete_trigger);
 			disableButton(setting_trigger);
 			enableButton(create_button);
-			Materialize.toast('Information deleted, Please reload the page', 3000);
+			Materialize.toast('Information deleted. Page reloading...', 3000);
 			localStorage.removeItem('url');
 			localStorage.removeItem('id');
 			setTimeout(function(){window.location.reload();}, 2000)
