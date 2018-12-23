@@ -32,9 +32,10 @@ jQuery(document).ready(function () {
 		},
 		complete: function () {
 			console.log('1')
-
-			$('#sheet_iframe').show()
-			window.location.reload();
+			setTimeout(() => {
+				$('#sheet_iframe').show()
+				window.location.reload();
+			}, 2000);
 			
 		} // This is callback for Modal close
 
