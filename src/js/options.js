@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
 	//	$('#modal3').modal('open')
 	//}})
 	$('#modal1').modal({
-		ready: function () {
+		ready: function () {  // This is  function executed when the modal is opened
 			if (localStorage.getItem('optionArray')) {
 				let optionArray = localStorage.getItem('optionArray').split(',')
 				for (let i = 0; i < 14; ++i) {
@@ -29,9 +29,17 @@ jQuery(document).ready(function () {
 				}
 			}
 
-		}
+		},
+		complete: function () {
+			console.log('1')
+
+			$('#sheet_iframe').show()
+			window.location.reload();
+			
+		} // This is callback for Modal close
 
 	})
+
 });
 
 
@@ -306,6 +314,7 @@ var authentication = (function () {
 			Materialize.toast('Information deleted. Page reloading...', 3000);
 			localStorage.removeItem('url');
 			localStorage.removeItem('id');
+			localStorage.removeItem('optionArray');
 			setTimeout(function () {
 				window.location.reload();
 			}, 2000)
@@ -334,6 +343,7 @@ var authentication = (function () {
 			setting_trigger = document.querySelector('#setting_btn')
 			setting_button = document.querySelector('#save_setting')
 			setting_button.addEventListener('click', userSetting)
+			
 
 
 			if (localStorage.getItem('url')) {
