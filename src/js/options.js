@@ -3,7 +3,11 @@
 //page action js
 jQuery(document).ready(function () {
 	$('.modal').modal();
-	$('.slider').slider();
+	$('.slider').slider({ 
+        full_width: true,
+        height : 800, // default - height : 400
+        interval: 8000 // default - interval: 6000
+    });
 	if (!localStorage.getItem('url')) {
 		$('#sheet_iframe').hide()
 		$('#modal3').modal('open')
@@ -40,9 +44,7 @@ jQuery(document).ready(function () {
 		} // This is callback for Modal close
 
 	})
-
 });
-
 
 // Authentication Functions
 var authentication = (function () {

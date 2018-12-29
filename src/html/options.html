@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 <script type="text/javascript" src="../js/libraries/jquery-3.3.1.min.js"></script>
 <script src="../js/libraries/materialize.min.js"></script>
 <script type="text/javascript" src="../js/options.js"></script>
-<link rel="stylesheet" href="../css/style.css">
-
-
 
 <html>
 
@@ -16,27 +14,29 @@
     <title>User Option</title>
 </head>
 
-
 <body background="../Image/background.jpg">
     <header>
         <!--navigation bar-->
         <nav>
-            <div class="nav-wrapper purple darken-3">
-                <a class="brand-logo center">Catswork</a>
+            <div class="nav-wrapper">
+                <a class="brand-logo center">
+                    <img src="../Image/logo-new.png" width="30%"> 
+                </a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li>
-                        <a href="https://mail.google.com" target="_blank">Gmail</a>
+                        <a href="https://mail.google.com" target="_blank">
+                            <img src="../Image/gmail-icon.png">
+                        </a>
                     </li>
                     <li>
-                        <a href="https://www.google.com/docs/about" target="_blank">G-Suite</a>
-                    </li>
-                </ul>
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a href="https://www.northwestern.edu/careers/" target="_blank">Northwestern Career Resources</a>
+                        <a href="https://www.linkedin.com/" target="_blank">
+                            <img src="../Image/linkedin-icon.png">
+                        </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/" target="_blank">Linkedin</a>
+                        <a href="https://www.northwestern.edu/careers/" target="_blank">
+                            <img src="../Image/nca-icon.png" width="60px">
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -45,25 +45,22 @@
     <main>
         <center>
             <br>
-            <button class="btn waves-effect waves-light purple" type="signin" id="signin" name="action">
+            <button class="button1" type="signin" id="signin" name="action" style="margin: 2px">
                 Log in
             </button>
-            <button class="btn waves-effect waves-light purple" type="revoke" id="revoke" name="action" disabled>
+            <button class="button1" type="revoke" id="revoke" name="action" disabled style="margin: 2px">
                 Log Out
             </button>
             <br>
             <br>
-            <a href="#modal1" class="btn waves-effect waves-light purple" id="createsheet">
+            <a href="#modal1" class="button2" id="createsheet" style="margin: 2px">
                 <i class="material-icons right">fiber_new</i>
                 Create SpreadSheet</a>
-            <a href="#modal2" class="btn waves-effect waves-light purple" id="deletesheet_btn" disabled>
-                <i class="material-icons right">delete</i>
-                Delete SpreadSheet</a>
-            <a href="#modal1" class="btn waves-effect waves-light purple modal-trigger" id="setting_btn">
+            <a href="#modal1" class="button2" id="setting_btn" style="margin: 2px">
                 <i class="material-icons right">settings</i>
-                User Setting
+                Customize Tracker
             </a>
-            <a href="#modal3" class="btn waves-effect waves-light purple modal-trigger" id="tutorial_btn">
+            <a href="#modal3" class="button2" id="tutorial_btn" style="margin: 2px">
                 <i class="material-icons right">info</i>
                 Tutorial
             </a>
@@ -78,7 +75,10 @@
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4>Custom Setting</h4>
-            <h6>Information you would like to track:</h6>
+            <a href="#modal2" class="button2" id="deletesheet_btn" disabled style="margin: 2px">
+                    <i class="material-icons right">delete</i>
+                    Delete SpreadSheet</a>
+            <h5>Information you would like to track:</h5>
             <form action="#">
                 <div class="switch">
                     <label class="label">
@@ -196,8 +196,8 @@
             </form>
             <br>
             <div class="modal-footer">
-                <button class="modal-action modal-close waves-effect btn purple" type="button" id="modal_footer1">Cancel</button>
-                <button class="modal-action modal-close waves-effect btn purple" type="button" id="save_setting">Confirm</button>
+                <button class="button2" type="button" id="modal_footer1">Cancel</button>
+                <button class="button2" type="button" id="save_setting">Confirm</button>
             </div>
         </div>
     </div>
@@ -209,42 +209,43 @@
             </h6>
         </div>
         <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect btn purple" type="button">Cancel</button>
-            <button class="modal-action modal-close waves-effect btn purple" type="button" id="deletesheet">Confirm</button>
+            <button class="modal-action modal-close button2" type="button">Cancel</button>
+            <button class="modal-action modal-close button2" type="button" id="deletesheet">Confirm</button>
 
         </div>
     </div>
 
     <div id="modal3" class="modal">
         <div class="slider">
-                <ul class="slides">
-                  <li> 
-                    <img src="https://www.quotemaster.org/images/20/201f7f0238a9f9032c86cde61dc1bd49.png" alt="">
+            <ul class="slides">
+                <li>
+                    <img class="responsive-img" src="../Image/tutorial.png"  >
                     <div class="caption left-align">
-                      <h3></h3>
-                      <h5 class="light grey-text text-lighten-3"></h5>
+                        <h3></h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
                     </div>
-                  </li>
-                  <li>
-                    <img src="http://digm.drexel.edu/acelab/wp-content/uploads/2013/10/PosterCollage.jpg" alt="">
+                </li>
+                <li>
+                    <img class="responsive-img" src="../Image/tutorial2.png" >
                     <div class="caption right-align">
-                      <h3></h3>
-                      <h5 class="light grey-text text-lighten-3"></h5>
+                        <h3></h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
                     </div>
-                  </li>
-                  <li>
+                </li>
+                <!-- <li>
                     <img src="https://i.ytimg.com/vi/8l4a6H1wC7M/maxresdefault.jpg" alt="">
                     <div class="caption center-align">
-                      <h3>Everybody has something that chews them up and, for me, that thing was always loneliness. The cinema has the
-                        power to make you not feel lonely, even when you are.</h3>
-                      <h5 class="light grey-text text-lighten-3">---Tom Hanks</h5>
+                        <h3>Everybody has something that chews them up and, for me, that thing was always loneliness.
+                            The cinema has the
+                            power to make you not feel lonely, even when you are.</h3>
+                        <h5 class="light grey-text text-lighten-3">---Tom Hanks</h5>
                     </div>
-                  </li>
-                </ul>
-              </div>
+                </li> -->
+            </ul>
+        </div>
         <div class="modal-footer">
-            <button id = "tutorial done" class="modal-action waves-effect btn purple modal-close" type="button">OK!</button>
-            <button id = "tutorial done" class="modal-action waves-effect btn purple modal-close" type="button">Close</button>
+            <button id="tutorial done" class="modal-action modal-close button2" type="button">OK!</button>
+            <button id="tutorial done" class="modal-action modal-close button2" type="button">Close</button>
         </div>
     </div>
 
