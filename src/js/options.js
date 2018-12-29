@@ -9,18 +9,15 @@ jQuery(document).ready(function () {
         interval: 8000 // default - interval: 6000
     });
 	if (!localStorage.getItem('url')) {
+		if(localStorage.getItem('token_exist') == 'true'){
+			$('#modal3').modal('open')
+		}
 		$('#sheet_iframe').hide()
-		$('#modal3').modal('open')
 	}
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 	$('#option1').click(function () {
 		console.log($('#option1').val())
 	})
-
-	//$('#modal1').modal({onOpenStart: function () {
-	//	console.log("hello, onstart event triggered")
-	//	$('#modal3').modal('open')
-	//}})
 	$('#modal1').modal({
 		ready: function () {  // This is  function executed when the modal is opened
 			if (localStorage.getItem('optionArray')) {
