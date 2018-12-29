@@ -85,17 +85,18 @@ body{
   background-color: white; 
   color: black;
 }
-
-/* .input-field {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid black;
-  border-radius: 25px;
-  background-color: white;
-  color:#85CCB9;
-} */
+.button1[disabled=disabled], button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  pointer-events: none;
+}
+.button2[disabled=disabled], button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  pointer-events: none;
+}
 
 /* Header and footer */
 
