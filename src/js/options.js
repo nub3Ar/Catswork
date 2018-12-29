@@ -8,12 +8,11 @@ jQuery(document).ready(function () {
         height : 800, // default - height : 400
         interval: 8000 // default - interval: 6000
     });
-	if (!localStorage.getItem('url')) {
-		if(localStorage.getItem('token_exist') == 'true'){
-			$('#modal3').modal('open')
-		}
+	if (!localStorage.getItem('url') || localStorage.getItem('token_exist') == 'false') {
 		$('#sheet_iframe').hide()
+		$('#modal3').modal('open')
 	}
+
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 	$('#option1').click(function () {
 		console.log($('#option1').val())
@@ -36,7 +35,7 @@ jQuery(document).ready(function () {
 			setTimeout(() => {
 				$('#sheet_iframe').show()
 				window.location.reload();
-			}, 2000);
+			}, 3000);
 			
 		} // This is callback for Modal close
 
