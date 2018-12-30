@@ -23,7 +23,8 @@
   
   "browser_action": {
     "default_title": "Catswork",
-    "default_popup": "src/html/popup.html"
+    "default_popup": "src/html/popup.html",
+    "default_icon": "src/Image/catswork-favicon2.png"
   },
   
   "oauth2": {

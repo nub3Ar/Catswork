@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
 	$('.slider').slider({ 
         full_width: true,
         height : 800, // default - height : 400
-        interval: 8000 // default - interval: 6000
+        interval: 80000 // default - interval: 6000
     });
 	if (!localStorage.getItem('url') || localStorage.getItem('token_exist') == 'false') {
 		$('#sheet_iframe').hide()

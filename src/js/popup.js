@@ -22,8 +22,6 @@ jQuery(document).ready(function () {
 		//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
 	$('#create_notif').hide()
-	
-
 
 
 		//autosaving all of the inputs
