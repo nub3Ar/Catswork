@@ -139,9 +139,12 @@ var authentication = (function () {
 			if (localStorage.getItem('url')) {
 				disableButton(create_button)
 				enableButton(delete_trigger)
+				$('#sheet_iframe').show()
+
 			} else {
 				enableButton(create_button)
 			}
+			
 		}
 	}
 
@@ -175,6 +178,7 @@ var authentication = (function () {
 			localStorage.setItem('token_exist', false)
 			// Update the user interface accordingly
 			changeState(STATE_START);
+			$('#sheet_iframe').hide()
 		}
 
 	}
