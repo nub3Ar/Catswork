@@ -16,6 +16,11 @@ body{
   font-size: 12px;
 }
 
+
+.a{
+  text-align: left;
+}
+
 .center {
   display: block;
   margin-left: auto;
@@ -114,6 +119,9 @@ footer {
   padding: 1rem;
   text-align: center;
 }
+
+
+
 
 .switch label{
   font-size: 12pt;
