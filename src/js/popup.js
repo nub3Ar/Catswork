@@ -67,7 +67,7 @@ jQuery(document).ready(function () {
 
 
 
-	if (localStorage.getItem('token_exist') == 'false'){
+	if (localStorage.getItem('token_exist') == 'false' | !localStorage.getItem('token_exist')){
 		state = 'not logged in'
 	}
 	else{

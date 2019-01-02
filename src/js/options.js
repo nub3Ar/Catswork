@@ -4,9 +4,9 @@
 jQuery(document).ready(function () {
 	$('.modal').modal();
 	$('.slider').slider({ 
-        full_width: true,
+		full_width: true,
         height : 800, // default - height : 400
-        interval: 80000 // default - interval: 6000
+        interval: 6000// default - interval: 6000
     });
 	if (!localStorage.getItem('url') || localStorage.getItem('token_exist') == 'false') {
 		$('#sheet_iframe').hide()
