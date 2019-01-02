@@ -156,6 +156,7 @@ var executionAPIExample = (function () {
 
 		localStorage.removeItem('array');
 		localStorage.setItem('array', inputArray)
+
 		//posting to google appscript
 		post({
 			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
@@ -174,7 +175,12 @@ var executionAPIExample = (function () {
 
 	function submitResponse(response) {
 		console.log(response)
-        enableButton(submit_button);
+		enableButton(submit_button);
+		var inputs = document.getElementsByTagName('input');
+		for (let index = 0; index < inputs.length; ++index) {
+			inputs[index].value = ""
+		}
+
 	}
 	
 	function getNames() {

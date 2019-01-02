@@ -53,7 +53,6 @@ jQuery(document).ready(function () {
 		$('#submit_notif').show(1500).delay(1000);
 		$('#submit_notif').hide(1500);
 		$('#submit').prop('disabled', false);
-
 	})
 
 	//prefilling the date
