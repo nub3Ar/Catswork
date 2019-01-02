@@ -12,7 +12,9 @@ jQuery(document).ready(function () {
 		$('#sheet_iframe').hide()
 		$('#modal3').modal('open')
 	}
-
+	if (window.location.href.indexOf('#modal3') != -1){
+		$('#modal3').modal('open')
+	}
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 	$('#option1').click(function () {
 		console.log($('#option1').val())
