@@ -306,3 +306,9 @@ var executionAPIExample = (function () {
 })();
 
 window.onload = executionAPIExample.onload;
+
+
+.modal{
+	max-height: 95%;
+  
+  }
