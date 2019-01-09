@@ -183,6 +183,8 @@ let authentication = (function () {
 	}
 
 	function userSetting() {
+		$('#loading').show(1000).delay(1000)
+		$('#loading').hide(1000)
 		getAuthToken({
 			'interactive': false,
 			'callback': userSettingCallback,
