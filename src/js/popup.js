@@ -71,7 +71,7 @@ jQuery(document).ready(function () {
 				localStorage.removeItem('tutorial_step')
 				$("#step_3_a").hide(1000);
 				$("#step_3_b").hide(1000);
-				$("#tutorial_complete").show(1500).delay(1000);
+				$("#tutorial_complete").show(1500).delay(2500);
 				$("#tutorial_complete").hide(1500);
 				localStorage.setItem('first_time_user', false)
 			}

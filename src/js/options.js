@@ -273,8 +273,11 @@ let authentication = (function () {
 			delete_button = document.querySelector('#deletesheet')
 			delete_button.addEventListener('click', deleteSheet)
 
-			setting_button = document.querySelector('#save_setting')
-			setting_button.addEventListener('click', userSetting)
+			setting_button = document.querySelectorAll("input[id*='option']")
+			console.log(setting_button)
+			setting_button.forEach(function(x){
+				x.addEventListener('click', userSetting)
+			})
 
 			create_button = document.querySelector('#createsheet')
 			create_button.addEventListener('click', createSheet)
