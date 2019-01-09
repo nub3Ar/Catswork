@@ -6,5 +6,6 @@ function install_notice() {
 
     localStorage.setItem('first_time_user', true);
     localStorage.setItem('tutorial_step', 1);
+    localStorage.setItem('token_exist', "false")
 }
 install_notice();
