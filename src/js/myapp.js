@@ -19,7 +19,7 @@ var executionAPIExample = (function () {
 
 	var state = STATE_START;
 
-	var submit_button;
+	var submit_button
 	var names_dict_index;
 	var inputArray = [];
 	var sheet_link;
@@ -128,7 +128,7 @@ var executionAPIExample = (function () {
 	}
 
 	function submit() {
-        disableButton(submit_button);
+		disableButton(submit_button);
         getAuthToken({
             'interactive': false,
             'callback': submitCallback,
@@ -180,7 +180,26 @@ var executionAPIExample = (function () {
 		for (let index = 0; index < inputs.length; ++index) {
 			inputs[index].value = ""
 		}
-
+		if (localStorage.getItem('first_time_user') == 'true'){
+			if (localStorage.getItem('tutorial_step') == 1){
+				localStorage.setItem('tutorial_step', 2)
+				$("#step_1_a").hide(1000);
+				$("#step_1_b").hide(1000);
+				$("#step_1_c").hide(1000);
+				$("#step_1_d").show(1000);
+				$("#step_2_a").show(1000);
+				$("#step_2_b").show(1000);
+			}
+			else if (localStorage.getItem('tutorial_step') == 2){
+				localStorage.setItem('tutorial_step', 3)
+				$("#step_2_a").hide(1000);
+				$("#step_2_b").hide(1000);
+				$("#step_2_d").show(1000);
+				$("#step_3_a").show(1000);
+				$("#step_3_b").show(1000);
+			}
+		}
+		getNames();
 	}
 	
 	function getNames() {
@@ -276,7 +295,6 @@ var executionAPIExample = (function () {
 		onload: function () {
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
-
 
 			if (localStorage.getItem('url')){
 				getNames();

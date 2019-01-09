@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Catswork Tracker</title>
+  <title id = 'catswork_title'>Catswork Tracker</title>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -29,16 +29,16 @@
   <center>
     <div id="log_in">
       <p>
-        Welcome to CatsWork! You are not logged in. Click the button below and navigate to your CatsWork Dashboard!
+        Welcome to CatsWork! You are not logged in. Click the button below and navigate to your CatsWork Dashboard for logging in!
       </p>
       <a class="button1" href="../html/options.html" type="submit" id="login_link" target="_blank">
-        Get Started
+        Go to Dashboard
       </a>
     </div>
 
     <div id="createsheet">
       <p>
-        Welcome to CatsWork! You do not have a connected Google Sheet. Create one now!
+        Welcome to CatsWork! You do not have a connected Google Sheet. Create one now in your Dashboard!
       </p>
       <a class="button1" href="../html/options.html" type="submit" id="create_link" target="_blank">
         Go to Dashboard
@@ -46,6 +46,12 @@
     </div>
 
     <div id='catswork'>
+      <div id="step_1_a">
+        <h6>Step 1: Learn to input contact information. Please click CatsTrack below.</h6>
+      </div>
+      <div id="step_2_a">
+        <h6>Step 2: Learn to update a contact.</h6>
+      </div>
       <ul class='collapsible'>
         <li>
           <div class='collapsible-header'>
@@ -53,6 +59,12 @@
           </div>
           <div class='collapsible-body'>
             <div class="row">
+              <div id="step_1_b">
+                <h6>We have prefilled the information for you for the first time, please scroll down and click submit</h6>
+              </div>
+              <div id="step_2_b">
+                  <h6>Type in the first 3 letters of the name of contact to search for it and try to update some information. Then scroll down to click update.</h6>
+              </div>
               <form id="main_form" class="col-s12">
                 <div class="input-field col-s12">
                   <input type="text" id="nam3" class="autocomplete">
@@ -67,7 +79,7 @@
                   <label for="email">Email</label>
                 </div>
                 <div class="input-field col-s12" id="field4">
-                  <input id="email" type="text">
+                  <input id="phone" type="text">
                   <label for="email">Phone</label>
                 </div>
                 <div class="input-field col-s12" id="field5">
@@ -87,8 +99,8 @@
                   <label for="education">Education</label>
                 </div>
                 <div class="input-field col-s12" id="field9">
-                  <input id="Source" type="text">
-                  <label for="Source">Source</label>
+                  <input id="source" type="text">
+                  <label for="source">Source</label>
                 </div>
                 <div class="input-field col-s12" id="field10">
                   <input id="alternative" type="text" class="validate">
@@ -121,6 +133,9 @@
                 </div>
               </form>
             </div>
+            <div id="step_1_c">
+                <h6>Click submit button! You will see the update in your Catswork Dashboard</h6>
+            </div>
             <button class="button1" type="submit" id="submit" name="action">
               Submit
               <i class="material-icons right">send</i>
@@ -130,10 +145,25 @@
             <div id="submit_notif">
               <h6>Contact Submitted!</h6>
             </div>
+            <div id="step_1_d">
+                <h6>Congrats! You have learnt how to input a contact.</h6>
+                <a class="button2" id="step_1_complete" href = "#catswork">
+                    -> STEP 2
+                </a>
+            </div>
+            <div id="step_2_d">
+                <h6>Congrats! You have learnt how to update a contact.</h6>
+                <a class="button2" id="step_2_complete" href = "#step_3_a">
+                    -> STEP 3
+                </a>
+            </div>
           </div>
         </li>
       </ul>
 
+      <div id="step_3_a">
+          <h6>Step 3: Click CatsChat to check out our recruitment resources for you</h6>
+      </div>
       <ul class='collapsible'>
         <li>
           <div class='collapsible-header'>
@@ -166,8 +196,14 @@
               <img src="../image/Video.png" style="width:20px;height:20px">
               <a href="http://www.catswork.io/videos/" target="_blank">Choosing Best-Fitting Investment Banks</a>
             </div>
+            <br>
+            <div id="step_3_b">
+                <button class="button2" id="step_3_complete" name = 'action'>
+                  FINISH TUTORIAL
+                </button>
+            </div>
           </div>
-
+        </li>
       </ul>
     </div>
   </center>
