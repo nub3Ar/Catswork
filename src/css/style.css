@@ -16,7 +16,6 @@ body{
   font-size: 12px;
 }
 
-
 .a{
   text-align: left;
 }
@@ -120,11 +119,8 @@ footer {
   text-align: center;
 }
 
-
-
-
 .switch label{
-  font-size: 12pt;
+  font-size: "1vw";
   color:black
 }
 
