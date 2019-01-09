@@ -1,6 +1,7 @@
 function install_notice() {
 
     var now = new Date().getTime();
+    localStorage.clear()
     localStorage.setItem('install_time', now);
     chrome.tabs.create({url: "src/html/options.html"});
 
