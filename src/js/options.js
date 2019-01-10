@@ -4,7 +4,6 @@ jQuery(document).ready(function () {
 
 	$('.modal').modal();
 	$('#loading').hide();
-<<<<<<< HEAD
 	if (localStorage.getItem('first_time_user') == "true"){
 		Materialize.toast("Click on the extension logo to start your tutorial!", 5000);
 	}
@@ -34,34 +33,6 @@ jQuery(document).ready(function () {
 
 
 
-=======
-	//no token
-	if (localStorage.getItem('token_exist') == "false") {
-		$('#dashboard').hide()
-		$('#login').show()
-		$('#create').hide()
-		console.log('no')
-	} else {
-		//yes token, no sheet
-		if (!localStorage.getItem('url')) {
-			$('#login').hide()
-			$('#dashboard').hide()
-			$('#create').show()
-			$('#sheet_iframe').hide()
-			console.log("yes, no")
-		}
-		//yes token, yes sheet
-		else {
-			$('#login').hide()
-			$('#dashboard').show()
-			$('#create').hide()
-			console.log("yes, yes")
-		}
-	}
-
-
-
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
 	if (localStorage.getItem('optionArray')) {
 		let optionArray = localStorage.getItem('optionArray').split(',')
@@ -78,11 +49,7 @@ jQuery(document).ready(function () {
 let authentication = (function () {
 	let SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
 	let login_state = 2
-<<<<<<< HEAD
 	let signin_button, revoke_button, delete_button, setting_button, create_button;
-=======
-	let signin_button, revoke_button, delete_button, delete_trigger, setting_button, create_button;
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 
 
 	function getAuthToken(options) {
@@ -112,21 +79,13 @@ let authentication = (function () {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
 		} else {
-<<<<<<< HEAD
 			
-=======
-			Materialize.toast('Login successful!', 3000);
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 			localStorage.setItem('token_exist', true);
 			if (localStorage.getItem('url')) {
 				$('#sheet_iframe').show()
 			}
 			if (login_state == "active")
-<<<<<<< HEAD
 			{	Materialize.toast('Login successful!', 3000);
-=======
-			{
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 				createSheet();
 				$('#loading').show()
 				setTimeout(() => {
@@ -216,10 +175,6 @@ let authentication = (function () {
 			localStorage.setItem('url', response.response.result.url);
 			localStorage.setItem('id', response.response.result.id);
 			Materialize.toast("Sheet Creation successful!")
-<<<<<<< HEAD
-=======
-			$('#loading').show()
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 			setTimeout(() => {
 				window.location.reload()
 			}, 1000);
@@ -317,7 +272,6 @@ let authentication = (function () {
 				localStorage.setItem('token_exist', "false")
 			})
 
-<<<<<<< HEAD
 			delete_button = document.querySelector('#deletesheet')
 			delete_button.addEventListener('click', deleteSheet)
 
@@ -326,14 +280,6 @@ let authentication = (function () {
 			setting_button.forEach(function(x){
 				x.addEventListener('click', userSetting)
 			})
-=======
-			delete_trigger = document.querySelector('#deletesheet_btn');
-			delete_button = document.querySelector('#deletesheet')
-			delete_button.addEventListener('click', deleteSheet)
-
-			setting_button = document.querySelector('#save_setting')
-			setting_button.addEventListener('click', userSetting)
->>>>>>> 6dd7b49c7c184c1053156a2637095aacbb5307bf
 
 			create_button = document.querySelector('#createsheet')
 			create_button.addEventListener('click', createSheet)
