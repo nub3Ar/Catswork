@@ -5,7 +5,7 @@ jQuery(document).ready(function () {
 	$('.modal').modal();
 	$('#loading').hide();
 	if (localStorage.getItem('first_time_user') == "true"){
-		Materialize.toast("Click on the extension logo to start your tutorial!", 4000);
+		Materialize.toast("Click on the extension logo to start your tutorial!", 5000);
 	}
 	//no token
 	if (localStorage.getItem('token_exist') == "false") {
