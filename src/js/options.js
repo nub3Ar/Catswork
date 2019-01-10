@@ -90,7 +90,7 @@ let authentication = (function () {
 				$('#loading').show()
 				setTimeout(() => {
 					window.location.reload()
-				}, 1000);
+				}, 3000);
 			}
 
 		}
