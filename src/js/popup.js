@@ -19,12 +19,12 @@ jQuery(document).ready(function () {
 		data: JSON.parse(localStorage.getItem('names'))
 	});
 
-		//disabling user interaction until authentification (most button logics are in myapp.js)
+	//disabling user interaction until authentification (most button logics are in myapp.js)
 	$('#submit_notif').hide();
 	$('#create_notif').hide()
 
 
-		//autosaving all of the inputs
+	//autosaving all of the inputs
 	var allInputs = $(":input");
 	allInputs.each(function (input) {
 		$(this).blur(function (input) {
@@ -36,11 +36,11 @@ jQuery(document).ready(function () {
 		$(this).val(localStorage.getItem($(this).attr("id")));
 	});
 
-	if (localStorage.getItem('optionArray')){
+	if (localStorage.getItem('optionArray')) {
 		let optionArray = localStorage.getItem('optionArray').split(',')
-		for (let i = 0; i<14; ++i){
-			if(optionArray[i] == "no"){
-				let name = '#field'+(i+1)
+		for (let i = 0; i < 14; ++i) {
+			if (optionArray[i] == "no") {
+				let name = '#field' + (i + 1)
 				console.log(name)
 				$(name).hide()
 			}
@@ -48,8 +48,8 @@ jQuery(document).ready(function () {
 	}
 
 	//Submitted notification
-	$('#submit').click(function() {
-		if (localStorage.getItem('first_time_user') == false){
+	$('#submit').click(function () {
+		if (localStorage.getItem('first_time_user') == false) {
 			$(this).prop('disabled', true).delay(1000);
 			$('#submit_notif').show(1500).delay(1000);
 			$('#submit_notif').hide(1500);
@@ -57,17 +57,17 @@ jQuery(document).ready(function () {
 		}
 	})
 
-	$('#step_1_complete').click(function() {
+	$('#step_1_complete').click(function () {
 		$('#step_1_d').hide(1000);
 	})
 
-	$('#step_2_complete').click(function() {
+	$('#step_2_complete').click(function () {
 		$('#step_2_d').hide(1000);
 	})
 
-	$('#step_3_complete').click(function() {
-		if (localStorage.getItem('first_time_user') == 'true'){
-			if (localStorage.getItem('tutorial_step') == 3){
+	$('#step_3_complete').click(function () {
+		if (localStorage.getItem('first_time_user') == 'true') {
+			if (localStorage.getItem('tutorial_step') == 3) {
 				localStorage.removeItem('tutorial_step')
 				$("#step_3_a").hide(1000);
 				$("#step_3_b").hide(1000);
@@ -75,11 +75,11 @@ jQuery(document).ready(function () {
 				$("#tutorial_complete").hide(1500);
 				localStorage.setItem('first_time_user', false)
 			}
-		}	
+		}
 	})
 
 	//prefilling the date
-	var today = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
+	var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 	$("#date").val(today);
 	//adding sheet URL to the href
 	$('#opensheet').attr('href', localStorage.getItem('url'));
@@ -89,14 +89,12 @@ jQuery(document).ready(function () {
 
 
 
-	if (localStorage.getItem('token_exist') == 'false' | !localStorage.getItem('token_exist')){
+	if (localStorage.getItem('token_exist') == 'false' | !localStorage.getItem('token_exist')) {
 		state = 'not logged in'
-	}
-	else{
-		if (!localStorage.getItem('url')){
+	} else {
+		if (!localStorage.getItem('url')) {
 			state = 'no sheet'
-		}
-		else{
+		} else {
 			state = 'good'
 		}
 	}
@@ -118,23 +116,18 @@ jQuery(document).ready(function () {
 			$("#createsheet").hide();
 	}
 
-	if (state = 'good'){
+	if (state = 'good') {
 
-		if (localStorage.getItem('first_time_user') == 'false' | !localStorage.getItem('first_time_user')){
+		if (localStorage.getItem('first_time_user') == 'false' | !localStorage.getItem('first_time_user')) {
 			tutorial_step = 'non_first_time_user'
-		}
-	
-		else{
-			if (localStorage.getItem('tutorial_step') == 1){
+		} else {
+			if (localStorage.getItem('tutorial_step') == 1) {
 				tutorial_step = '1'
-			}
-			else if (localStorage.getItem('tutorial_step') == 2){
+			} else if (localStorage.getItem('tutorial_step') == 2) {
 				tutorial_step = '2'
-			}
-			else if (localStorage.getItem('tutorial_step') == 3){
+			} else if (localStorage.getItem('tutorial_step') == 3) {
 				tutorial_step = '3'
-			}
-			else{
+			} else {
 				tutorial_step = 'non_first_time_user'
 			}
 		}
@@ -163,17 +156,17 @@ jQuery(document).ready(function () {
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
 				var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
-				var tutorial_array = ["Catswork NU","CatsWork","catsworknu@gmail.com","(123)456-7899","Tech","Evanston","Server","NU","Career Fair","None","https://www.linkedin.com/company/catswork/","Friendly","no"]
+				var tutorial_array = ["Catswork NU", "CatsWork", "catsworknu@gmail.com", "(123)456-7899", "Tech", "Evanston", "Server", "NU", "Career Fair", "None", "https://www.linkedin.com/company/catswork/", "Friendly", "no"]
 				var index = 0;
 				allInputs.each(function () {
-					if (prefill_ids.includes($(this).attr('id'))){
+					if (prefill_ids.includes($(this).attr('id'))) {
 						console.log($(this).attr('id'))
 						console.log(tutorial_array[index])
 						$(this).val(tutorial_array[index]);
 						console.log($(this).val())
 						index = index + 1;
 					}
-				});	
+				});
 				break;
 			case ('2'):
 				$("#step_1_a").hide();
@@ -186,7 +179,7 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
-			break;
+				break;
 			case ('3'):
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
@@ -198,6 +191,7 @@ jQuery(document).ready(function () {
 				$("#step_3_a").show();
 				$("#step_3_b").show();
 				$("#tutorial_complete").hide();
+				break;
 			default:
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
@@ -212,7 +206,7 @@ jQuery(document).ready(function () {
 		}
 	}
 
-	
+
 
 
 });
