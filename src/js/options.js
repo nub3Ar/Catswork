@@ -80,12 +80,13 @@ let authentication = (function () {
 		if (chrome.runtime.lastError) {
 		} else {
 			
-			localStorage.setItem('token_exist', true);
 			if (localStorage.getItem('url')) {
 				$('#sheet_iframe').show()
 			}
 			if (login_state == "active")
-			{	Materialize.toast('Login successful!', 3000);
+			{	
+				localStorage.setItem('token_exist', true);
+				Materialize.toast('Login successful!', 3000);
 				createSheet();
 				$('#loading').show()
 				setTimeout(() => {

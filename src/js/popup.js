@@ -58,11 +58,13 @@ jQuery(document).ready(function () {
 	})
 
 	$('#step_1_complete').click(function () {
-		$('#step_1_d').hide(1000);
+		$('#step_1_d').hide();
 	})
 
 	$('#step_2_complete').click(function () {
-		$('#step_2_d').hide(1000);
+		$('#step_2_d').hide();
+		$("#catstrack").attr('class', 'greyout');
+		$("#catschat").attr('class', 'normal');
 	})
 
 	$('#step_3_complete').click(function () {
@@ -74,6 +76,8 @@ jQuery(document).ready(function () {
 				$("#tutorial_complete").show(1500).delay(2500);
 				$("#tutorial_complete").hide(1500);
 				localStorage.setItem('first_time_user', false)
+				$("#catstrack").attr('class', 'normal');
+				$("#footer").attr('class', 'normal');
 			}
 		}
 	})
@@ -155,6 +159,8 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
+				$("#catschat").attr('class', 'greyout');
+				$("#footer").attr('class', 'greyout');
 				var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
 				var tutorial_array = ["Catswork NU", "CatsWork", "catsworknu@gmail.com", "(123)456-7899", "Tech", "Evanston", "Server", "NU", "Career Fair", "None", "https://www.linkedin.com/company/catswork/", "Friendly", "no"]
 				var index = 0;
@@ -179,6 +185,8 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
+				$("#catschat").attr('class', 'greyout');
+				$("#footer").attr('class', 'greyout');
 				break;
 			case ('3'):
 				$("#step_1_a").hide();
@@ -191,6 +199,8 @@ jQuery(document).ready(function () {
 				$("#step_3_a").show();
 				$("#step_3_b").show();
 				$("#tutorial_complete").hide();
+				$("#catstrack").attr('class', 'greyout');
+				$("#footer").attr('class', 'greyout');
 				break;
 			default:
 				$("#step_1_a").hide();

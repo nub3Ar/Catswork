@@ -206,3 +206,8 @@ i.right {
   z-index: 100;
   /* text-align: left; */
 }
+
+.greyout {
+  opacity: 0.2; /* Real browsers */
+  filter: alpha(opacity = 60); /* MSIE */
+}
