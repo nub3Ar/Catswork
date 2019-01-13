@@ -192,6 +192,7 @@ var executionAPIExample = (function () {
 				$("#step_2_a").show(1000);
 				$("#step_2_b").show(1000);
 				$("#submit_normal").attr('class','greyout')
+				highlightLastLine();
 			}
 			else if (localStorage.getItem('tutorial_step') == 2){
 				localStorage.setItem('tutorial_step', 3)
@@ -292,22 +293,21 @@ var executionAPIExample = (function () {
 		}
 	}
 
-	function deleteFirstData() {
-		console.log('called')
+	function deleteLastLine() {
         getAuthToken({
             'interactive': false,
-            'callback': deleteFirstDataCallback,
+            'callback': deleteLastLineCallback,
         });
     }
 
-	function deleteFirstDataCallback(token) {
+	function deleteLastLineCallback(token) {
 		//posting to google appscript
 		post({
 			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
-			'callback': deleteFirstDataResponse,
+			'callback': deleteLastLineResponse,
 			'token': token,
 			'request': {
-				'function': 'deleteFirstData',
+				'function': 'deleteLastLine',
 				'parameters': {
 					'url': localStorage.getItem('url')
 				}
@@ -315,9 +315,38 @@ var executionAPIExample = (function () {
 		});
 	}
 
-	function deleteFirstDataResponse(response) {
+	function deleteLastLineResponse(response) {
 		if (response.response.result.status == 'ok') {
-			console.log('back')
+		}
+		else{
+			console.log(response.response.result.status)
+		}
+	}
+
+	function highlightLastLine() {
+        getAuthToken({
+            'interactive': false,
+            'callback': highlightLastLineCallback,
+        });
+    }
+
+	function highlightLastLineCallback(token) {
+		//posting to google appscript
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': highlightLastLineResponse,
+			'token': token,
+			'request': {
+				'function': 'highlightLastLine',
+				'parameters': {
+					'url': localStorage.getItem('url')
+				}
+			}
+		});
+	}
+
+	function highlightLastLineResponse(response) {
+		if (response.response.result.status == 'ok') {
 		}
 		else{
 			console.log(response.response.result.status)
@@ -331,7 +360,7 @@ var executionAPIExample = (function () {
 
 
 			tutorial_finish_button = document.getElementById('step_3_complete')
-			tutorial_finish_button.addEventListener('click', deleteFirstData);
+			tutorial_finish_button.addEventListener('click', deleteLastLine);
 
 
 			if (localStorage.getItem('url')){
