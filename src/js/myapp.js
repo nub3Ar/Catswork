@@ -141,11 +141,15 @@ var executionAPIExample = (function () {
 		var inputs = document.getElementsByTagName('input');
 		for (let index = 0; index < inputs.length; ++index) {
 			if (inputs[index].getAttribute('id')) {
-				if (inputs[index].getAttribute('type') == 'checkbox' && inputs[index].checked == true) {
-					inputArray.push("yes");
+				if (inputs[index].getAttribute('type') == 'checkbox') {
+					if (inputs[index].checked == true){
+						inputArray.push("Yes");
+					}
+					else{
+						inputArray.push("No");
+					}
 				} 
 				else {
-					
 					inputArray.push(inputs[index].value);
 				}
 			}

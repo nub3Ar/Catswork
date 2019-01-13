@@ -5,7 +5,7 @@ jQuery(document).ready(function () {
 	$('.modal').modal();
 	$('#loading').hide();
 	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem("url")!= null){
-		Materialize.toast("Click on the extension logo to start your tutorial!", 5000);
+		$('#tutorial_popup').modal('open');
 	}
 	//no token
 	if (localStorage.getItem('token_exist') == "false") {
@@ -93,7 +93,6 @@ let authentication = (function () {
 					window.location.reload()
 				}, 3000);
 			}
-
 		}
 	}
 

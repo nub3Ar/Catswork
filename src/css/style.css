@@ -79,6 +79,7 @@ body{
 .button2 {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
+
 }
 .button1:hover {
   background-color: white; 
