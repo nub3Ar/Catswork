@@ -59,10 +59,12 @@ jQuery(document).ready(function () {
 
 	$('#step_1_complete').click(function () {
 		$('#step_1_d').hide();
+		$("#submit_normal").attr('class','submit_normal')
 	})
 
 	$('#step_2_complete').click(function () {
 		$('#step_2_d').hide();
+		$("#submit_normal").attr('class','submit_normal')
 		$("#catstrack").attr('class', 'greyout');
 		$("#catschat").attr('class', 'normal');
 	})

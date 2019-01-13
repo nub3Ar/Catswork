@@ -19,7 +19,7 @@ var executionAPIExample = (function () {
 
 	var state = STATE_START;
 
-	var submit_button
+	var submit_button, tutorial_finish_button
 	var names_dict_index;
 	var inputArray = [];
 	var sheet_link;
@@ -191,6 +191,7 @@ var executionAPIExample = (function () {
 				$("#step_1_d").show(1000);
 				$("#step_2_a").show(1000);
 				$("#step_2_b").show(1000);
+				$("#submit_normal").attr('class','greyout')
 			}
 			else if (localStorage.getItem('tutorial_step') == 2){
 				localStorage.setItem('tutorial_step', 3)
@@ -199,6 +200,7 @@ var executionAPIExample = (function () {
 				$("#step_2_d").show(1000);
 				$("#step_3_a").show(1000);
 				$("#step_3_b").show(1000);
+				$("#submit_normal").attr('class','greyout')
 			}
 		}
 		getNames();
@@ -211,9 +213,6 @@ var executionAPIExample = (function () {
         });
     }
 
-	//submission button:
-	//1. clears the previous inputs because the data will be saved
-	//2. store all nputs into an array
 	function getNamesCallback(token) {
 		//posting to google appscript
 		post({
@@ -255,9 +254,6 @@ var executionAPIExample = (function () {
         });
     }
 
-	//submission button:
-	//1. clears the previous inputs because the data will be saved
-	//2. store all nputs into an array
 	function autoFillCallback(token) {
 		//posting to google appscript
 		post({
@@ -296,10 +292,47 @@ var executionAPIExample = (function () {
 		}
 	}
 
+	function deleteFirstData() {
+		console.log('called')
+        getAuthToken({
+            'interactive': false,
+            'callback': deleteFirstDataCallback,
+        });
+    }
+
+	function deleteFirstDataCallback(token) {
+		//posting to google appscript
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': deleteFirstDataResponse,
+			'token': token,
+			'request': {
+				'function': 'deleteFirstData',
+				'parameters': {
+					'url': localStorage.getItem('url')
+				}
+			}
+		});
+	}
+
+	function deleteFirstDataResponse(response) {
+		if (response.response.result.status == 'ok') {
+			console.log('back')
+		}
+		else{
+			console.log(response.response.result.status)
+		}
+	}
+
 	return {
 		onload: function () {
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
+
+
+			tutorial_finish_button = document.getElementById('step_3_complete')
+			tutorial_finish_button.addEventListener('click', deleteFirstData);
+
 
 			if (localStorage.getItem('url')){
 				getNames();
