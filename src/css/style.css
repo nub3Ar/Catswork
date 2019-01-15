@@ -106,8 +106,16 @@ body{
 /* Header and footer */
 
 /* Header */
+@font-face {
+    font-family: 'bebasregular';
+    src: url('bebas-webfont.woff2') format('woff2'),
+         url('bebas-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 header{
-  font-family: "Karla", sans-serif;
+  font-family: "bebasregular", sans-serif;
 }
 
 
