@@ -14,6 +14,7 @@ main {
 body{
   font-family: "PT sans";
   font-size: 12px;
+
 }
 
 .a{
@@ -116,6 +117,8 @@ body{
 }
 header{
   font-family: "bebasregular", sans-serif;
+  letter-spacing: 2px;
+  font-size: 4px; 
 }
 
 
@@ -181,12 +184,24 @@ i.right {
   font-size: 15px;
 }
 
+.u{
+  line-height: 80px;
+}
+
 /* Options Page */
 /* Navigation Bar*/
 .nav-wrapper {
   background-color: white;
   box-shadow: none;
-  border-bottom: 1px solid black;
+  border-bottom: 0px solid black;
+
+}
+
+.right {
+  display: inline-block;
+  padding: -15px;
+  padding-left: -15px;
+  padding-right: -15px;
 }
 
 
