@@ -10,13 +10,13 @@
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis
  * https://github.com/GoogleDeveloperExperts/chrome-extension-google-apis/blob/master/LICENSE
  */
-var executionAPIExample = (function () {
 
+var executionAPIExample = (function () {
 	var SCRIPT_ID = '1nPvptCpoQZKnaYCCzjs_dN4HldFucBUCpXJ9JYh0POK-cLPlenYP2KBT';
 	var STATE_START = 1;
 	var STATE_ACQUIRING_AUTHTOKEN = 2;
 	var STATE_AUTHTOKEN_ACQUIRED = 3;
-
+	
 	var state = STATE_START;
 
 	var submit_button, tutorial_finish_button

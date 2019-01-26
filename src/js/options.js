@@ -33,7 +33,8 @@ jQuery(document).ready(function () {
 
 	if (localStorage.getItem('first_time_user') == "true"){
 		// send message to background script
-		chrome.runtime.sendMessage({ "newIconPath" : "src/Image/catswork-favicon.png" });
+		// chrome.runtime.sendMessage({ "newIconPath" : "src/Image/catswork-favicon.png" });
+		$('#nav-mobile').hide();
 	}
 
 	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
