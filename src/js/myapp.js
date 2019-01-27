@@ -130,30 +130,28 @@ var executionAPIExample = (function () {
 	}
 
 
-	function getLinkedin() {
-		//disableButton(get_linkedin_button);
-		var abc = 1;
-		var tabURL;
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			tabURL = tabs[0].url;
-			getLinkedinCallback(tabURL);
-		});
-	}
 
-	function getLinkedinCallback(tabURL) {
+	function getLinkedin() {
+		disableButton(get_linkedin_button);
 		chrome.tabs.executeScript(null, {
 			file: "src/js/get_linkedin.js"
 		}, function(results){
-			console.log(results)
-			sendLinkedin(results, tabURL)
+			console.log(results);
+			getLinkedinCallback(results);
 			if (chrome.runtime.lastError){
 				message.innerText = 'There was an error injecting script: \n' + chrome.runtime.lastError.message;
 			}
 		});
 	}
 
-	function sendLinkedin(linkedin, tabURL) {
-		console.log(linkedin, tabURL);
+	function getLinkedinCallback(data) {
+		// passes the array to autofill
+		autoFillResponse({"response":{ 
+			"@type": "type.googleapis.com/google.apps.script.v1.ExecutionResponse", 
+			"result": {"status": "ok", "info": [[data]]}
+		}});
+		enableButton(get_linkedin_button);
+		message.innerText = '';
 	}
 
 
@@ -307,11 +305,11 @@ var executionAPIExample = (function () {
 		console.log(response)
 		if (response.response.result.status == 'ok') {
 			var info_list = JSON.parse(response.response.result.info);
-			var allInputs = document.getElementsByTagName('input')
-			console.log(allInputs.length, info_list.length)
-			console.log(response)
-			alert(response)
-			for (var i = 1; i < allInputs.length; i++){
+			var allInputs = document.getElementsByTagName('input');
+			console.log(allInputs.length, info_list.length);
+			console.log(info_list);
+
+			for (var i = 0; i < allInputs.length; i++){
 				if (i == 10){
 					var return_date = new Date(info_list[i]);
 					allInputs[i].value = return_date.toLocaleDateString("en-US")
