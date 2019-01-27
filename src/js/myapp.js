@@ -137,10 +137,8 @@ var executionAPIExample = (function () {
 			file: "src/js/get_linkedin.js"
 		}, function(results){
 			console.log(results);
-			getLinkedinCallback(results);
-			if (chrome.runtime.lastError){
-				message.innerText = 'There was an error injecting script: \n' + chrome.runtime.lastError.message;
-			}
+			getLinkedinCallback(results)
+
 		});
 	}
 
