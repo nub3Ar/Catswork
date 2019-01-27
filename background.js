@@ -24,12 +24,12 @@ install_notice();
 //     chrome.browserAction.setIcon({path:"src/Image/catswork-favicon.png"});
 // }
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        // read `newIconPath` from request and read `tab.id` from sender
-        chrome.browserAction.setIcon({
-            path: request.newIconPath,
-            tabId: sender.tab.id
-        });
-    });
+// chrome.runtime.onMessage.addListener(
+//     function(request, sender, sendResponse) {
+//         // read `newIconPath` from request and read `tab.id` from sender
+//         chrome.browserAction.setIcon({
+//             path: request.newIconPath,
+//             tabId: sender.tab.id
+//         });
+//     });
 
