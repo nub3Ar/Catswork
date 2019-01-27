@@ -19,7 +19,8 @@ var executionAPIExample = (function () {
 
 	var state = STATE_START;
 
-	var submit_button, tutorial_finish_button
+	var submit_button, tutorial_finish_button;
+	var get_linkedin_button;
 	var names_dict_index;
 	var inputArray = [];
 	var sheet_link;
@@ -38,12 +39,15 @@ var executionAPIExample = (function () {
 		switch (state) {
 			case STATE_START:
 				disableButton(submit_button);
+				disableButton(get_linkedin_button);
 				break;
 			case STATE_ACQUIRING_AUTHTOKEN:
 				disableButton(submit_button);
+				disableButton(get_linkedin_button);
 				break;
 			case STATE_AUTHTOKEN_ACQUIRED:
-				disableButton(submit_button);
+				enableButton(submit_button);
+				enableButton(get_linkedin_button);
 				break;
 		}
 	}
@@ -124,6 +128,34 @@ var executionAPIExample = (function () {
 		xhr.setRequestHeader('Authorization', 'Bearer ' + options.token);
 		xhr.send(JSON.stringify(options.request));
 	}
+
+
+	function getLinkedin() {
+		//disableButton(get_linkedin_button);
+		var abc = 1;
+		var tabURL;
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			tabURL = tabs[0].url;
+			getLinkedinCallback(tabURL);
+		});
+	}
+
+	function getLinkedinCallback(tabURL) {
+		chrome.tabs.executeScript(null, {
+			file: "src/js/get_linkedin.js"
+		}, function(results){
+			console.log(results)
+			sendLinkedin(results, tabURL)
+			if (chrome.runtime.lastError){
+				message.innerText = 'There was an error injecting script: \n' + chrome.runtime.lastError.message;
+			}
+		});
+	}
+
+	function sendLinkedin(linkedin, tabURL) {
+		console.log(linkedin, tabURL);
+	}
+
 
 	function submit() {
 		disableButton(submit_button);
@@ -272,10 +304,13 @@ var executionAPIExample = (function () {
 	}
 
 	function autoFillResponse(response) {
+		console.log(response)
 		if (response.response.result.status == 'ok') {
 			var info_list = JSON.parse(response.response.result.info);
 			var allInputs = document.getElementsByTagName('input')
 			console.log(allInputs.length, info_list.length)
+			console.log(response)
+			alert(response)
 			for (var i = 1; i < allInputs.length; i++){
 				if (i == 10){
 					var return_date = new Date(info_list[i]);
@@ -362,6 +397,13 @@ var executionAPIExample = (function () {
 			tutorial_finish_button = document.getElementById('step_3_complete')
 			tutorial_finish_button.addEventListener('click', deleteLastLine);
 
+			get_linkedin_button = document.querySelector('#getlinkedin')
+			get_linkedin_button.addEventListener('click', getLinkedin.bind(get_linkedin_button, true));
+			chrome.runtime.onMessage.addListener(function(request, sender) {
+				if (request.action == "getSource") {
+				  message.innerText = request.source;
+				}
+			  });
 
 			if (localStorage.getItem('url')){
 				getNames();
