@@ -144,7 +144,7 @@ var executionAPIExample = (function () {
 
 	function getLinkedinCallback(data) {
 		// passes the array to autofill
-		autoFillResponse({"response":{ 
+		autoFillLinkin({"response":{ 
 			"@type": "type.googleapis.com/google.apps.script.v1.ExecutionResponse", 
 			"result": {"status": "ok", "info": [[data]]}
 		}});
@@ -318,6 +318,30 @@ var executionAPIExample = (function () {
 
 			}
 			document.getElementById("submit").innerHTML = "Update <i class='material-icons right'>send</i>"
+		}
+		else{
+			console.log("Error")
+		}
+	}
+
+	function autoFillLinkin(response) {
+		console.log(response)
+		if (response.response.result.status == 'ok') {
+			var info_list = JSON.parse(response.response.result.info);
+			var allInputs = document.getElementsByTagName('input');
+			console.log(allInputs.length, info_list.length);
+			console.log(info_list);
+
+			for (var i = 0; i < allInputs.length; i++){
+				if (i == 10){
+					var return_date = new Date(info_list[i]);
+					allInputs[i].value = return_date.toLocaleDateString("en-US")
+				}
+				else{
+					allInputs[i].value = info_list[i]
+				}
+
+			}
 		}
 		else{
 			console.log("Error")

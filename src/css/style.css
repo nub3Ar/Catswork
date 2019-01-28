@@ -235,3 +235,8 @@ i.right {
   opacity: 0.2; /* Real browsers */
   filter: alpha(opacity = 60); /* MSIE */
 }
+
+i.icon-black {
+  margin-top: -2px;
+  color: black;
+}

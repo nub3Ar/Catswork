@@ -57,6 +57,13 @@ jQuery(document).ready(function () {
 		}
 	})
 
+	// $('#catstrack_image').click(function () {
+	// 	if (localStorage.getItem('first_time_user') == true) {
+	// 		console.log('wowowow')
+	// 		$('#sheet_iframe').attr('src', 'https://www.linkedin.com/company/catswork/about/')
+	// 	}
+	// })
+
 	$('#step_1_complete').click(function () {
 		$('#step_1_d').hide();
 		$("#submit_normal").attr('class','submit_normal')
@@ -149,8 +156,10 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
+				console.log(chrome.extension.getBackgroundPage().myURL)
 				break;
 			case ('1'):
+			    console.log(document.URL)
 				$("#step_1_a").show();
 				$("#step_1_b").show();
 				$("#step_1_c").show();
