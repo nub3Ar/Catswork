@@ -57,15 +57,30 @@ jQuery(document).ready(function () {
 		}
 	})
 
-	// $('#catstrack_image').click(function () {
-	// 	if (localStorage.getItem('first_time_user') == true) {
-	// 		console.log('wowowow')
-	// 		$('#sheet_iframe').attr('src', 'https://www.linkedin.com/company/catswork/about/')
-	// 	}
-	// })
+	$('#getlinkedin').click(function () {
+		if (localStorage.getItem('first_time_user')) {
+			$('#step_1_b').hide(1000)
+			$('#step_1_b2').show(1000).delay(1000);
+			var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
+				var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123)456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
+				var index = 0;
+				allInputs.each(function () {
+					if (prefill_ids.includes($(this).attr('id'))) {
+						console.log($(this).attr('id'))
+						console.log(tutorial_array[index])
+						$(this).val(tutorial_array[index]);
+						console.log($(this).val())
+						index = index + 1;
+					}
+			});
+			localStorage.setItem('opened_extension', true)
+			chrome.tabs.update({url: "src/html/options.html"})
+		}
+	})
 
 	$('#step_1_complete').click(function () {
 		$('#step_1_d').hide();
+		$('#step_1_b2').hide();
 		$("#submit_normal").attr('class','submit_normal')
 	})
 
@@ -76,17 +91,18 @@ jQuery(document).ready(function () {
 		$("#catschat").attr('class', 'normal');
 	})
 
-	$('#step_3_complete').click(function () {
+	$('#finish_tutorial').click(function () {
 		if (localStorage.getItem('first_time_user') == 'true') {
 			if (localStorage.getItem('tutorial_step') == 3) {
 				localStorage.removeItem('tutorial_step')
 				$("#step_3_a").hide(1000);
 				$("#step_3_b").hide(1000);
-				$("#tutorial_complete").show(1500).delay(2500);
+				$("#tutorial_complete").show(1500).delay(200000);
 				$("#tutorial_complete").hide(1500);
 				localStorage.setItem('first_time_user', false)
 				$("#catstrack").attr('class', 'normal');
 				$("#footer").attr('class', 'normal');
+				$('#finish_tutorial').hide(1000)
 			}
 		}
 	})
@@ -129,7 +145,7 @@ jQuery(document).ready(function () {
 			$("#createsheet").hide();
 	}
 
-	if (state = 'good') {
+	if (state == 'good') {
 
 		if (localStorage.getItem('first_time_user') == 'false' | !localStorage.getItem('first_time_user')) {
 			tutorial_step = 'non_first_time_user'
@@ -148,6 +164,7 @@ jQuery(document).ready(function () {
 			case ('non_first_time_user'):
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
+				$("#step_1_b2").hide();
 				$("#step_1_c").hide();
 				$("#step_1_d").hide();
 				$("#step_2_a").hide();
@@ -156,12 +173,18 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
-				console.log(chrome.extension.getBackgroundPage().myURL)
+				chrome.tabs.getSelected(null,function(tab) {
+					var tablink = tab.url;
+					if (!tablink.includes('www.linkedin.com/in/')){
+						$('#getlinkedin').hide()
+					}
+				});
 				break;
 			case ('1'):
-			    console.log(document.URL)
+				chrome.tabs.update({url: "https://www.linkedin.com/in/catherine-work-25660117a/"})
 				$("#step_1_a").show();
 				$("#step_1_b").show();
+				$("#step_1_b2").hide();
 				$("#step_1_c").show();
 				$("#step_1_d").hide();
 				$("#step_2_a").hide();
@@ -172,22 +195,23 @@ jQuery(document).ready(function () {
 				$("#tutorial_complete").hide();
 				$("#catschat").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
-				var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
-				var tutorial_array = ["Catswork NU", "CatsWork", "catsworknu@gmail.com", "(123)456-7899", "Tech", "Evanston", "Server", "NU", "Career Fair", "None", "https://www.linkedin.com/company/catswork/", "Friendly", "no"]
-				var index = 0;
-				allInputs.each(function () {
-					if (prefill_ids.includes($(this).attr('id'))) {
-						console.log($(this).attr('id'))
-						console.log(tutorial_array[index])
-						$(this).val(tutorial_array[index]);
-						console.log($(this).val())
-						index = index + 1;
-					}
-				});
+				// var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
+				// var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123)456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
+				// var index = 0;
+				// allInputs.each(function () {
+				// 	if (prefill_ids.includes($(this).attr('id'))) {
+				// 		console.log($(this).attr('id'))
+				// 		console.log(tutorial_array[index])
+				// 		$(this).val(tutorial_array[index]);
+				// 		console.log($(this).val())
+				// 		index = index + 1;
+				// 	}
+				// });
 				break;
 			case ('2'):
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
+				$("#step_1_b2").hide();
 				$("#step_1_c").hide();
 				$("#step_1_d").hide();
 				$("#step_2_a").show();
@@ -216,6 +240,7 @@ jQuery(document).ready(function () {
 			default:
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
+				$("#step_1_b2").hide();
 				$("#step_1_c").hide();
 				$("#step_1_d").hide();
 				$("#step_2_a").hide();
@@ -224,6 +249,12 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
+				chrome.tabs.getSelected(null,function(tab) {
+					var tablink = tab.url;
+					if (!tablink.includes('www.linkedin.com/in/')){
+						$('#getlinkedin').hide()
+					}
+				});
 		}
 	}
 

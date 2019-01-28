@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
 
 	$('.modal').modal();
 	$('#loading').hide();
-	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem("url")!= null){
+	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem("url")!= null & localStorage.getItem('opened_extension')=='false'){
 		$('#tutorial_popup').modal('open');
 	}
 	//no token

@@ -26,6 +26,14 @@ var executionAPIExample = (function () {
 	var sheet_link;
 	var autoFill_row = 0;
 
+	chrome.tabs.getSelected(null,function(tab) {
+		var tablink = tab.url;
+		if (tablink.includes('www.linkedin.com/in/')){
+			document.getElementById("getlinkedin").hide()
+		}
+	});
+
+
 	function disableButton(button) {
 		button.setAttribute('disabled', 'disabled');
 	}
@@ -132,14 +140,15 @@ var executionAPIExample = (function () {
 
 
 	function getLinkedin() {
-		disableButton(get_linkedin_button);
-		chrome.tabs.executeScript(null, {
-			file: "src/js/get_linkedin.js"
-		}, function(results){
+		if (localStorage.getItem('first_time_user') == false){
+			disableButton(get_linkedin_button);
+			chrome.tabs.executeScript(null, {
+				file: "src/js/get_linkedin.js"
+			}, function(results){
 			console.log(results);
 			getLinkedinCallback(results)
-
-		});
+			});
+		}
 	}
 
 	function getLinkedinCallback(data) {
@@ -414,7 +423,7 @@ var executionAPIExample = (function () {
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
 
 
-			tutorial_finish_button = document.getElementById('step_3_complete')
+			tutorial_finish_button = document.getElementById('finish_tutorial')
 			tutorial_finish_button.addEventListener('click', deleteLastLine);
 
 			get_linkedin_button = document.querySelector('#getlinkedin')
