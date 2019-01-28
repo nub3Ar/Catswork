@@ -8,7 +8,7 @@ if (url.includes('linkedin')) {
         var name = document.getElementsByClassName("pv-top-card-section__name inline t-24 t-black t-normal").item(0).innerText.replace(/\s+/g, " ").trim();
     }
     catch(err) {
-        var name = 'None'
+        var name = ' '
     }
 
     try {
@@ -23,26 +23,28 @@ if (url.includes('linkedin')) {
         var company = pos_firm[1]
     }
     catch(err) {
-        var position = 'None';
-        var company = 'None';
+        var position = ' ';
+        var company = ' ';
     }
 
     try{
         var city = document.getElementsByClassName("pv-top-card-section__location t-16 t-black--light t-normal mt1 inline-block").item(0).innerText;
     }
     catch(err) {
-        var city = 'None';
+        var city = ' ';
     }
 
     try {
         var education = document.getElementsByClassName("pv-entity__school-name t-16 t-black t-bold").item(0).innerText;
     }
     catch(err) {
-        var education = 'None';
+        var education = ' ';
     }
     // constructs the array to autofill
     // [Name, firm, email, phone, industry, city, position, education, source, alt. contact, first contact date, scheduled, linkedin, notes]
-    var info = [name, company, "None", "None",  "None", city, position, education, "LinkedIn",  "None", "None", "None", url, "None" ];
+    var date = new Date()
+    var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    var info = [name, company, " ", " ",  " ", city, position, education, "LinkedIn",  " ", today, " ", url, " " ];
     JSON.stringify(info);
 }
 
