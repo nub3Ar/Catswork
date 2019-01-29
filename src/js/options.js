@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
 
 	$('.modal').modal();
 	$('#loading').hide();
-	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem("url")!= null & localStorage.getItem('opened_extension')=='false'){
+	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem(localStorage.getItem('current_user'))!= null & localStorage.getItem('opened_extension')=='false'){
 		$('#tutorial_popup').modal('open');
 	}
 	//no token
@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
 		console.log('no')
 	} else {
 		//yes token, no sheet
-		if (!localStorage.getItem('url')) {
+		if (!localStorage.getItem(localStorage.getItem('current_user'))) {
 			$('#login').hide()
 			$('#dashboard').hide()
 			$('#create').show()
@@ -37,7 +37,7 @@ jQuery(document).ready(function () {
 		$('#nav-mobile').hide();
 	}
 
-	$('#sheet_iframe').attr('src', localStorage.getItem('url'))
+	$('#sheet_iframe').attr('src', ('https://docs.google.com/spreadsheets/d/' + localStorage.getItem(localStorage.getItem('current_user'))))
 	if (localStorage.getItem('optionArray')) {
 		let optionArray = localStorage.getItem('optionArray').split(',')
 		for (let i = 0; i < 14; ++i) {
@@ -84,11 +84,13 @@ let authentication = (function () {
 		if (chrome.runtime.lastError) {
 		} else {
 			
-			if (localStorage.getItem('url')) {
+			if (localStorage.getItem(localStorage.getItem('current_user'))) {
 				$('#sheet_iframe').show()
 			}
 			if (login_state == "active")
 			{	
+				console.log('logged in');
+				getUserEmail();
 				localStorage.setItem('token_exist', true);
 				Materialize.toast('Login successful!', 3000);
 				createSheet();
@@ -175,9 +177,10 @@ let authentication = (function () {
 
 	function createSheetResponse(response) {
 		if (response.response.result.status == 'ok') {
-			console.log(response.response.result.url);
-			localStorage.setItem('url', response.response.result.url);
-			localStorage.setItem('id', response.response.result.id);
+			console.log(response.response.result.user_email);
+			console.log(response.response.result.id);
+			localStorage.setItem(localStorage.getItem('current_user'), response.response.result.id);
+			//localStorage.setItem('id', response.response.result.id);
 			Materialize.toast("Sheet Creation successful!")
 			setTimeout(() => {
 				window.location.reload()
@@ -217,7 +220,7 @@ let authentication = (function () {
 				'function': 'settingColumns',
 				'parameters': {
 					'option_array': option_array,
-					'url': localStorage.getItem('url')
+					'id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -242,7 +245,7 @@ let authentication = (function () {
 			'request': {
 				'function': 'deleteSheet',
 				'parameters': {
-					'sheet_id': localStorage.getItem('id')
+					'sheet_id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -251,8 +254,8 @@ let authentication = (function () {
 	function deleteSheetResponse(response) {
 		if (response.response.result.status == 'ok') {
 			Materialize.toast('Information deleted. Page reloading...', 3000);
-			localStorage.removeItem('url');
-			localStorage.removeItem('id');
+			//localStorage.removeItem('url');
+			localStorage.removeItem(localStorage.getItem('current_user'));
 			localStorage.removeItem('optionArray');
 			$('#loading').show()
 			setTimeout(() => {
@@ -261,6 +264,35 @@ let authentication = (function () {
 
 		} else {
 			Materialize.toast('Deletion Error. Please Try Again', 3000);
+		}
+	}
+
+	function getUserEmail() {
+		getAuthToken({
+			'interactive': false,
+			'callback': getUserEmailCallback,
+		});
+	}
+
+	function getUserEmailCallback(token) {
+		post({
+			'url': 'https://script.googleapis.com/v1/scripts/' + SCRIPT_ID + ':run',
+			'callback': getUserEmailResponse,
+			'token': token,
+			'request': {
+				'function': 'getUserEmail',
+			}
+		});
+	}
+
+	function getUserEmailResponse(response) {
+		if (response.response.result.status == 'ok') {
+			console.log(response.response.result.user_email);
+			localStorage.setItem('current_user', response.response.result.user_email)
+		}
+		else{
+			console.log('getUserEmail Error')
+			console.log(response.response.result.status)
 		}
 	}
 
@@ -274,6 +306,7 @@ let authentication = (function () {
 			revoke_button.addEventListener('click', revokeToken);
 			revoke_button.addEventListener('click', function () {
 				localStorage.setItem('token_exist', "false")
+				localStorage.setItem('current_user', "")
 			})
 
 			delete_button = document.querySelector('#deletesheet')

@@ -1,9 +1,7 @@
 // Source https://stackoverflow.com/questions/11684454/getting-the-source-html-of-the-current-page-from-chrome-extension
 
 var url = document.URL
-
 if (url.includes('linkedin')) {
-    
     try{
         var name = document.getElementsByClassName("pv-top-card-section__name inline t-24 t-black t-normal").item(0).innerText.replace(/\s+/g, " ").trim();
     }

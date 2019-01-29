@@ -102,12 +102,12 @@ var executionAPIExample = (function () {
 		// Catch chrome error if user is not authorized.
 		if (chrome.runtime.lastError) {
 			changeState(STATE_START);
-			if(localStorage.getItem('url')){
+			if(localStorage.getItem(localStorage.getItem('current_user'))){
 				enableButton(submit_button)
 			}
 		} else {
 			changeState(STATE_AUTHTOKEN_ACQUIRED);
-		    if(localStorage.getItem('url')){
+		    if(localStorage.getItem(localStorage.getItem('current_user'))){
 				enableButton(submit_button)
 			}
 		}
@@ -206,7 +206,7 @@ var executionAPIExample = (function () {
 				'parameters': {
 					'data': [inputArray],
 					'submitRow': autoFill_row,
-					'url': localStorage.getItem('url')
+					'id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -260,7 +260,7 @@ var executionAPIExample = (function () {
 			'request': {
 				'function': 'getNames',
 				'parameters': {
-					'url': localStorage.getItem('url')
+					'id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -301,7 +301,7 @@ var executionAPIExample = (function () {
 			'request': {
 				'function': 'autoFill',
 				'parameters': {
-					'url': localStorage.getItem('url'),
+					'id': localStorage.getItem(localStorage.getItem('current_user')),
 					'row': autoFill_row
 				}
 			}
@@ -373,7 +373,7 @@ var executionAPIExample = (function () {
 			'request': {
 				'function': 'deleteLastLine',
 				'parameters': {
-					'url': localStorage.getItem('url')
+					'id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -403,7 +403,7 @@ var executionAPIExample = (function () {
 			'request': {
 				'function': 'highlightLastLine',
 				'parameters': {
-					'url': localStorage.getItem('url')
+					'id': localStorage.getItem(localStorage.getItem('current_user'))
 				}
 			}
 		});
@@ -434,7 +434,7 @@ var executionAPIExample = (function () {
 				}
 			  });
 
-			if (localStorage.getItem('url')){
+			if (localStorage.getItem(localStorage.getItem('current_user'))){
 				getNames();
 			}
 
