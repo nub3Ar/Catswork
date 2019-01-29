@@ -21,9 +21,9 @@
         <nav>
             <div class="nav-wrapper">
                 <a class="brand-logo" href="catswork.io">
-                    <img style= "padding-left: 25px;" src="../Image/logo-new.png" width="35%">
+                    <img style="padding-left: 25px;" src="../Image/logo-new.png" width="35%">
                 </a>
-                <a class="brand-logo center"size="15"style="color: black">Dashboard
+                <a class="brand-logo center" size="15" style="color: black">Dashboard
                 </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right: 15px">
                     <li>
@@ -33,7 +33,7 @@
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/" target="_blank">
-                            <img style="width: 25px; height: 25px;"src="../Image/linkedin-icon.png">
+                            <img style="width: 25px; height: 25px;" src="../Image/linkedin-icon.png">
                         </a>
                     </li>
                     <li>
@@ -55,24 +55,17 @@
         <div class="row" id="dashboard">
             <!--Iframe-->
             <center>
-            <div>
-                <br>
-                <a href="" class="button2" style="margin: 2px;">
-                    <i class="material-icons right">info</i>
-                    Tutorial
-                </a>
-                <a href="#setting_modal" class="button2" style="margin: 2px;">
-                    <i class="material-icons right">settings</i>
-                    Setting
-                </a>
-                <a href="#delete_modal" class="button2" id="deletesheet_btn" style="margin: 2px;">
-                    <i class="material-icons right">delete</i>
-                    Delete Tracker
-                </a>
-                <button class="button1" type="revoke" id="revoke" name="action" style="margin: 2px;">
-                    Log Out
-                </button>
-            </div>
+                <div>
+                    <br>
+                    <a href="" class="button2" style="margin: 2px;">
+                        <i class="material-icons right">info</i>
+                        Tutorial
+                    </a>
+                    <a href="#setting_modal" class="button2" style="margin: 2px;">
+                        <i class="material-icons right">settings</i>
+                        Customize Tracker
+                    </a>
+                </div>
             </center>
             <br>
             <div>
@@ -83,15 +76,15 @@
         </div>
         <center>
             <div id="login" style="width:40%; padding-top:5%">
-                <h5>Welcome to CatsWork!  Click the button below to sign in with your email and get started!</h5>
+                <h5>Welcome to CatsWork! Click the button below to sign in with your email and get started!</h5>
                 <button class="button1" type="signin" id="signin" name="action" style="margin: 2px">
-                    Log in
+                    Sign in
                 </button>
             </div>
             <div id="create" style="width:40%; padding-top:5%">
                 <h5>Sign in successful! Click the button below to create your tracker!</h5>
                 <button class="button2" id="createsheet" name="action" style="margin: 2px">
-                    Create My Catswork Tracker
+                    CREATE TRACKER
                 </button>
 
             </div>
@@ -110,7 +103,15 @@
     </div>
     <div id="setting_modal" class="modal">
         <div class="modal-content">
+            <div>
+                <button class="button2" type="revoke" id="revoke" name="action" style="margin: 2px; float: right; ">
+                    Log Out
+                </button>
+            </div>
+
+            <br>
             <h5>Information you would like to track in extension:</h5>
+            <br>
             <form action="#">
                 <div class="row">
                     <div class="col s6">
@@ -233,22 +234,24 @@
                 </div>
             </form>
         </div>
+
         <div class="modal-footer">
             <button class="modal-action modal-close button2" type="button">Cancel</button>
             <button class="modal-action modal-close button2" type="button">Confirm</button>
+
         </div>
     </div>
     <div id="tutorial_popup" class="modal">
-        <div class = "modal-content" style = "padding: 0px">
+        <div class="modal-content" style="padding: 0px">
             <!-- <h6>Click on the Orange Cat in the upper right corner of the screen</h6>
             <h6>You can always return to the tutorial by clicking the orange tutorial button in the Dashboard.</h6> -->
-            <img src = "../image/tutorial_notif.gif" style = "max-width: 100%; max-height: 100%">
+            <img src="../image/tutorial_notif.gif" style="max-width: 100%; max-height: 100%">
         </div>
-        <div class = "modal-footer">
+        <div class="modal-footer">
             <center>
-            <button class = "button2 modal-action modal-close">Okay!</button>
+                <button class="button2 modal-action modal-close">Okay!</button>
             </center>
-            </div>
+        </div>
 </body>
 
 

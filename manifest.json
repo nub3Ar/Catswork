@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "CatsWork_1.0",
-  "version": "1.1",
+  "version": "1.4",
   "options_page": "src/html/options.html",
   "permissions": [
     "activeTab", "declarativeContent", "storage",

@@ -6,7 +6,6 @@ jQuery(document).ready(function () {
 	$('#loading').hide();
 	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem('current_user') != 'null'){
 		$('#tutorial_popup').modal('open');
-		Console.log("tutorial")
 	}
 	//no token
 	if (localStorage.getItem('token_exist') == "false") {

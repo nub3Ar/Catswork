@@ -62,7 +62,7 @@ jQuery(document).ready(function () {
 			$('#step_1_b').hide(1000)
 			$('#step_1_b2').show(1000).delay(1000);
 			var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
-			var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123)456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
+			var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123) 456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
 			var index = 0;
 			allInputs.each(function () {
 				if (prefill_ids.includes($(this).attr('id'))) {
@@ -94,7 +94,8 @@ jQuery(document).ready(function () {
 	})
 
 	$('#step_3_complete').click(function () {
-		$("#finish_tutorial").show();
+		$("#tutorial_complete").show();
+		$('finish_tutorial').show();
 	})
 
 	$('#finish_tutorial').click(function () {
@@ -103,8 +104,6 @@ jQuery(document).ready(function () {
 				localStorage.removeItem('tutorial_step')
 				$("#step_3_a").hide(1000);
 				$("#step_3_b").hide(1000);
-				$("#tutorial_complete").show(1500).delay(200000);
-				$("#tutorial_complete").hide(1500);
 				localStorage.setItem('first_time_user', false)
 				$("#catstrack").attr('class', 'normal');
 				$("#footer").attr('class', 'normal');
@@ -169,6 +168,7 @@ jQuery(document).ready(function () {
 		switch (tutorial_step) {
 			case ('non_first_time_user'):
 				$("#linkedin_sample").hide();
+				$('#step_1_linkedin').hide();
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
 				$("#step_1_b2").hide();
@@ -205,21 +205,24 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
-				$("#catschat").attr('class', 'greyout');
-				$("#catschat-collapse").prop('disabled', true);
+				$("#catstrack").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
+				$("#catschat").attr('class', 'greyout');
 				$('#finish_tutorial').hide()
+				$('#step_1_complete').click(function(){
+					$('#getlinkedin').hide()
+				})
 				$("#linkedin_sample").click(function () {
 					chrome.tabs.update({
 						url: "https://www.linkedin.com/in/catherine-work-25660117a/"
 					})
-
+					$("#catstrack").removeClass('greyout');
 					$('#step_1_linkedin').hide()
 					$("#step_1_a").show();
 					$("#step_1_b").show();
 				})
 				// var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
-				// var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123)456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
+				// var tutorial_array = ["Catherine Work", "CatsWork", "catswork2019@gmail.com", "(123) 456-7890", "Information Services", "Greater Chicago Area", "Data Analyst", "Northwestern University", "LinkedIn", "catsworknu@gmail.com", "https://www.linkedin.com/in/catherine-work-25660117a/", "Phone Interview", "no"]
 				// var index = 0;
 				// allInputs.each(function () {
 				// 	if (prefill_ids.includes($(this).attr('id'))) {
@@ -232,7 +235,7 @@ jQuery(document).ready(function () {
 				// });
 				break;
 			case ('2'):
-				$("#linkedin_sample").hide();
+				$('#step_1_linkedin').hide();
 				$('#getlinkedin').hide()
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
@@ -246,12 +249,13 @@ jQuery(document).ready(function () {
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
 				$("#catschat").attr('class', 'greyout');
-				$("#catschat-collapse").attr('disabled', true);
 				$("#footer").attr('class', 'greyout');
 				$('#finish_tutorial').hide()
+
 				break;
 			case ('3'):
-				$("#linkedin_sample").hide();
+				$('#step_1_linkedin').hide();
+				$('#getlinkedin').hide()
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
 				$("#step_1_c").hide();
@@ -261,13 +265,14 @@ jQuery(document).ready(function () {
 				$("#step_2_d").hide();
 				$("#step_3_a").show();
 				$("#step_3_b").show();
-				$("#tutorial_complete").hide();
+				$("#tutorial_complete").show();
 				$("#catstrack").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
-				$('#finish_tutorial').hide()
+				$('#finish_tutorial').show();
 				break;
 			default:
 				$("#linkedin_sample").hide();
+				$('#step_1_linkedin').hide();
 				$("#step_1_a").hide();
 				$("#step_1_b").hide();
 				$("#step_1_b2").hide();
@@ -279,11 +284,11 @@ jQuery(document).ready(function () {
 				$("#step_3_a").hide();
 				$("#step_3_b").hide();
 				$("#tutorial_complete").hide();
-				$('#finish_tutorial').hide()
+				$('#finish_tutorial').hide();
 				chrome.tabs.getSelected(null, function (tab) {
 					var tablink = tab.url;
 					if (!tablink.includes('www.linkedin.com/in/')) {
-						$('#getlinkedin').hide()
+						$('#getlinkedin').hide();
 					}
 				});
 		}
