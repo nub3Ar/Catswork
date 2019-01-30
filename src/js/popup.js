@@ -85,6 +85,7 @@ jQuery(document).ready(function () {
 		$('#step_1_d').hide();
 		$('#step_1_b2').hide();
 		$("#submit_normal").attr('class', 'submit_normal')
+		$('#submit').show(1000);
 	})
 
 	$('#step_2_complete').click(function () {
@@ -92,6 +93,7 @@ jQuery(document).ready(function () {
 		$("#submit_normal").attr('class', 'submit_normal')
 		$("#catstrack").attr('class', 'greyout');
 		$("#catschat").attr('class', 'normal');
+		$('#submit').show(1000);
 	})
 
 	$('#step_3_complete').click(function () {
@@ -209,6 +211,7 @@ jQuery(document).ready(function () {
 				$("#catstrack").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
 				$("#catschat").attr('class', 'greyout');
+				$("#video_list").attr('class', 'greyout');
 				$('#finish_tutorial').hide()
 				$('#step_1_complete').click(function(){
 					$('#getlinkedin').hide()
@@ -252,7 +255,7 @@ jQuery(document).ready(function () {
 				$("#catschat").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
 				$('#finish_tutorial').hide()
-
+				$("#video_list").attr('class', 'greyout');
 				break;
 			case ('3'):
 				$('#step_1_linkedin').hide();
@@ -270,6 +273,7 @@ jQuery(document).ready(function () {
 				$("#catstrack").attr('class', 'greyout');
 				$("#footer").attr('class', 'greyout');
 				$('#finish_tutorial').show();
+				$("#video_list").attr('class', 'greyout');
 				break;
 			default:
 				$("#linkedin_sample").hide();

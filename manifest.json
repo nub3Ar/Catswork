@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "CatsWork_1.0",
+  "name": "CatsWork",
   "version": "1.4",
   "options_page": "src/html/options.html",
   "permissions": [

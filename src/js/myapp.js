@@ -141,6 +141,7 @@ var executionAPIExample = (function () {
 
 	function getLinkedin() {
 		console.log('get_linked_in clicked')
+		disableButton(get_linkedin_button);
 		if (!localStorage.getItem('first_time_user')){
 			console.log('get_linked_in clicked when first_time_user false')
 			disableButton(get_linkedin_button);
@@ -222,6 +223,7 @@ var executionAPIExample = (function () {
 			inputs[index].value = ""
 		}
 		if (localStorage.getItem('first_time_user') == 'true'){
+
 			if (localStorage.getItem('tutorial_step') == 1){
 				localStorage.setItem('tutorial_step', 2)
 				$("#step_1_a").hide(1000);
@@ -231,6 +233,7 @@ var executionAPIExample = (function () {
 				$("#step_2_a").show(1000);
 				$("#step_2_b").show(1000);
 				$("#submit_normal").attr('class','greyout')
+				$('#submit').hide(1000);
 				highlightLastLine();
 			}
 			else if (localStorage.getItem('tutorial_step') == 2){
@@ -241,6 +244,7 @@ var executionAPIExample = (function () {
 				$("#step_3_a").show(1000);
 				$("#step_3_b").show(1000);
 				$("#submit_normal").attr('class','greyout')
+				$('#submit').hide(1000);
 			}
 		}
 		getNames();
@@ -424,7 +428,7 @@ var executionAPIExample = (function () {
 			if (localStorage.getItem(localStorage.getItem('current_user'))){
 				getNames();
 			}
-			
+
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
 
