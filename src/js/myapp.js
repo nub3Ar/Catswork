@@ -140,7 +140,9 @@ var executionAPIExample = (function () {
 
 
 	function getLinkedin() {
-		if (localStorage.getItem('first_time_user') == false){
+		console.log('get_linked_in clicked')
+		if (!localStorage.getItem('first_time_user')){
+			console.log('get_linked_in clicked when first_time_user false')
 			disableButton(get_linkedin_button);
 			chrome.tabs.executeScript(null, {
 				file: "src/js/get_linkedin.js"
@@ -419,6 +421,10 @@ var executionAPIExample = (function () {
 
 	return {
 		onload: function () {
+			if (localStorage.getItem(localStorage.getItem('current_user'))){
+				getNames();
+			}
+			
 			submit_button = document.querySelector('#submit')
 			submit_button.addEventListener('click', submit.bind(submit_button, true));
 
@@ -433,10 +439,6 @@ var executionAPIExample = (function () {
 				  message.innerText = request.source;
 				}
 			  });
-
-			if (localStorage.getItem(localStorage.getItem('current_user'))){
-				getNames();
-			}
 
 			document.getElementById("nam3").addEventListener("blur", function(){
 				var autoFill_name = document.getElementById("nam3").value;

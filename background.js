@@ -1,11 +1,13 @@
 function install_notice() {
-
     var now = new Date().getTime();
-    
     localStorage.setItem('catswork_install_time', now);
     localStorage.setItem('first_time_user', true);
     localStorage.setItem('tutorial_step', 1);
     localStorage.setItem('token_exist', "false")
+    localStorage.removeItem('opened_extension');
+    localStorage.removeItem('current_user');
+    localStorage.removeItem('array');
+    localStorage.removeItem('names');
     chrome.tabs.create({url: "src/html/options.html"});
     //startTimer();
 }

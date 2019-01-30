@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
 
 	$('.modal').modal();
 	$('#loading').hide();
-	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem('current_user') != 'null'){
+	if (localStorage.getItem('first_time_user') == "true" & localStorage.getItem('token_exist') == "true" & localStorage.getItem(localStorage.getItem('current_user')) != null & !localStorage.getItem('opened_extension')){
 		$('#tutorial_popup').modal('open');
 	}
 	//no token
@@ -37,7 +37,10 @@ jQuery(document).ready(function () {
 		$('#nav-mobile').hide();
 	}
 
-	$('#sheet_iframe').attr('src', ('https://docs.google.com/spreadsheets/d/' + localStorage.getItem(localStorage.getItem('current_user'))))
+	if (localStorage.getItem(localStorage.getItem('current_user'))){
+		$('#sheet_iframe').attr('src', ('https://docs.google.com/spreadsheets/d/' + localStorage.getItem(localStorage.getItem('current_user'))))
+	}
+
 	if (localStorage.getItem('optionArray')) {
 		let optionArray = localStorage.getItem('optionArray').split(',')
 		for (let i = 0; i < 14; ++i) {

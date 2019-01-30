@@ -49,7 +49,7 @@ jQuery(document).ready(function () {
 
 	//Submitted notification
 	$('#submit').click(function () {
-		if (localStorage.getItem('first_time_user') == false) {
+		if (localStorage.getItem('first_time_user') == 'false') {
 			$(this).prop('disabled', true).delay(1000);
 			$('#submit_notif').show(1500).delay(1000);
 			$('#submit_notif').hide(1500);
@@ -58,7 +58,8 @@ jQuery(document).ready(function () {
 	})
 
 	$('#getlinkedin').click(function () {
-		if (localStorage.getItem('first_time_user')) {
+		if (localStorage.getItem('first_time_user') == 'true') {
+			console.log('getlinkin clicked when first_time_user_true')
 			$('#step_1_b').hide(1000)
 			$('#step_1_b2').show(1000).delay(1000);
 			var prefill_ids = ["nam3", "firm", "email", "phone", "industry", "city", "position", "education", "source", "alternative", "linkedin", "notes", "follow-up"]
@@ -95,7 +96,7 @@ jQuery(document).ready(function () {
 
 	$('#step_3_complete').click(function () {
 		$("#tutorial_complete").show();
-		$('finish_tutorial').show();
+		$('#finish_tutorial').show();
 	})
 
 	$('#finish_tutorial').click(function () {
