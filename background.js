@@ -11,8 +11,6 @@ function install_notice() {
     chrome.tabs.create({url: "src/html/options.html"});
     //startTimer();
 }
-
-
 install_notice();
 
 // function startTimer() {
