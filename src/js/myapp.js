@@ -218,6 +218,7 @@ var executionAPIExample = (function () {
 	function submitResponse(response) {
 		console.log(response)
 		enableButton(submit_button);
+		document.getElementById("submit").innerHTML = "Submit <i class='material-icons right'>send</i>"
 		var inputs = document.getElementsByTagName('input');
 		for (let index = 0; index < inputs.length; ++index) {
 			inputs[index].value = ""
