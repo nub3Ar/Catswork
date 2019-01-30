@@ -29,7 +29,7 @@ var executionAPIExample = (function () {
 	chrome.tabs.getSelected(null,function(tab) {
 		var tablink = tab.url;
 		if (tablink.includes('www.linkedin.com/in/')){
-			document.getElementById("getlinkedin").hide()
+			$("#getlinkedin").show()
 		}
 	});
 
@@ -142,7 +142,7 @@ var executionAPIExample = (function () {
 	function getLinkedin() {
 		console.log('get_linked_in clicked')
 		disableButton(get_linkedin_button);
-		if (!localStorage.getItem('first_time_user')){
+		if (localStorage.getItem('first_time_user') == "false"){
 			console.log('get_linked_in clicked when first_time_user false')
 			disableButton(get_linkedin_button);
 			chrome.tabs.executeScript(null, {
