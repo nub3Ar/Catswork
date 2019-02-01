@@ -38,9 +38,7 @@
     "client_id": "174622660166-1vl9lfqkdttfj848ghe1c37s6a84ah1d.apps.googleusercontent.com",
     "scopes": [
       "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/spreadsheets",
-      "https://www.googleapis.com/auth/drive",
-      "https://www.googleapis.com/auth/drive.file"
+      "https://www.googleapis.com/auth/spreadsheets"
     ] 
   },
 
