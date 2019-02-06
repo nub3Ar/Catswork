@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+  "name": "CatsWork",
+  "description": "We work to get you work",
+  "default_locale": "en",
+  "version": "2.0",
+  "options_page": "src/html/options.html",
+  "permissions": [
+    "activeTab", "declarativeContent", "storage",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "tabs",
+    "<all_urls>",
+    "identity",
+    "https://*.googleapis.com/*"
+  ],
+  "web_accessible_resources": ["src/image/icon.jpg, src/image/logo.png"],
+  "content_scripts": [{
+    "matches": ["https://mail.google.com/mail/*", "https://inbox.google.com/*"],
+    "js": ["src/js/myapp.js", "src/js/popup.js", "src/js/get_linkedin.js",
+      "src/js/libraries/jquery-3.3.1.min.js", "src/js/libraries/materialize.min.js"
+    ]
+  }],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  
+  "browser_action": {
+    "default_title": "Catswork",
+    "default_popup": "src/html/popup.html",
+    "default_icon": "src/Image/catswork-favicon2.png"
+  },
+  
+  "oauth2": {
+    "client_id": "174622660166-1vl9lfqkdttfj848ghe1c37s6a84ah1d.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/spreadsheets"
+    ] 
+  },
+
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgyIR07T1CxGx2Lj5IoRupp/s93NfGb5wPV26r3+zi/ZdLGtVDgMrZyz/S1gdYj3/4EbkKA9PFatDZZWsrDtbz4AOCm+1IgkZ4zEO1m2kIAlhg9iealvqFnZBeBdBsVpGABW5NxNfKtdZ+67pqBydVkICMD9RmP7pJrlAkcTazsWy2W/a9/2fExWvxSBl5JIqRPRRMqlnTujTCVmbEciQ6vt5tyJEZweYgJW5XF9r7Jzst84L0jxBLVTwKoJ4fpB9IkQiTPmG/BrZt31rafWzm/lL/8271oZ93Bjzl0ODdAqd7rYeVwzHJ8zHUYDuFrZ4w2Gzjn3s5a93tXTHTblw2wIDAQAB"
+
+}

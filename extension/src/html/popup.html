@@ -1,0 +1,299 @@
+<html>
+
+<head>
+  <title id='catswork_title'>Catswork Tracker</title>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  <script type="text/javascript" src="../js/libraries/jquery-2.2.1.min.js"></script>
+  <script src="../js/libraries/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/popup.js"></script>
+  <script type="text/javascript" src="../js/myapp.js"></script>
+</head>
+
+<body style="background-color: #ffffff; padding: 5%; width:310px; height:600px">
+  <div class="row">
+    <div class="col s10">
+      <img src="../Image/logo-new.png" width="60%">
+    </div>
+    <div class="col s1">
+      <a href="options.html" target="_blank">
+        <i class="small material-icons icon-black">web</i>
+      </a>
+    </div>
+  </div>
+  <br>
+
+  <center>
+    <div id="log_in">
+      <p>
+        Welcome to CatsWork! You are not logged in. 
+      </p>
+      <p>
+        Click the button below and navigate to your CatsWork Dashboard for
+        logging in!
+      </p>
+      <a class="button1" href="../html/options.html" type="submit" id="login_link" target="_blank">
+        Go to Dashboard
+      </a>
+    </div>
+
+    <div id="createsheet">
+      <p>
+        Welcome to CatsWork! You do not have a connected Google Sheet.
+      </p>
+      <p>
+        Create one now in your Dashboard!
+      </p>
+      <a class="button1" href="../html/options.html" type="submit" id="create_link" target="_blank">
+        Go to Dashboard
+      </a>
+    </div>
+
+    <div id='catswork'>
+        <div id="step_1_linkedin">
+            <h6>For this tutorial only we will open a <i><b>sample LinkedIn Profile</b></i></h6>
+            <button class="button1" id="linkedin_sample">Open Sample Linkedin Page</button>
+        </div>
+      <div id='catstrack'>
+        <div id="step_1_a">
+          <h6><i><b>Click CATSTRACK</b></i> below to continue.</h6>
+          <br>
+        </div>
+        <div id="step_2_a">
+          <h6>Step 2: Learn to update a contact.</h6>
+        </div>
+        <ul class='collapsible'>
+          <li>
+            <div class='collapsible-header'>
+              <img src="../Image/catstrack-logo.png" width="40%" height="3.3%">
+            </div>
+            <div class='collapsible-body'>
+              <div class="row">
+                <div id="step_1_b">
+                  <h6>CatsTrack <i><b>autofills LinkedIn</b></i> profile information.</h6>
+                  <h6>Click the button below to try it out with this sample profile!</h6>
+                </div>
+                <div id="step_1_b2">
+                  <h6>You can also <i><b>input</b></i> details <i><b>manually</b></i>.</h6>
+                  <h6>Then <i><b>scroll down</b></i> and click <i><b>SUBMIT</b></i>.</h6>
+                </div>
+                <br>
+                <div id="step_2_b">
+                    <h6>You can also <i><b>edit existing contact</b></i> information.</h6>
+                    <h6>To edit Catherine's information, <i><b>type "Catherine" in Name</b></i>, edit anything and <i><b>scroll down</b></i> to update.</h6>
+                </div>
+                <!-- LinkedIn button here -->
+                <div id="submit_normal">
+                  <button class="button1" type="getlinkedin" id="getlinkedin" name="action">
+                    LINKEDIN AUTOFILL
+                    <i class="tiny material-icons">create</i>
+                  </button>
+                  <!-- <div id='linkedin_status'>Injecting Script....</div> -->
+                </div>
+                <br>
+                <form id="main_form" class="col-s12">
+                  <div class="input-field col-s12">
+                    <input type="text" id="nam3" class="autocomplete">
+                    <label for="autocomplete-input">Name</label>
+                  </div>
+                  <div class="input-field col-s12" id="field2">
+                    <input id="firm" type="text">
+                    <label for="firm">Firm</label>
+                  </div>
+                  <div class="input-field col-s12" id="field3">
+                    <input id="email" type="text">
+                    <label for="email">Email</label>
+                  </div>
+                  <div class="input-field col-s12" id="field4">
+                    <input id="phone" type="text">
+                    <label for="email">Phone</label>
+                  </div>
+                  <div class="input-field col-s12" id="field5">
+                    <input id="industry" type="text">
+                    <label for="industry">Industry</label>
+                  </div>
+                  <div class="input-field col-s12" id="field6">
+                    <input id="city" type="text">
+                    <label for="city">City</label>
+                  </div>
+                  <div class="input-field col-s12" id="field7">
+                    <input id="position" type="text">
+                    <label for="position">Position</label>
+                  </div>
+                  <div class="input-field col-s12" id="field8">
+                    <input id="education" type="text" class="validate">
+                    <label for="education">Education</label>
+                  </div>
+                  <div class="input-field col-s12" id="field9">
+                    <input id="source" type="text">
+                    <label for="source">Source</label>
+                  </div>
+                  <div class="input-field col-s12" id="field10">
+                    <input id="alternative" type="text" class="validate">
+                    <label for="alternative">Alternative Contact</label>
+                  </div>
+                  <div class="input-field col-s12" id="field11">
+                    <input id="date" type="text" class="datepicker"></input>
+                    <label for="date">First Contact Date</label>
+                  </div>
+                  <div class="input-field col-s12" id="field12">
+                    <input id="schedule" type="text" class="datepicker"></input>
+                    <label for="schedule">Scheduled Contact</label>
+                  </div>
+                  <div class="input-field col-s12" id="field13">
+                    <input id="linkedin" type="text"></input>
+                    <label for="linkedin">LinkedIn/Website</label>
+                  </div>
+                  <div class="input-field col-s12" id="field14">
+                    <input id="notes" type="text"></input>
+                    <label for="notes">Notes</label>
+                  </div>
+                  <div class="switch">
+                    <p style="text-align: center">Follow up with this contact later?</p>
+                    <label style="color:black">
+                      No
+                      <input type="checkbox" id='follow-up' value='Yes'>
+                      <span class="lever"></span>
+                      Yes
+                    </label>
+                  </div>
+                </form>
+              </div>
+              <div id="step_1_c">
+                <h6>Click submit button!</h6>
+                <h6>You will see the update in your Dashboard</h6>
+              </div>
+              <div id="submit_normal">
+                <button class="button1" type="submit" id="submit" name="action">
+                  Submit
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+              <div id="submit_notif">
+                <h6>Contact Submitted!</h6>
+              </div>
+              <div id="step_1_d">
+                <h6> Now, you can see this contact in the <i><b>Dashboard</b></i> and on your <i><b>Google Sheet</b></i>.</h6>
+
+                <a class="button2" id="step_1_complete" href="#catswork">
+                  Continue
+                </a>
+              </div>
+              <div id="step_2_d">
+                <h6>Now you know how to use CatsTrack!</h6>
+                <a class="button2" id="step_2_complete" href="#step_3_a">
+                  Continue
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <div id="catschat">
+        <div id="step_3_a">
+          <h6>Click CATSCHAT below to check out</h6>
+          <h6>our <i><b>recruitment-related resources</b></i></h6>
+        </div>
+        <ul class='collapsible' id="catschat-collapse">
+          <li>
+            <div class='collapsible-header'>
+              <img src="../Image/catschat-logo.png" width="38%" height="3.3%">
+            </div>
+            <div class='collapsible-body'>
+              <div id="step_3_b">
+                <h6>You can also view them at</h6>
+                <h6>www.catswork.io</h6>
+                <a class="button2" id="step_3_complete" href="#footer">
+                   Continue
+                </a>
+              </div>
+              <div id = 'video_list'>
+              <div id="cc1">
+                <a href="http://www.catswork.io/catschat/#video1" target="_blank">
+                  <img src="https://storage.googleapis.com/www.catswork.io/catschat%20thumbnail/video1.jpg" style="width:100%">
+                </a>
+              </div>
+              <br>
+              <div id="cc2">
+                <a href="http://www.catswork.io/catschat/#video2" target="_blank">
+                  <img src="https://storage.googleapis.com/www.catswork.io/catschat%20thumbnail/video2.jpg" style="width:100%">
+                </a>
+              </div>
+              <br>
+              <div id="cc3">
+                <a href="http://www.catswork.io/catschat/#video3" target="_blank">
+                  <img src="https://storage.googleapis.com/www.catswork.io/catschat%20thumbnail/video3.jpg" style="width:100%">
+                </a>
+              </div>
+              <br>
+              <div id="cc4">
+                <a href="http://www.catswork.io/catschat/#video4" target="_blank">
+                  <img src="https://storage.googleapis.com/www.catswork.io/catschat%20thumbnail/video4.jpg" style="width:100%">
+                </a>
+              </div>
+              <br>
+              <div id="cc5">
+                <a href="http://www.catswork.io/catschat/#video5" target="_blank">
+                  <img src="https://storage.googleapis.com/www.catswork.io/catschat%20thumbnail/video5.jpg" style="width:100%">
+                </a>
+              </div>
+              </div>
+              <br>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="tutorial_complete">
+        <h6>All set! Enjoy Catswork!</h6>
+        <h6>You can customize what info to track</h6>
+        <h6>by clicking <i><b>CUSTOMIZE TRACKER</b></i></h6>
+        <h6>in your Dashboard!</h6>
+      </div>
+
+      <div id="finish">
+        <a class="button2" id="finish_tutorial" href="https://goo.gl/forms/x56e9bQeWZxjRxQH2" target="_blank">FINISH
+          TUTORIAL</a>
+      </div>
+    </div>
+  </center>
+
+
+</body>
+<footer id='footer'>
+  <div id='bottom_tools'>
+    <a class="button2" href="" target="_blank" id="opensheet">
+      <i class="material-icons right">assignment</i>
+      Open SpreadSheet</a>
+    <br>
+    <a class="button2" href="https://www.northwestern.edu/careers" target="_blank">
+      <i class="material-icons right">business_center</i>
+      NCA Resources</a>
+    <br>
+    <a class="button2" id="feedback" href="http://www.catswork.io/feedback/" target="_blank">
+      <i class="material-icons right">feedback</i>
+      Feedback</a>
+    <br>
+    <a class="button2" id="help" href="../html/options.html#modal3" data-target="#modal3" data-toggle="modal" target="_blank">
+      <i class="material-icons right">help</i>
+      Help</a>
+    <br>
+    <br>
+  </div>
+  <center>
+    <div>
+      <a id='terms' href="http://www.catswork.io/terms-of-service/" target="_blank">Terms of Service</a>
+    </div>
+    <div>
+      <a id='privacy' href="http://www.catswork.io/privacy-policy/" target="_blank">Privacy Policy</a>
+    </div>
+    <br>
+    <br>
+  </center>
+</footer>
+
+
+</html>

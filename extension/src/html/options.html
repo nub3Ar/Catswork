@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<script type="text/javascript" src="../js/libraries/jquery-3.3.1.min.js"></script>
+<script src="../js/libraries/materialize.min.js"></script>
+<script type="text/javascript" src="../js/options.js"></script>
+
+<html>
+
+<head>
+    <meta name="Catswork" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+</head>
+<!-- background="../Image/background.jpg" style="background-repeat:no-repeat; background-size:cover"-->
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav>
+            <div class="nav-wrapper">
+                <a class="brand-logo" href="catswork.io">
+                    <img style="padding-left: 25px;" src="../Image/logo-new.png" width="35%">
+                </a>
+                <a class="brand-logo center" size="15" style="color: black">Dashboard
+                </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right: 15px">
+                    <li>
+                        <a href="https://mail.google.com" target="_blank">
+                            <img style="width: 25px; height: 19.36px;" src="../Image/email-icon.png">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/" target="_blank">
+                            <img style="width: 25px; height: 25px;" src="../Image/linkedin-icon.png">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.catswork.io/additional-resources/" target="_blank">
+                            <img style="width: 25px; height: 25px;" src="../Image/resources-icon.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="progress" id="loading">
+                <div class="indeterminate"></div>
+            </div>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <div class="row" id="dashboard">
+            <!--Iframe-->
+            <center>
+                <div>
+                    <br>
+                    <a href="" class="button2" style="margin: 2px;">
+                        <i class="material-icons right">info</i>
+                        Tutorial
+                    </a>
+                    <a href="#setting_modal" class="button2" style="margin: 2px;">
+                        <i class="material-icons right">settings</i>
+                        Customize Tracker
+                    </a>
+                </div>
+            </center>
+            <br>
+            <div>
+                <iframe width="100%" height="600px" id="sheet_iframe"></iframe>
+            </div>
+            <!--Setting and buttons-->
+
+        </div>
+        <center>
+            <div id="login" style="width:40%; padding-top:5%">
+                <h5>Welcome to CatsWork! Click the button below to sign in with your email and get started!</h5>
+                <button class="button1" type="signin" id="signin" name="action" style="margin: 2px">
+                    Sign in
+                </button>
+            </div>
+            <div id="create" style="width:40%; padding-top:5%">
+                <h5>Sign in successful! Click the button below to create your tracker!</h5>
+                <button class="button2" id="createsheet" name="action" style="margin: 2px">
+                    CREATE TRACKER
+                </button>
+
+            </div>
+        </center>
+    </main>
+
+    <div id="delete_modal" class="modal">
+        <div class="modal-content">
+            <h4>Erase all data</h4>
+            <h6>Are you sure you want to delete the spreadsheet?
+            </h6>
+        </div>
+        <div class="modal-footer"></div>
+        <button class="modal-action modal-close button2" type="button">Cancel</button>
+        <button class="modal-action modal-close button2" type="button" id="deletesheet">Confirm</button>
+    </div>
+    <div id="setting_modal" class="modal">
+        <div class="modal-content">
+            <div>
+                <button class="button2" type="revoke" id="revoke" name="action" style="margin: 2px; float: right; ">
+                    Log Out
+                </button>
+            </div>
+
+            <h5>Information you would like to track in extension:</h5>
+            <h6>Notice: this setting modifies the input fields in your extension popup.</h6>
+            <br>
+            <form action="#">
+                <div class="row">
+                    <div class="col s6">
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option1' value='yes' checked>
+                                <span class="lever"></span>
+                                Name
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option2' value='yes' checked>
+                                <span class="lever"></span>
+                                Firm
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option3' value='yes' checked>
+                                <span class="lever"></span>
+                                Email
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option4' value='yes' checked>
+                                <span class="lever"></span>
+                                Phone
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option5' value='yes' checked>
+                                <span class="lever"></span>
+                                Industry
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option6' value='yes' checked>
+                                <span class="lever"></span>
+                                City
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option7' value='yes' checked>
+                                <span class="lever"></span>
+                                Position
+                            </label>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col s6">
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option8' value='yes' checked>
+                                <span class="lever"></span>
+                                Education
+                            </label>
+                        </div>
+                        <br>
+
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option9' value='yes' checked>
+                                <span class="lever"></span>
+                                Source
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option10' value='yes' checked>
+                                <span class="lever"></span>
+                                Alternative Contact
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option11' value='yes' checked>
+                                <span class="lever"></span>
+                                First Contact
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option12' value='yes' checked>
+                                <span class="lever"></span>
+                                Scheduled Call Date
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option13' value='yes' checked>
+                                <span class="lever"></span>
+                                Linkedin/Website
+                            </label>
+                        </div>
+                        <br>
+                        <div class="switch">
+                            <label class="label">
+                                <input type="checkbox" id='option14' value='yes' checked>
+                                <span class="lever"></span>
+                                Notes
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-action modal-close button2" type="button">Cancel</button>
+            <button class="modal-action modal-close button2" type="button">Confirm</button>
+        </div>
+    </div>
+    <div id="tutorial_popup" class="modal">
+        <div class="modal-content" style="padding: 0px">
+            <!-- <h6>Click on the Orange Cat in the upper right corner of the screen</h6>
+            <h6>You can always return to the tutorial by clicking the orange tutorial button in the Dashboard.</h6> -->
+            <img src="../image/tutorial_notif.gif" style="max-width: 100%; max-height: 100%">
+        </div>
+        <div class="modal-footer">
+            <center>
+                <h5>Click on the <i><b>Orange Cat</b></i> in the upper right corner of your screen!</h5>
+                <button class="button2 modal-action modal-close">Okay!</button>
+            </center>
+        </div>
+</body>
+
+
+</html>
