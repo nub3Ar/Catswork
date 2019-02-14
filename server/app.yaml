@@ -13,4 +13,6 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs10
+env: flex
+
 # [END gae_quickstart_yaml]
